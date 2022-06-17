@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Hotel_management.Models.TreatmentTranslations>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+              <th>
+            @Html.DisplayNameFor(model => model.Treatment.Hotel)
+        </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Treatment)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Name_en)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name_ru)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description_en)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description_ru)
+            </th>
+           
+       
+            <th>Settings</th>
+
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+             <td>
+            @Html.DisplayFor(modelItem => item.Treatment.Hotel.Name)
+        </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Treatment.Description)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Name_en)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name_ru)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description_en)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description_ru)
+            </td>
+            
+            <td>
+                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

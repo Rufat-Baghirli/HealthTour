@@ -1,0 +1,347 @@
+﻿@model HotelVM
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> usermanager;
+@using Microsoft.Extensions.Localization;
+@using System.Globalization;
+@inject IStringLocalizer<SharedResource> localizer;
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_HotelLayout.cshtml";
+     AppUser user = null;
+    if (User.Identity.IsAuthenticated)
+    {
+        user = await usermanager.FindByIdAsync(User.Identity.Name);
+    }
+}
+
+ @foreach (Hotel hotel in Model.Hotels)
+    {
+
+        <section id="services" class="services section-bg">
+
+            <div class="container-fluid">
+
+                <div class="row row-sm">
+                    <h5 class="text-center">@hotel.Name</h5>
+                    <div class="col-lg-6 col-md-12 col-sm-12 boxzoomimg _boxzoom">
+
+
+                        <img style="height:100%;width:100%" src="~/images/Hotels/@hotel.Mainimg" alt="">
+
+
+
+                    </div>
+
+
+                    <div class="col-lg-6 col-md-12 col-sm-12" data-aos="fade-left">
+                        <div style="width: 100%">
+                            @if (hotel.MapLocation!=null)
+                            {
+                                <iframe src="@hotel.MapLocation" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                      
+                            }
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+        </section>
+          <h1 style="font-size:48px" class="text-center pt-3"> <a class="btn btn-success" asp-action="HotelDetails" asp-route-Id="@hotel.Id">@localizer["View Rooms"]</a></h1> 
+
+        <section class="CommentHotelItems">
+            <div class="container">
+                <div class="row helper">
+                    <div class="col-md-12">
+                        <div class="tabs">
+                            <ul>
+                                <li><button  class="active _comment_desc">@localizer["Description"]</button></li>
+                                <li><button class="_review">@localizer["Reviews"] <span>@hotel.Reviews.Count</span></button></li>
+                            </ul>
+                        </div>
+                        <div class="interactive-content">
+                            <div class="description">
+                                <p>
+                                     @if(CultureInfo.CurrentCulture.Name.ToLower()=="en" && hotel.hotelTranslations.Description_en!=null )
+                            {
+                                @hotel.hotelTranslations.Description_en
+                            }
+                            else if(CultureInfo.CurrentCulture.Name.ToLower()=="ru" && hotel.hotelTranslations.Description_ru!=null)
+                            {
+                                @hotel.hotelTranslations.Description_ru
+
+                            }
+                            else
+                            {
+                                @hotel.Description
+                            }
+                                </p>
+                            </div>
+                            <div class="reviews d-none">
+                                <ol>
+                                    @foreach (Review item in hotel.Reviews)
+                                    {
+                                        <li>
+                                            <div class="row comment-item">
+                                                <div class="col-3 col-sm-2 col-md-1">
+                                                    <div class="commenter-image">
+                                                        <img src="~/images/Other/user.png" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-9 col-sm-10 col-md-11">
+                                                    <div class="comment-header">
+                                                        <strong class="commenter-name">@item?.UserName</strong>
+                                                        <div class="rating-box-and-date">
+                                                          
+
+                                                            <div class="date">
+                                                                <p>@item?.Date.ToString("MMMM dd, yyyy")</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-text">
+                                                        <p>
+                                                            @item?.Text
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    }
+
+                                </ol>
+
+                            </div>
+
+                              <div class="write-comment d-none">
+                                <h5>@localizer["Add a review"]</h5>
+                                <p>@localizer["Your email address will not be published"]. @localizer["Required fields are marked"] *</p>
+                            
+                                     <form asp-action="SendComment" asp-route-Id="@hotel.Id" method="post">
+                                    <div class="mb-3">
+                                        <label asp-for="Reviews.Text" class="form-label">@localizer["Your review"] *</label>
+                                        <textarea asp-for="Reviews.Text" required class="form-control" id="comment" rows="3"></textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label asp-for="Reviews.UserName" class="form-label">@localizer["Name"] *</label>
+                                        <input type="text" asp-for="Reviews.UserName" value="@user?.UserName" required class="form-control" id="name">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label asp-for="Reviews.Email" class="form-label">@localizer["Email"] *</label>
+                                        <input type="email" asp-for="Reviews.Email" value="@user?.Name" required class="form-control" id="email">
+                                    </div>
+                                    
+
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+
+
+                                        <div class="row g-0">
+                                            <div class="col-6 pb-3">
+                                                <div class="form-group">
+                                                    <button type="submit" id="submit" class="submit">@localizer["Send"]</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row g-0">
+                                            <div class="col-6 pb-3">
+                                                <div class="form-group">
+                                                    <a asp-controller="Account" asp-action="Register" id="submit" class="submit" style="color: red ; text-decoration:none;border: 1px solid; padding: 8px; display: flex; justify-content: center; align-items: center; letter-spacing: 2px;" class="btn btn-danger">@localizer["Please,Log in"]</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+                                </form>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section id="OtelOzellikleri">
+
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-12" data-aos="fade-left">
+                        <h2>@localizer["Hotel Features"]</h2>
+                        <div class="LeftSideListItem">
+                             @foreach (HotelFeature item in hotel.HotelFeatures)
+                                {
+                                @if (CultureInfo.CurrentCulture.Name.ToLower() == "en")
+                                {
+                                    @if (item.HotelFeatureTranslations!=null)
+                                    {
+                                            <div class="YemekICecekItem">
+                                            <h4>@item.HotelFeatureTranslations.Name_en</h4>
+                                            <ul>
+
+                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                {
+                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
+                                                    {
+
+
+                                                        <li><span>
+                                                                @dtl.hotelFeatureDetailsTranslations.Detail_en
+                                                            </span></li>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <li><span>
+                                                                @dtl.Detail
+                                                            </span></li>
+                                                    }
+                                                }
+
+
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                         <div class="YemekICecekItem">
+                                            <h4>@item.Name</h4>
+                                            <ul>
+
+                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                {
+                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
+                                                    {
+
+
+                                                        <li><span>
+                                                                @dtl.hotelFeatureDetailsTranslations.Detail_en
+                                                            </span></li>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <li><span>
+                                                                @dtl.Detail
+                                                            </span></li>
+                                                    }
+                                                }
+
+
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                                else if(CultureInfo.CurrentCulture.Name.ToLower() == "ru")
+                                {
+                                    
+                                    @if (item.HotelFeatureTranslations!=null)
+                                    {
+                                            <div class="YemekICecekItem">
+                                            <h4>@item.HotelFeatureTranslations.Name_ru</h4>
+                                            <ul>
+
+                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                {
+                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
+                                                    {
+
+
+                                                        <li><span>
+                                                                @dtl.hotelFeatureDetailsTranslations.Detail_ru
+                                                            </span></li>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <li><span>
+                                                                @dtl.Detail
+                                                            </span></li>
+                                                    }
+                                                }
+
+
+                                            </ul>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                         <div class="YemekICecekItem">
+                                            <h4>@item.Name</h4>
+                                            <ul>
+
+                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                {
+                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
+                                                    {
+
+
+                                                        <li><span>
+                                                                @dtl.hotelFeatureDetailsTranslations.Detail_ru
+                                                            </span></li>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <li><span>
+                                                                @dtl.Detail
+                                                            </span></li>
+                                                    }
+                                                }
+
+
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <div class="YemekICecekItem">
+                                        <h4>@item.Name</h4>
+                                        <ul>
+                                          
+                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                {
+                                                    <li><span>
+                                                            @dtl.Detail
+                                                        </span></li>
+                                                }
+                                            
+
+                                        </ul>
+                                    </div>
+                                }
+                            }
+                            
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+        </section>
+        }

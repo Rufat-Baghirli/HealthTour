@@ -1,0 +1,99 @@
+﻿  @using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<SharedResource> localizer;
+@model IEnumerable<Transfer>;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+      <section id="TransferPage">
+
+            <div class="TransferLogo">
+                <h1> Health Tour</h1>
+            </div>
+        </section>
+
+     
+      
+        <section id="transferTable">
+            <div class="wrapper">
+                <ul class="tabs clearfix" data-tabgroup="second-tab-group">
+                  <li><a href="#tab6" class="active"> @localizer["Standart Transfer"]</a></li>
+                  <li><a href="#tab7">@localizer["Vip Transfer"]</a></li>
+        
+                </ul>
+                <section id="second-tab-group" class="tabgroup">
+                  <div id="tab6">
+    
+                    <table class="container">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h1>@localizer["Route"].Value.ToUpper()</h1>
+                                </th>
+                                <th>
+                                    <h1>@localizer["Car"].Value.ToUpper()</h1>
+                                </th>
+                                <th>
+                                    <h1>@localizer["Price"].Value.ToUpper()</h1>
+                                </th>
+        
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Transfer item in Model.Where(m=>m.IsVip==false))
+                            {
+                                <tr>
+                                <td>@item.Route</td>
+                                <td>@item.Car</td>
+                                
+                                <td>@item.Price AZN</td>
+        
+                            </tr>
+                            }
+                            
+                            
+        
+                        </tbody>
+                    </table>
+        
+        
+                  </div>
+                  <div id="tab7">
+                    <table class="container">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <h1>@localizer["Route"].Value.ToUpper()</h1>
+                                </th>
+                                <th>
+                                    <h1>@localizer["Car"].Value.ToUpper()</h1>
+                                </th>
+                                <th>
+                                    <h1>@localizer["Price"].Value.ToUpper()</h1>
+                                </th>
+        
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Transfer item in Model.Where(m=>m.IsVip==true))
+                            {
+                                <tr>
+                                <td>@item.Route</td>
+                                <td>@item.Car</td>
+                                
+                                <td>@item.Price AZN</td>
+        
+                            </tr>
+                            }
+                               
+        
+                        </tbody>
+                    </table>
+                 
+                  </div>
+                </section>
+              </div>
+          
+
+        </section>
+

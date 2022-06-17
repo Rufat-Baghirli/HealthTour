@@ -1,0 +1,38 @@
+﻿@model Hotel_management.Models.ForeignDomesticTour
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>ForeignDomesticTour</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="ForeignTourDescription" class="control-label"></label>
+                              <textarea asp-for="ForeignTourDescription" class="form-control"></textarea>
+
+                <span asp-validation-for="ForeignTourDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DomesticTourDescription" class="control-label"></label>
+                                <textarea asp-for="DomesticTourDescription" class="form-control"></textarea>
+                <span asp-validation-for="DomesticTourDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

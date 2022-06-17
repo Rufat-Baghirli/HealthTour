@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Hotel_management.Models.RoomFeatureDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomFeatures)
+            </th>
+             <th>
+            @Html.DisplayNameFor(model => model.RoomFeatures.Room)
+        </th>
+       
+             <th>
+           Otel
+        </th>
+       
+            <th>
+                Settings
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Detail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomFeatures.Features)
+            </td>
+             <td>
+            @Html.DisplayFor(modelItem => item.RoomFeatures.Room.Id)
+             </td>
+              <td>
+            @Html.DisplayFor(modelItem => item.RoomFeatures.Room.Hotel.Name)
+        </td>
+            <td class="d-flex">
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                Or 
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

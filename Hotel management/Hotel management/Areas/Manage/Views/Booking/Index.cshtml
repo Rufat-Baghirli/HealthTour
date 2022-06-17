@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Booking>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="h3 mb-4 text-gray-800">Bookings</h1>
+
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Hotel Name</th>
+            <th scope="col">Room Type</th>
+            <th scope="col">Reserve Time</th>
+            <th scope="col">Checkin Date</th>
+            <th scope="col">Checkout Date</th>
+            <th scope="col">Ordernumber</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
+            <th scope="col">Total Price</th>
+
+          
+                
+                      <th> Adults</th>
+                
+              
+                @if(Model.Any(b=>b.Child > 0))
+                {
+                    
+                      <th> Children</th>
+                }
+                
+            
+
+            <th scope="col">Status</th>
+            <th scope="col">Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Booking booking in Model)
+        {
+        <tr>
+            <th scope="row">@booking.Hotel.Name</th>
+            <th scope="row">@booking.Room.RoomType.Name</th>
+            <td>@booking.ReserveTime</td>
+            <td>@booking.Checkin</td>
+            <td>@booking.Checkout</td>
+            <td>@booking.Ordernumber</td>
+            <td>@booking.Name</td>
+            <td>@booking.SurName</td>
+            <td>@booking.Email</td>
+            <td>@booking.PhoneNumber</td>
+            <td>@booking.TotalPrice</td>
+            <td>
+                <ul>
+            @for (int i = 0; i < booking.Adults.Count; i++)
+{
+      @if (booking.Adults[i].Treatment)
+                {
+                     
+                    <li>Adult(@(i+1).)  3 dəfə yemək və @booking.Adults[i].Treatment_model.Name müalicə paketi </li> 
+                       
+                    }
+                    else
+                    {
+                       
+                      <li>Adult(@(i+1).) 3 dəfə yemək </li>   
+                       
+                    }
+}
+</ul>
+</td>
+ @if(booking.Child > 0)
+                {
+                    <td>
+                    <ul>
+                     @for (int i = 0; i < booking.Children.Count; i++)
+{
+      @if (booking.Children[i].Treatment)
+                {
+                     <li>
+                      3 dəfə yemək və  @booking.Children[i].Treatment_model.Name müalicə paketi / <br/>   Yaş - @booking.Children[i].Age 
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                        3 dəfə yemək / <br/>   Yaş - @booking.Children[i].Age 
+                   </li>
+                    }
+}
+</ul>
+</td>
+                }
+            <td style="color:green">Active</td>      
+            <td>
+              
+                    <a new { onclick="return confirm('Are sure wants to delete the current Item?');" } class="btn btn-danger" asp-action="ChangeStatus" asp-route-Id="@booking.Id" asp-route-status="false">Delete</a>
+         
+            </td>
+            
+         
+        </tr>
+        }
+    </tbody>
+</table>
+
+

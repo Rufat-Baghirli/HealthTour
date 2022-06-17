@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Hotel_management.Models.MidSeason>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Season)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.January)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.February)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.March)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.April)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.May)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.June)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.July)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.August)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.September)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.October)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.November)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.December)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Season.Hotel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.January)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.February)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.March)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.April)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.May)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.June)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.July)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.August)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.September)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.October)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.November)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.December)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

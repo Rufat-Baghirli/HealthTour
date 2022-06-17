@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Hotel_management.Models.RoomType>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+    int orders = (ViewBag.SelectPage - 1) * 10;
+    int SelectedPage = ViewBag.SelectPage;
+    decimal totalPage = ViewBag.TotalPage;
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.Hotel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+              Oneweek Low
+            </th>
+            <th>
+               Twoweeks Low
+            </th>
+            <th>
+              Threeweeks Low
+            </th>
+             <th>
+               Oneweek Mid
+            </th>
+            <th>
+               Twoweeks Mid
+            </th>
+            <th>
+                Threeweeks Mid
+            </th>
+            <th>
+               Oneweek High
+            </th>
+            <th>
+               Twoweeks High
+            </th>
+            <th>
+                Threeweeks High
+            </th>
+            
+           
+           
+            <th>
+                Settings
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (RoomType item in Model) {
+        <tr>
+              <td>
+                @Html.DisplayFor(modelItem => item.Hotel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OneweekPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoweeksPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeweeksPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OneweekPriceMid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoweeksPriceMid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeweeksPriceMid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OneweekPriceHigh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TwoweeksPriceHigh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThreeweeksPriceHigh)
+            </td>
+          
+           
+            <td class="d-flex">
+                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
+                <a  new { onclick="return confirm('Are sure wants to delete the current Item?');" } asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<div class="d-flex justify-content-center mt-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            @if (SelectedPage > 1)
+            {
+                <li class="page-item"><a asp-action="index" asp-route-page="@(SelectedPage-1)" class="page-link">Previous</a></li>
+            }
+            @{ int startPage = (SelectedPage == 1 || totalPage <= 3) ? 1 : SelectedPage < totalPage ? SelectedPage - 1 : SelectedPage - 2;
+                int Page = totalPage > 2 ? startPage + 2 : (int)totalPage; }
+            @for (int i = startPage; i <= Page; i++)
+            {
+                <li class="@(i==SelectedPage?"active":"")"><a class="page-link" asp-action="index" asp-route-page="@i" asp-route-search="@ViewBag.CurrentSearch">@i</a></li>
+            }
+            @if (SelectedPage < totalPage)
+            {
+                <li class="page-item"><a asp-action="index" asp-route-page="@(SelectedPage+1)" class="page-link">Next</a></li>
+            }
+
+
+
+        </ul>
+    </nav>
+</div>

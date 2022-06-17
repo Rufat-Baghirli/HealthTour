@@ -1,0 +1,116 @@
+﻿@model Hotel_management.Models.Room
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hotel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hotel.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomType)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RoomType.Name)
+        </dd>
+ 
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Smoking)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Smoking)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Roomarea)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Roomarea)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mainimg)
+        </dt>
+        <dd class = "col-sm-10">
+           <div class="card" style="width:100%">
+          
+   
+
+   <ul class="d-flex list-unstyled">
+          
+      
+       
+        <li>
+            <img class="img-fluid" style="width:500px !important" src="~/images/Rooms/@Model.Mainimg">
+            
+
+        </li>
+          
+           
+        
+        
+
+       
+    </ul>
+   
+   
+
+</div>
+        </dd>
+        <dt class="col-sm-2">
+            Otagin sekilleri
+        </dt>
+        <dd class="col-sm-10">
+            <div class="card" style="width:100%">
+          
+   
+
+   <ul class="d-flex list-unstyled">
+          
+      
+          @foreach (RoomImages img in Model.RoomImages)
+        {
+        <li>
+            <img class="img-fluid" style="width:500px !important" src="~/images/Rooms/@img.Name">
+            
+
+        </li>
+          
+           
+        
+        }
+
+       
+    </ul>
+   
+   
+
+</div>
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.People)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.People)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Children)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Children)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Update" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

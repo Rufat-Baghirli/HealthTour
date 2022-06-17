@@ -1,0 +1,59 @@
+﻿@model Hotel_management.Models.TourTranslations
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>TourTranslations</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name_en" class="control-label"></label>
+                <input asp-for="Name_en" class="form-control" />
+                <span asp-validation-for="Name_en" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name_ru" class="control-label"></label>
+                <input asp-for="Name_ru" class="form-control" />
+                <span asp-validation-for="Name_ru" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description_en" class="control-label"></label>
+                <input asp-for="Description_en" class="form-control" />
+                <span asp-validation-for="Description_en" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description_ru" class="control-label"></label>
+                <input asp-for="Description_ru" class="form-control" />
+                <span asp-validation-for="Description_ru" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TourId" class="control-label">Tour</label>
+                <select asp-for="TourId" class ="form-control" >
+                    @foreach (Tour item in ViewBag.Tours )
+                    {
+                        <option value="@item.Id"><pre> <h1>NAME</h1>: @item.Name /// DESCRIPTION: @item.Description
+                               </pre>
+                            </option>
+                    }
+                </select>
+        <span class="alert-danger" asp-validation-for="TourId"></span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

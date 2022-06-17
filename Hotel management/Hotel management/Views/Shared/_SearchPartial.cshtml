@@ -1,0 +1,168 @@
+﻿ @model SearchRoomVM    
+@using Microsoft.Extensions.Localization;
+@using System;
+@using System.Globalization;
+@using System.Threading;
+@inject IStringLocalizer<SharedResource> localizer;
+
+ @{
+    ViewBag.Search = Model;
+
+}
+ 
+<form method="get" asp-controller="Search" asp-action="SearchResult" autocomplete="off">
+        <div asp-validation-summary="All" class="text-danger"></div>
+                            <br />
+                      <div class="input-group">
+                        <label asp-for="Location" class="label">@localizer["Going to"]</label>
+                        <input  id="Location"  asp-for="Location" class="input--style-1" type="text"  name="Location" placeholder="@localizer["City"],@localizer["hotel name"]"
+                          required>
+                  
+                         <span asp-validation-for="Location" class="text-danger"></span>
+                          <div>
+<b><span id="LocationName"></span></b>
+</div>
+                        <i class="zmdi zmdi-pin input-group-symbol"></i>
+                      </div>
+                      <div class="row row-space">
+                        <div class="col-2">
+                          <div class="input-group">
+                            <label asp-for="Checkin" class="label">@localizer["check-in"]</label>
+                            <input asp-for="Checkin" class="input--style-1" type="text" name="Checkin" placeholder="mm/dd/yyyy"
+                              id="input-start" required />
+                          <span asp-validation-for="Checkin" class="text-danger"></span>
+
+                            <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <div class="input-group">
+                            <label asp-for="Checkout" class="label">@localizer["check-out"]</label>
+                            <input asp-for="Checkout" class="input--style-1" type="text" name="Checkout" placeholder="mm/dd/yyyy"
+                              id="input-end" required />
+                          <span asp-validation-for="Checkout" class="text-danger"></span>
+
+                            <i class="zmdi zmdi-calendar-alt input-group-symbol"></i>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="container">
+                        <div class="row">
+                          <div class="col-lg-8">
+                            <div class="item_acardion">
+
+
+                              <div class="Head_item">
+                                <i class="fa-solid fa-user-group"></i>
+                                <div class="_bodyitem">
+                                  <h6>@localizer["The number of people and rooms"] </h6>
+                                  <p>@localizer["Example"]:@localizer["Adults"]:1,@localizer["Children"]:0</p>
+                                  <span>@localizer["Room search"]</span>
+                                </div>
+                                <i class="fa-solid fa-angle-down"></i>
+                              </div>
+
+
+                              <div class="_hotelAccardion_item">
+
+                                <label class="justify-content-center">
+                                  <a data-bs-toggle="modal" data-bs-target="#exampleModalsetting">
+                                      @localizer["Choose Room Details"]                             
+                                      </a>
+  
+
+                                </label>
+
+
+                              </div>
+
+
+                              <div class="modal fade" id="exampleModalsetting" tabindex="-1"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+
+                                      <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close">X</button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <div class="container">
+                                      <div class="row">
+                                        <div class="col-lg-6 col-md-12 col-sm-12 addroomsTable">
+                                          <h1>@localizer["Adults"] @localizer["and"] @localizer["Children"]</h1>
+                                        
+    
+                                      
+                           
+                           
+                          
+  <div class="Room_itemModal">
+                                            <div class="_ModalItemHead">
+                                              <p>@localizer["Adults"]</p>
+                                             
+                                              <span id="addAdult" class="roomPlus">+</span>
+    
+                                            </div>
+                                            <div class="_roomServiceModal">
+                                              <ul class="listbody">
+                           
+                                                
+                                              
+                                              </ul>
+                                            </div>
+
+                                          </div>
+                        
+                                      
+                                      <div class="Modal_item_child">
+      <div class="_ModalItemHeadChild">
+        <p>@localizer["Children"]</p>
+
+        <span id="addChild" class="roomPlusChild">+</span>
+  
+  
+       
+      </div>
+      <div class="_roomServiceModal">
+      <ul class="listbodyChild">
+   
+      
+     </ul>
+  </div>
+   </div>   
+
+                                    </div>
+                                    </div>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        
+                      </div>
+                       <div class="col-lg-3 mt-2">
+                            <button class="btn-submit" type="submit">@localizer["search"]</button>
+                          </div>
+                      </div>
+                     
+                      </div>
+                    </form>
+                      
+                    @section Scripts {
+                      
+
+
+
+    
+
+
+   
+}
+
+

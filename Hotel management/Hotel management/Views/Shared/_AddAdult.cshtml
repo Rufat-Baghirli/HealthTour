@@ -1,0 +1,63 @@
+﻿    @model Adult
+    @using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<SharedResource> localizer;
+
+@{
+    Layout = null;
+    
+}
+
+@using Hotel_management.Extensions;
+
+@using (Html.BeginCollectionItem("Adults"))
+{
+
+    <div id="removeAddMoreAdult">
+      
+            <li>
+         
+     <input type="hidden" asp-for="Id"/>
+         <select asp-for="Treatment">
+     <option value="true">
+         @localizer["3 meals a day and treatment"]
+
+     </option>
+     <option value="false">
+         @localizer["3 meals a day"]
+     </option>
+ </select>
+
+             
+     <button style="
+    margin: 0 8px;
+    width: 25px;
+    height: 25px;
+    background: teal;
+    color: white;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;" class="removeAdult btn">-</button>
+ 
+          </li>
+           
+       </div>
+            
+            
+}
+
+
+
+                                        
+<script>
+    $(".removeAdult").click(function () {
+        $(this).parents("#removeAddMoreAdult").remove();
+    });
+</script>
+

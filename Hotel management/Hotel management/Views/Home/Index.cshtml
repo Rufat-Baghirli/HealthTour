@@ -1,0 +1,200 @@
+﻿@model HomeVM
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<SharedResource> localizer;
+@using System.Globalization;
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+   
+}
+
+
+  <header>
+<div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+          @foreach (var item in Model.Hotels)
+          {
+              
+          
+        <div class="swiper-slide"><img src="~/images/Hotels/@item.Mainimg" alt="">
+          <div class="logoSlider">
+            <img src="~/images/Logo/white-logo.png" alt="">
+          </div>
+
+           
+        </div>
+        
+          }
+
+      
+      </div>
+
+    <section id="vacation">
+
+      <div class="VacationBody">
+       
+        <div class="vacationDays">
+        <div class="page-wrapper bg-img-1  p-b-100">
+          <div class="wrapper wrapper--w720">
+            <div style="background: rgba(71, 72, 64, 0.62)" class="card card-3">
+              <div class="card-body">
+
+                <div class="tab-content">
+                  <div class="tab-pane active" id="tab1">
+         
+                    @await Html.PartialAsync("_SearchPartial",Model.SearchRoomViewModel)
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+    
+     
+
+    </section>
+    </div>
+    </header>
+
+    <div class="container pt-3">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+         <div class="HotelHeadItem__text">
+          <h1>Health Tour</h1>
+          <p>@localizer["Your Rest Philosophy"]</p>
+         </div>
+        </div>
+      </div>
+    </div>
+    <section id="OtelHomeDetails">
+      <div class="container">
+
+          @foreach (Hotel hotel in Model.Hotels.OrderByDescending(t=>t.HotelStar.Star))
+          {
+                 
+        <div class="row pt-3">
+          <div class="col-lg-6" data-aos="fade-right">
+            <div class="leftsideDetails">
+
+
+
+              <div class="hotelRating">
+                <h5>@hotel.Name</h5>
+                <ul>
+                    @for (int i = 0; i < hotel.HotelStar.Star; i++)
+                    {
+                        <li>
+                    <a asp-controller="Hotel" asp-action="HotelDetails" asp-route-Id="@hotel.Id"><i class="fa-solid fa-star"></i></a>
+                  </li>
+                    }
+                  
+                 
+
+                </ul>
+              </div>
+              <h1>@hotel.Name</h1>
+              <p>
+
+                            
+                             @if(CultureInfo.CurrentCulture.Name.ToLower()=="en" && hotel.hotelTranslations.Description_en!=null )
+                            {
+                                @hotel.hotelTranslations.Description_en
+                            }
+                            else if(CultureInfo.CurrentCulture.Name.ToLower()=="ru" && hotel.hotelTranslations.Description_ru!=null)
+                            {
+                                @hotel.hotelTranslations.Description_ru
+
+                            }
+                            else
+                            {
+                                @hotel.Description
+                            }
+
+              </p>
+            </div>
+
+
+          </div>
+
+
+          <div class="col-lg-6" data-aos="fade-left">
+            <div class="RaightSideMelumatlar">
+              <img style="max-width:500px" src="~/images/Hotels/@hotel.Mainimg" alt="">
+
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+
+
+    </section>
+
+
+   
+        
+ 
+
+@section Scripts {
+    <script>
+      $('#addAdult').on('click', function () {
+       
+        $.ajax({
+            url: '@Url.Action("AddAdult", "Search")',
+            type: 'GET',
+           
+            data:{
+            },
+            success: function (result) {
+                $('.listbody').append(result);
+            },
+            error: function () {
+            }
+        });
+
+      
+    });
+    </script>
+        <script>
+      $('#addChild').on('click', function () {
+        $.ajax({
+            url: '@Url.Action("AddChild", "Search")',
+            type: 'GET',
+            data: {
+            },
+            success: function (result) {
+                $('.listbodyChild').append(result);
+            },
+            error: function () {
+            }
+        });
+    });
+    </script>
+
+   
+                         
+    <script>
+        $(document).ready(function () {
+            $('#Location').autocomplete({
+                source: '/api/product/SearchHotel'
+            });
+        });
+    </script>
+      
+    
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+}
+
+
+
+
+

@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hotel Management - Admin Panel</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/manage/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/manage/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" asp-area="manage" asp-controller="Hotel" asp-action="Index">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">Hotel Management <sup>Admin Panel</sup></div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+
+      
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Addons
+            </div>
+
+
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Booking" asp-action="Index">
+                   <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Booking</span>
+                </a>
+            </li>
+       
+            <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Hotel" asp-action="Index">
+                   <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Hotel</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="HotelTranslations" asp-action="Index">
+                   <i class="fas fa-fw fa-folder"></i>
+
+                    <span>HotelTR</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Room" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Room</span>
+                </a>
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="RoomType" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>RoomType</span>
+                </a>
+            </li>
+  
+
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Location" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Location</span>
+                </a>
+
+            </li>
+       
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="HealthTourContact" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>HealthTourContact</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="HotelFeatures" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Hotelfeatures</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="HotelFeatureTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>HotelFeatureTR</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="HotelFeatureDetails" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>HotelfeatureDetails</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="HotelFeatureDetailsTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>HotelFeatureDetailsTR</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="RoomFeatures" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>RoomFeatures</span>
+                </a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="RoomFeaturesTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>RoomFeaturesTR</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="RoomFeatureDetails" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>RoomFeatureDetails</span>
+                </a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="RoomFeatureDetailTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>RoomFeatureDetailTR </span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="ExtraPrice" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>ExtraPrice</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Treatments" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Treatments</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="TreatmentTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>TreatmentTR</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="User" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Users</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Tur" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Tur</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="TourTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>TurTR</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="TurContact" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>TurContact</span>
+                </a>
+            </li>
+               <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="DaxiliTur" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>DaxiliTur</span>
+                </a>
+            </li>
+               <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="XariciTur" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>XariciTur</span>
+                </a>
+            </li>
+          <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="ForeignDomesticTours" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>ForeignDomesticTours</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="ForeignDomesticTourTranslations" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>ForeignDomesticToursTR</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Transfers" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Transfer</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Seasons" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>Seasons</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Seasons" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>LowSeasons</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Seasons" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>MidSeasons</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link" asp-area="manage" asp-controller="Seasons" asp-action="Index">
+                 <i class="fas fa-fw fa-folder"></i>
+
+                    <span>HighSeasons</span>
+                </a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+      
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2022</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+ 
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/manage/vendor/jquery/jquery.min.js"></script>
+    <script src="~/manage/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/manage/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/manage/js/sb-admin-2.min.js"></script>
+
+        @await RenderSectionAsync("Scripts", required: false)
+
+
+</body>
+
+</html>

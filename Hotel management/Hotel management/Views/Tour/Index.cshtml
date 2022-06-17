@@ -1,0 +1,235 @@
+﻿@model TourVM
+  @using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<SharedResource> localizer;
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <section id="TourPage">
+
+      <h2>
+        Health Tour
+      </h2>
+    </section>
+    <section id="Tourtabs">
+      <div class="wrapper">
+        <ul class="tabs clearfix" data-tabgroup="second-tab-group">
+          <li><a href="#tab6" class="active">@localizer["Domestic tours"]</a></li>
+          <li><a href="#tab7">@localizer["Foreign tours"]</a></li>
+
+        </ul>
+     
+        <section id="second-tab-group" class="tabgroup">
+          <div id="tab6">
+             <h1>@localizer["Relevant person"] : @Model.TurContact.Name @Model.TurContact.Surname 
+    <br>
+    
+  <p style="padding-top: 10px;color: gray;">
+<i class="fa fa-mobile" aria-hidden="true"></i>   @localizer["Phone"] :
+       @Model.TurContact.Mobile
+</p></h1>
+            <div class="DaxiliToursData">
+              <h3>@localizer["Domestic tours"]</h3>
+              @foreach (var item in Model.daxiliTurlar)
+              {
+              <a >@item.City</a>
+                  
+              }
+            </div>
+
+            <div class="container pt-lg-5">
+              <div class="row">
+                  
+                 @foreach (var item in Model.Tours)
+                        {
+                            @if (item.IsXarici == false)
+                            {
+                                <div class="col-lg-3">
+                                    <a >
+                    <div class="DaxiliTourHead">
+                      <img src="~/images/Tour/@item.Img" alt="">
+                      <p class="PriceTour"> @item.Price AZN</p>
+
+                    <div class="TourBody">
+                        <p> <a > @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && item.TourTranslations!=null)
+                        {
+                             @item.TourTranslations.Name_en
+                        }
+                        else if (CultureInfo.CurrentCulture.Name.ToLower()=="ru" && item.TourTranslations!=null)
+                        {
+                                                     @item.TourTranslations.Name_ru
+
+                        }
+                       else
+                        {
+                                 @item.Name                      
+                         }
+</a></p>
+                      </div>
+                      <div class="tourbodyItem">
+                        <p>
+                        @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && item.TourTranslations!=null)
+                        {
+                             @item.TourTranslations.Description_en
+                        }
+                        else if (CultureInfo.CurrentCulture.Name.ToLower()=="ru" && item.TourTranslations!=null)
+                        {
+                                                     @item.TourTranslations.Description_ru
+
+                        }
+                       else
+                        {
+                                 @item.Description                       
+                         }
+
+                        </p>
+                      </div>
+                    </div>
+
+                  </a>
+
+
+                </div>
+                }
+                 }
+               
+               
+                <div class="_tourBody">
+                  <h1>@localizer["Domestic tours"]</h1>
+                   <p>  @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && Model.foreignDomesticTour.ForeignDomesticTourTanslations!=null)
+                        {
+                             @Model.foreignDomesticTour.ForeignDomesticTourTanslations.DomesticTourDescription_en
+                        }
+                        else if (CultureInfo.CurrentCulture.Name.ToLower()=="ru" && Model.foreignDomesticTour.ForeignDomesticTourTanslations!=null)
+                        {
+                        @Model.foreignDomesticTour.ForeignDomesticTourTanslations.DomesticTourDescription_ru
+
+
+                        }
+                       else
+                        {
+                         @Model.foreignDomesticTour.DomesticTourDescription
+
+                       
+                         }</p>
+                </div>
+             
+               
+              </div>
+
+             
+
+            </div>
+
+          </div>
+          <div id="tab7">
+              <h1>@localizer["Relevant person"] : @Model.TurContact.Name @Model.TurContact.Surname 
+    <br>
+    
+  <p style="padding-top: 10px;color: gray;">
+<i class="fa fa-mobile" aria-hidden="true"></i>   @localizer["Phone"] :
+       @Model.TurContact.Mobile
+</p></h1>
+            <div class="DaxiliToursData">
+              <h3>@localizer["Foreign tours"]</h3>
+              @foreach (var item in Model.xariciTurlar)
+              {
+              <a >@item.CityorCountry</a>
+                  
+              }
+            </div>
+
+            <div class="container pt-lg-5">
+              <div class="row">
+ @foreach (var item in Model.Tours)
+                        {
+                            @if (item.IsXarici == true)
+                            {
+                                <div class="col-lg-3">
+                                    <a>
+                    <div class="DaxiliTourHead">
+                      <img src="~/images/Tour/@item.Img" alt="">
+                      <p class="PriceTour"> @item.Price AZN</p>
+
+                      <div class="TourBody">
+                        <p> <a > @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && item.TourTranslations!=null)
+                        {
+                             @item.TourTranslations.Name_en
+                        }
+                        else if (CultureInfo.CurrentCulture.Name.ToLower()=="ru" && item.TourTranslations!=null)
+                        {
+                                                     @item.TourTranslations.Name_ru
+
+                        }
+                       else
+                        {
+                                 @item.Name                      
+                         }
+</a></p>
+                      </div>
+                      <div class="tourbodyItem">
+                        <p>
+                        @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && item.TourTranslations!=null)
+                        {
+                             @item.TourTranslations.Description_en
+                        }
+                        else if (CultureInfo.CurrentCulture.Name.ToLower()=="ru" && item.TourTranslations!=null)
+                        {
+                                                     @item.TourTranslations.Description_ru
+
+                        }
+                       else
+                        {
+                                 @item.Description                       
+                         }
+
+                        </p>
+                      </div>
+                    </div>
+
+                  </a>
+
+
+                </div>
+                }
+
+                }
+
+
+                </div>
+                
+              </div>
+              <div class="_tourBody">
+                <h1>@localizer["Foreign tours"]</h1>
+                <p>  @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && Model.foreignDomesticTour.ForeignDomesticTourTanslations!=null)
+                        {
+                             @Model.foreignDomesticTour.ForeignDomesticTourTanslations.ForeignTourDescription_en
+                        }
+                        else if (CultureInfo.CurrentCulture.Name.ToLower()=="ru" && Model.foreignDomesticTour.ForeignDomesticTourTanslations!=null)
+                        {
+                        @Model.foreignDomesticTour.ForeignDomesticTourTanslations.ForeignTourDescription_ru
+
+
+                        }
+                       else
+                        {
+                                                       @Model.foreignDomesticTour.ForeignTourDescription
+                       
+                         }</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+
+
+  
+  
+
+    
+    

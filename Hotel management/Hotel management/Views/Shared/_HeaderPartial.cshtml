@@ -1,0 +1,123 @@
+﻿@using Microsoft.Extensions.Localization;
+@using System;
+@using System.Globalization;
+@using System.Threading;
+@inject IStringLocalizer<SharedResource> localizer;
+@inject Hotel_management.Services.LayoutService layoutService;
+@{
+    AppUserVM appUserVM = await layoutService.GetUser();
+}
+
+<div id="preloader">
+    <div id="status"> <img src="~/images/Logo/preloader.png" alt=""></div>
+</div>
+<nav style="">
+    <div class="container-fluid">
+        <div style="background: #00ad5f;" class="row">
+            <div class="col-lg-4">
+
+                <div class="leftNav">
+                    <ul>
+                        <li><a asp-controller="Home" asp-action="Index">
+                                <img src="~/images/Logo/white logo-12.png" alt="">
+                            </a>
+                        </li>
+                        <li> <a asp-controller="Hotel" asp-action="Index">@localizer["Hotels"]</a></li>
+                        <li><a asp-controller="Tour" asp-action="Index">@localizer["Tour"]</a></li>
+                        <li><a asp-controller="Transfer" asp-action="Index">@localizer["Transfer"]</a></li>
+
+                        <li style="margin-left:5rem">
+                            @await Html.PartialAsync("_SelectLanguagePartial")
+                        </li>
+
+
+                    </ul>
+
+
+
+
+                </div>
+            </div>
+            <div class="col-lg-8">
+
+                <div class="RightNav">
+                    <ul>
+                        <li><a asp-controller="About" asp-action="Index">@localizer["About"]</a></li>
+                        <li><a asp-controller="Contact" asp-action="Index">@localizer["Contact"]</a></li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+
+                            <li class="pt-2">
+                                <a style="color:green">@appUserVM.Name</a> 
+
+                            </li>
+
+                            <li class="pt-2">
+                                <a style="color:white:!important" class="btn btn-danger"  asp-controller="Account" asp-action="Logout">@localizer["Logout"]</a>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li ><a asp-controller="Account" asp-action="Login">@localizer["Login"]</a></li>
+                            <li ><a asp-controller="Account" asp-action="Register">@localizer["Register"]</a></li>
+                        }
+
+
+            </ul>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </nav>
+  <div class="page-wrapper mobile">
+    <div class="nav-wrapper">
+      <div class="grad-bar"></div>
+      <nav class="navbar">
+    <img src="/images/Logo/logo3.png" alt="Company Logo">
+        <div class="menu-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="nav no-search">
+            
+          <li class="nav-item"><a asp-controller="Home" asp-action="Index">@localizer["Home"]</a></li>
+          <li class="nav-item"><a asp-controller="About" asp-action="Index">@localizer["About"]</a></li>
+          <li class="nav-item"><a asp-controller="Tour" asp-action="Index">@localizer["Tour"]</a></li>
+          <li class="nav-item"><a asp-controller="Transfer" asp-action="Index">@localizer["Transfer"]</a></li>
+          <li class="nav-item"><a asp-controller="Contact" asp-action="Index">@localizer["Contact"]</a></li>
+          <li class="nav-item"><a asp-controller="Hotel" asp-action="Index">@localizer["Hotel"]</a></li>
+
+          @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <li class="nav-item">
+                                            
+                                                
+                                            <a style="color:green">@(appUserVM.Name)</a>
+
+                                                </li>
+                                            
+                                                                                          <li class="nav-item">
+
+                                                    <a style="color:red" asp-controller="Account" asp-action="Logout" class="font-weight-bold">@localizer["Logout"]</a>
+                                                </li>
+                    
+                    
+                }
+                else
+                {
+                    <li ><a class="nav-item" asp-controller="Account" asp-action="Login">@localizer["Login"]</a></li>
+            <li ><a  class="nav-item" asp-controller="Account" asp-action="Register">@localizer["Register"]</a></li>
+                }
+          
+        </ul>
+      </nav>
+    </div>
+
+
+  </div>

@@ -1,0 +1,102 @@
+﻿@using Microsoft.Extensions.Localization;
+@using System;
+@using System.Globalization;
+@using System.Threading;
+@inject IStringLocalizer<SharedResource> localizer;
+@inject Hotel_management.Services.LayoutService layoutService;
+@{
+    HealthTourContact contact = await layoutService.GetContact();
+}
+                <footer id="footer" data-aos="fade-right">
+    <footer class="footer-section">
+      <div class="container">
+        <div class="footer-cta pt-5 pb-5">
+          <div class="row">
+            <div class="col-xl-4 col-md-4 mb-30">
+              <div class="single-cta">
+                <i class="fas fa-map-marker-alt"></i>
+                <div class="cta-text">
+                  <h4>@localizer["Find us"]</h4>
+                  <span>@contact.Address</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-4 mb-30">
+              <div class="single-cta">
+                <i class="fas fa-phone"></i>
+                <div class="cta-text">
+                  <h4>@localizer["Call us"]</h4>
+                  <a style="color: #757575;font-size:15px;" href="tel:@contact.Phone">@contact.Phone</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-4 mb-30">
+              <div class="single-cta">
+                <i class="far fa-envelope-open"></i>
+                <div class="cta-text">
+                  <h4>@localizer["Mail us"]</h4>
+                    <span>
+                  <a style="color: #757575;font-size:15px;" href="mailto:@contact.Email">@contact.Email</a>
+
+                </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-content pt-5 pb-5">
+          <div class="row">
+            <div class="col-xl-4 col-lg-4 mb-50">
+              <div class="footer-widget">
+                <div class="footer-logo">
+                  <a asp-controller="Home" asp-action="Index"><img src="~/images/Logo/footer-logo.png" class="img-fluid" alt="logo"></a>
+                </div>
+                <div class="footer-text">
+                  <p>@localizer["Visit our website for hotel reservations"]</p>
+                </div>
+                <div class="footer-social-icon">
+                  <span>@localizer["Follow us"]</span>
+                  <a href="@contact.Facebook"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                  <a href="@contact.Twitter"><i class="fab fa-twitter twitter-bg"></i></a>
+                  <a href="@contact.Whatsapp"><i class="fab fa-whatsapp"></i></a>
+                  <a href="@contact.Instagram"> <i class="fab fa-instagram"></i></a>
+                  <a href="@contact.Linkedin"><i class="fab fa-linkedin-in"></i></a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+              <div class="footer-widget">
+                <div class="footer-widget-heading">
+                  <h3>@localizer["Useful Links"]</h3>
+                </div>
+                <ul>
+                 
+                   <li><a asp-controller="Home" asp-action="Index">@localizer["Home"]</a></li>
+          <li><a asp-controller="About" asp-action="Index">@localizer["About"]</a></li>
+          <li><a asp-controller="Tour" asp-action="Index">@localizer["Tour"]</a></li>
+          <li><a asp-controller="Transfer" asp-action="Index">@localizer["Transfer"]</a></li>
+          <li><a asp-controller="Contact" asp-action="Index">@localizer["Contact"]</a></li>
+          <li><a asp-controller="Hotel" asp-action="Index">@localizer["Hotel"]</a></li>
+                </ul>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      <div class="copyright-area">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+              <div class="copyright-text">
+                <p>Copyright &copy; @DateTime.Now.Year</p>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </footer>

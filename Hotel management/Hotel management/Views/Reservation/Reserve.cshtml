@@ -1,0 +1,258 @@
+﻿@model Booking
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<SharedResource> localizer;
+@using System.Globalization;
+
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+
+}
+
+  <section id="ReservationsHome">
+
+
+
+        </section>
+
+
+
+        <section id="Reservation">
+
+            <form asp-action="Reserve" method="post" enctype="multipart/form-data">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="leftSideReservation_page">
+                            <h1>HEALTH TOUR @localizer["Reservation"].Value.ToUpper()</h1>
+                            <div class="formsInput">
+                                
+                                <div class="formIcon_social">
+                                    <i class="fa-solid fa-user"></i>
+                                    <h6>@localizer["Person"]</h6>
+                                </div>
+                                
+                               <input type="hidden" asp-for="Id" />
+                                    <input asp-for="Name" placeholder="@localizer["Name"]" required>
+                                    <input asp-for="SurName"   placeholder="@localizer["Surname"]"
+                                        required>
+
+                                
+                            </div>
+                            <div class="formsInput">
+                                <div class="formIcon_social">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <h6>Əlaqə</h6>
+                                </div>
+                               
+                                    <input asp-for="Email" required   placeholder="your@email.com">
+                                    <input asp-for="PhoneNumber" required   placeholder="+(994) 50 *** ** **">
+
+                                
+                            </div>
+                        </div>
+
+                        <div class="BottomInput_form">
+                            
+
+                        @if (TempData["Reserve"] != null)
+                        {
+                            <div class="alert alert-primary" role="alert">
+@TempData["Reserve"]
+</div>
+                       
+                            
+                        }
+
+                            
+
+                            <button type="submit">
+                                <p>@localizer["Send"]</p>
+                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                                    enable-background="new 0 0 512 512" xml:space="preserve">
+                                    <path id="paper-plane-icon" d="M462,54.955L355.371,437.187l-135.92-128.842L353.388,167l-179.53,124.074L50,260.973L462,54.955z
+                              M202.992,332.528v124.517l58.738-67.927L202.992,332.528z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                          
+
+                    </div>
+                     
+                    <div class="col-lg-4">
+
+                        <div class="RightSideReservation_page">
+                            <div class="rightSideDetail_hotel_head">
+
+                                <h3>
+                                  @Model.Room.Hotel.Name
+                                </h3>
+                                <ul class="Hotel_head_list">
+                    @for (int i = 0; i < Model.Room.Hotel.HotelStar.Star; i++)                            
+                    {
+                                    <li><i class="fas fa-star"></i></li>
+                        
+                    }
+                </ul>
+                               
+                                <img src="~/images/Hotels/@Model.Hotel.Mainimg" alt="">
+
+                                <div class="summaryDate">
+                                    <div class="StartSummaryDate">
+                                        <span> @localizer["Arrival date"]:</span>
+                                        <p> <i class="far fa-calendar-alt"></i> @Model.Checkin @localizer["Arrival time"] 14:00</p>
+                                    </div>
+
+                                    <div class="staySummaryDate">
+                                        <span>Departure date:</span>
+                                        <p><i class="far fa-calendar-alt"></i> @Model.Checkout  @localizer["Checkout time"].Value.ToLower() 12:00</p>
+
+                                        <h6>@localizer["Length of stay"]: <span> @localizer["Night"].Value.ToLower() : @Model.Night</span></h6>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="hotel_body_details2">
+
+                                <div class="body_item_heads">
+                                    <img src="~/images/Rooms/@Model.Room.Mainimg" alt="">
+                                    <div class="_bodySocialDetail">
+                                        <i class="fa-solid fa-user"></i>
+                                        <p>@Model.Room.RoomType.Name</p>
+                                    </div>
+
+                                </div>
+
+                                @for (int i = 0; i < Model.Adult; i++)
+                {
+                    <div class="Adults_andHotlDetail">
+                        <div class="LeftAccorment">
+                            <span id="ageADult">@(i+1)</span>
+                            <span id="nameAdult">Adult</span>
+
+                        </div>
+                        <div class="RightAccorment">
+                           
+                            @if (Model.Adults[i].Treatment)
+                            {
+                                  <p>@localizer["3 meals a day and treatment"]</p>
+                           
+    
+        <input type="hidden"  asp-for="Adults[i].Id" value="@Model.Adults[i].Id">
+                                    <select    name="AdultsItems[]">
+                                        
+                                    @foreach (Treatment item in Model.Hotel.Treatments)
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                             @item.Name / @item.Price
+                                    </option>
+                                    }
+
+                                </select>
+                                <br />
+                           @localizer["Treatment packet's price will be added to Total Price"]
+                              
+    
+                            }
+                
+                            
+                            else
+                            {
+                          
+                                <p>@localizer["3 meals a day"]</p>
+
+                            }
+
+                                </div>
+                               </div>
+                                }
+                @if (Model.Child > 0)
+                {
+                     @for (int i = 0; i < Model.Child; i++)
+                {
+                    <div class="Adults_andHotlDetail">
+                        <div class="LeftAccorment">
+                            <span id="ageADult">@(i+1).</span>
+                            <span id="nameAdult">@localizer["Child"]</span>
+
+                        </div>
+                        <div class="RightAccorment">
+                           
+                            @if (Model.Children[i].Treatment)
+                            {
+                                <p>@localizer["Age"]: @Model.Children[i].Age</p>
+                                <p>@localizer["3 meals a day and treatment"]</p>
+
+                                    <input type="hidden"  asp-for="Children[i].Id" value="@Model.Children[i].Id">
+                                    <select    name="ChildrenItems[]">
+                                       
+                                    @foreach (Treatment item in Model.Hotel.Treatments)
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                            @item.Name / @item.Price AZN
+                                    </option>
+                                    }
+
+                                </select>
+                                  <br />
+                           @localizer["Treatment packet's price will be added to Total Price"]
+
+
+                            }
+                            else
+                            {
+                            
+                                <p>@localizer["3 meals a day"]</p>
+
+                            }
+
+                                </div>
+                               </div>
+                                }
+                              
+                }
+                  </form>
+                <div class="BodyAccorment">
+                                    <ul>
+                                        <li>@localizer["Price per room"]</li>
+                                        <li>@(Model.TotalPrice/Model.Night) AZN</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+
+                            <div class="Hotel_total_Details_body">
+                                <h4>Total price</h4>
+
+                                <ul id="totalcount">
+                                    <li>@localizer["Total"] (AZN)</li>
+                                    <li><span>@Model.TotalPrice AZN</span></li>
+                                </ul>
+
+                               
+                            </div>
+
+
+                           
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            </div>
+          
+        </section>
+      
+
+     

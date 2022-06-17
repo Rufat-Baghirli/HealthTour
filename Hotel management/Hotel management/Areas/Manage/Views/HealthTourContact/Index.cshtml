@@ -1,0 +1,78 @@
+﻿@model HealthTourContact;
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Facebook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Instagram)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Linkedin)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Twitter)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Whatsapp)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>Settings</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => modelItem.Facebook)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => modelItem.Instagram)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => modelItem.Linkedin)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => modelItem.Phone)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => modelItem.Twitter)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => modelItem.Whatsapp)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => modelItem.Email)
+            </td>
+            <td>
+                @if (Model.Id!=null)
+                {
+                      <a class="btn btn-warning" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> 
+                }
+              
+
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+

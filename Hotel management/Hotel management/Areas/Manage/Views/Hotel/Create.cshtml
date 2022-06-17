@@ -1,0 +1,81 @@
+﻿@model Hotel_management.Models.Hotel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Hotel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="HotelImagesFile"></label>
+        <input class="form-control" accept="image/*" asp-for="HotelImagesFile">
+        <span class="alert-danger" asp-validation-for="HotelImagesFile"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainimgFile"   class="control-label"></label>
+                <input asp-for="MainimgFile" accept="image/*" class="form-control" />
+                <span asp-validation-for="MainimgFile" class="text-danger"></span>
+            </div>
+          
+           <div class="form-group">
+                <label asp-for="MapLocation" class="control-label"></label>
+                <input asp-for="MapLocation" class="form-control" />
+                <span asp-validation-for="MapLocation" class="text-danger"></span>
+            </div>
+            
+
+       
+            <div class="form-group">
+               
+        <label>Location</label>
+        <select class="form-control" asp-for="LocationId">
+            @foreach (var location in ViewBag.Locations)
+            {
+                <option value="@location.Id">@location.City</option>
+                
+            }
+        </select>
+        <span class="alert-danger" asp-validation-for="LocationId"></span>
+    </div>
+
+                     
+                <div class="form-group">
+                    <label>Rating</label>
+                    <select class="form-control" asp-for="HotelStarId">
+                        @foreach (var stars in ViewBag.Ratings)
+                        {
+
+                            <option value="@stars.Id">@stars.Star</option>
+                        }
+        </select>
+        <span class="alert-danger" asp-validation-for="HotelStarId"></span>
+    </div>
+          
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

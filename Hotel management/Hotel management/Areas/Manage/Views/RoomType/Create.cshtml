@@ -1,0 +1,96 @@
+﻿@model Hotel_management.Models.RoomType
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>RoomType</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <select asp-for="Name" 
+                    class="form-control">
+               @foreach (var type in Html.GetEnumSelectList<RoomType.Type>())
+            {
+                <option value="@type.Text">@type.Text</option>
+                
+            }
+            </select>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OneweekPrice" class="control-label"></label>
+                <input asp-for="OneweekPrice" class="form-control" />
+                <span asp-validation-for="OneweekPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TwoweeksPrice" class="control-label"></label>
+                <input asp-for="TwoweeksPrice" class="form-control" />
+                <span asp-validation-for="TwoweeksPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThreeweeksPrice" class="control-label"></label>
+                <input asp-for="ThreeweeksPrice" class="form-control" />
+                <span asp-validation-for="ThreeweeksPrice" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="OneweekPriceMid" class="control-label"></label>
+                <input asp-for="OneweekPriceMid" class="form-control" />
+                <span asp-validation-for="OneweekPriceMid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TwoweeksPriceMid" class="control-label"></label>
+                <input asp-for="TwoweeksPriceMid" class="form-control" />
+                <span asp-validation-for="TwoweeksPriceMid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThreeweeksPriceMid" class="control-label"></label>
+                <input asp-for="ThreeweeksPriceMid" class="form-control" />
+                <span asp-validation-for="ThreeweeksPriceMid" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label asp-for="OneweekPriceHigh" class="control-label"></label>
+                <input asp-for="OneweekPriceHigh" class="form-control" />
+                <span asp-validation-for="OneweekPriceHigh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TwoweeksPriceHigh" class="control-label"></label>
+                <input asp-for="TwoweeksPriceHigh" class="form-control" />
+                <span asp-validation-for="TwoweeksPriceHigh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThreeweeksPriceHigh" class="control-label"></label>
+                <input asp-for="ThreeweeksPriceHigh" class="form-control" />
+                <span asp-validation-for="ThreeweeksPriceHigh" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HotelId" class="control-label"></label>
+                <select asp-for="HotelId" class ="form-control">
+                     @foreach (Hotel hotel in ViewBag.Hotels)
+            {
+                <option value="@hotel.Id">@hotel.Name</option>
+                
+            }
+                </select>
+                <span asp-validation-for="HotelId" class="text-danger"></span>
+
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

@@ -1,0 +1,37 @@
+﻿@model Hotel_management.Models.RoomFeaturesTranslation
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>RoomFeaturesTranslation</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Features_en)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Features_en)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Features_ru)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Features_ru)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RoomFeatures)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RoomFeatures.Features)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Hotel_management.Models.ExtraPrice>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BabyPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChildPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.YoungPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hotel)
+            </th>
+            <th>
+                Settings
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BabyPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChildPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.YoungPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hotel.Name)
+                    </td>
+                    <td style="display:flex">
+                        <a class="btn btn-warning" asp-action="Update" asp-route-id="@item.Id">Edit</a> 
+                        <a class="btn btn-danger" new { onclick="return confirm('Are sure wants to delete the current Item?');" } asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

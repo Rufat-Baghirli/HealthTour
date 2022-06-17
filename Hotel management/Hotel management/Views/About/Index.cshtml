@@ -1,0 +1,20 @@
+﻿@model IEnumerable<AboutImg>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <section id="AboutGallery">
+      <div class="container-fluid"> 
+          <div class="row">
+              @foreach ( var item in Model)
+              {
+                    <div class="col-12 pt-3">
+                  <img style="width:100%"  src="~/images/About/@item.Img"/>
+              </div>
+         
+              }
+            
+          </div>
+      </div>
+      </section>
