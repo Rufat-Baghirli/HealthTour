@@ -307,3 +307,6 @@ C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backen
 C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\obj\Release\net6.0\Hotel_management.pdb
 C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\obj\Release\net6.0\Hotel_management.genruntimeconfig.cache
 C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\obj\Release\net6.0\ref\Hotel_management.dll
+C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\obj\Release\net6.0\az\Hotel_management.resources.cs
+C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\obj\Release\net6.0\en\Hotel_management.resources.cs
+C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\obj\Release\net6.0\ru\Hotel_management.resources.cs

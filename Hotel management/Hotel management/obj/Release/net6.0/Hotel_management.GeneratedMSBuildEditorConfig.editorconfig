@@ -99,6 +99,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhlYWx0aFRvdXJDb250YWN0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HighSeasons/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhpZ2hTZWFzb25zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HighSeasons/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhpZ2hTZWFzb25zXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HighSeasons/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhpZ2hTZWFzb25zXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HighSeasons/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhpZ2hTZWFzb25zXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HighSeasons/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhpZ2hTZWFzb25zXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HotelFeatureDetailsTranslations/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhvdGVsRmVhdHVyZURldGFpbHNUcmFuc2xhdGlvbnNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -215,6 +235,46 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExvY2F0aW9uXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/LowSeasons/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExvd1NlYXNvbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/LowSeasons/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExvd1NlYXNvbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/LowSeasons/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExvd1NlYXNvbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/LowSeasons/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExvd1NlYXNvbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/LowSeasons/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXExvd1NlYXNvbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/MidSeasons/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE1pZFNlYXNvbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/MidSeasons/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE1pZFNlYXNvbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/MidSeasons/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE1pZFNlYXNvbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/MidSeasons/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE1pZFNlYXNvbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/MidSeasons/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXE1pZFNlYXNvbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomFeatureDetails/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21GZWF0dXJlRGV0YWlsc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -311,8 +371,48 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21cVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Seasons/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNlYXNvbnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Seasons/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNlYXNvbnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Seasons/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNlYXNvbnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Seasons/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNlYXNvbnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Seasons/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNlYXNvbnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNoYXJlZFxfTGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/SpecialDays/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNwZWNpYWxEYXlzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/SpecialDays/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNwZWNpYWxEYXlzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/SpecialDays/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNwZWNpYWxEYXlzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/SpecialDays/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNwZWNpYWxEYXlzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/SpecialDays/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFNwZWNpYWxEYXlzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/TourTranslations/Create.cshtml]
