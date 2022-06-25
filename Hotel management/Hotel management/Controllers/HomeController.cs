@@ -1,6 +1,7 @@
 ﻿using Hotel_management.DAL;
 //using Hotel_management.Resources;
 using Hotel_management.ViewModels.HomeViewModel;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -55,9 +56,10 @@ namespace Hotel_management.Controllers
             return LocalRedirect(returnUrl);
         }
 
-        [Route("/Error")]
+
         public IActionResult Error()
         {
+
             return View();
         }
 

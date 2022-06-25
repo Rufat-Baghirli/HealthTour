@@ -11,9 +11,6 @@ namespace Hotel_management.Models
         [Display(Name = "Surname")]
         public string SurName { get; set; }
         public bool IsDeleted { get; set; }
-        //[Display(Name= "Fathername")]
-        //public string FatherName { get; set; }
-        //[Display(Name = "Age")]
-        //public byte Age { get; set; }
+       
     }
 }

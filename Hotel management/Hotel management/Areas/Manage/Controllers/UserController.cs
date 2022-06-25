@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
-    [Area("manage")]
+    [Area("Manage")]
     [Authorize(Roles = "Admin")]
     public class UserController : Controller
     {
@@ -36,7 +36,8 @@ namespace Hotel_management.Areas.Manage.Controllers
                     Email = appUser.Email,
                     Role = (await _userManager.GetRolesAsync(appUser))[0],
                     UserName = appUser.UserName,
-                    IsDeleted = appUser.IsDeleted
+                    IsDeleted = appUser.IsDeleted,
+                    
                 };
 
                 appUserVMs.Add(appUserVM);

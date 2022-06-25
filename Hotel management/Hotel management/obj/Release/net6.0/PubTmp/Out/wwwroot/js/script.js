@@ -90,636 +90,636 @@ AOS.init({
   debounceDelay: 50
 });
 
- function AddRomms() {
-  const AddromsData = document.querySelector(".addroomsTable")
-  const RoomData = document.querySelector(".addRoomModal_item")
+// function AddRomms() {
+//  const AddromsData = document.querySelector(".addroomsTable")
+//  const RoomData = document.querySelector(".addRoomModal_item")
 
-  let count = 0
+//  let count = 0
 
- if(RoomData!=null){
-  RoomData.addEventListener("click", function (e) {
-    e.preventDefault()
-    count++
+// if(RoomData!=null){
+//  RoomData.addEventListener("click", function (e) {
+//    e.preventDefault()
+//    count++
 
-    const RommInnerHTML = `
+//    const RommInnerHTML = `
     
    
-    <span>Room ${count}</span>
+//    <span>Room ${count}</span>
   
-    <div class="Room_itemModal">
-      <div class="_ModalItemHead">
-        <p>Adults</p>
-        <span class="roomMinus">-</span>
-  <input class="text-center" type="number" value="1" min="1" max="4" class="roomSay"  name="Adult" />
+//    <div class="Room_itemModal">
+//      <div class="_ModalItemHead">
+//        <p>Adults</p>
+//        <span class="roomMinus">-</span>
+//  <input class="text-center" type="number" value="1" min="1" max="4" class="roomSay"  name="Adult" />
 
-        <span class="roomPlus">+</span>
+//        <span class="roomPlus">+</span>
   
-      </div>
-      <div class="_roomServiceModal">
-        <ul class="listbody">
+//      </div>
+//      <div class="_roomServiceModal">
+//        <ul class="listbody">
         
-        <li>
-        <div class="countTypes">
+//        <li>
+//        <div class="countTypes">
       
-        </div>
+//        </div>
    
-          <select name="RoomTypes" id="RoomTypes">
+//          <select name="RoomTypes" id="RoomTypes">
   
-            <option value="full board and treatment">full board and treatment
-            </option>
-            <option value="full board without treatment">full board without
-              treatment</option>
+//            <option value="full board and treatment">full board and treatment
+//            </option>
+//            <option value="full board without treatment">full board without
+//              treatment</option>
 
-          </select>
-        </li>
+//          </select>
+//        </li>
         
-        </ul>
-      </div>
-    </div>
+//        </ul>
+//      </div>
+//    </div>
   
-    <div class="Modal_item_child">
-      <div class="_ModalItemHeadChild">
-        <p>Children</p>
-        <span class="roomMinusChild">-</span>
-        <span class="roomSayChild">0</span>
-        <span class="roomPlusChild">+</span>
+//    <div class="Modal_item_child">
+//      <div class="_ModalItemHeadChild">
+//        <p>Children</p>
+//        <span class="roomMinusChild">-</span>
+//        <span class="roomSayChild">0</span>
+//        <span class="roomPlusChild">+</span>
   
   
        
-      </div>
-    </div>
-    <div class="_roomServiceModal">
-      <ul class="listbodyChild">
-      <li>
-      <div class="countTypes">
+//      </div>
+//    </div>
+//    <div class="_roomServiceModal">
+//      <ul class="listbodyChild">
+//      <li>
+//      <div class="countTypes">
       
-       </div>
+//       </div>
  
-     <select name="RoomTypes" id="RoomTypes">
+//     <select name="RoomTypes" id="RoomTypes">
  
-       <option value="full board and treatment">full board and treatment
-       </option>
-       <option value="full board without treatment">full board without
-         treatment</option>
-       <option vallue="half board and treatment">half board and treatment
-       </option>
-       <option value="half board without treatment">half board without
-         treatment</option>
-     </select>
+//       <option value="full board and treatment">full board and treatment
+//       </option>
+//       <option value="full board without treatment">full board without
+//         treatment</option>
+//       <option vallue="half board and treatment">half board and treatment
+//       </option>
+//       <option value="half board without treatment">half board without
+//         treatment</option>
+//     </select>
  
  
-     <select  name="AgeChild" id=" ageChild">
+//     <select  name="AgeChild" id=" ageChild">
  
-       <option selected="selected" value="Age">Age</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10">10</option>
-       <option value="11">11</option>
-       <option value="12">12</option>
-       <option value="13">13</option>
-       <option value="14">14</option>
-       <option value="15">15</option>
-       <option value="16">16</option>
-       <option value="17">17</option>
-       <option value="18">18</option>
-     </select>
-   </li> 
+//       <option selected="selected" value="Age">Age</option>
+//       <option value="1">1</option>
+//       <option value="2">2</option>
+//       <option value="3">3</option>
+//       <option value="4">4</option>
+//       <option value="5">5</option>
+//       <option value="6">6</option>
+//       <option value="7">7</option>
+//       <option value="8">8</option>
+//       <option value="9">9</option>
+//       <option value="10">10</option>
+//       <option value="11">11</option>
+//       <option value="12">12</option>
+//       <option value="13">13</option>
+//       <option value="14">14</option>
+//       <option value="15">15</option>
+//       <option value="16">16</option>
+//       <option value="17">17</option>
+//       <option value="18">18</option>
+//     </select>
+//   </li> 
       
-      </ul>
-    </div>
+//      </ul>
+//    </div>
     
-    `
+//    `
 
-    AddromsData.innerHTML += RommInnerHTML
-  })
- }
-  function addAdult() {
+//    AddromsData.innerHTML += RommInnerHTML
+//  })
+// }
+//  function addAdult() {
 
-    var RoomMinus = document.querySelector(".roomMinus")
-    var RoomMSayi = document.querySelector(".roomSay")
-    var RoomPlus = document.querySelector(".roomPlus")
-    let count = 1
+//    var RoomMinus = document.querySelector(".roomMinus")
+//    var RoomMSayi = document.querySelector(".roomSay")
+//    var RoomPlus = document.querySelector(".roomPlus")
+//    let count = 1
 
-    const list = document.querySelector(".listbody")
-    const countTypes = document.querySelector(".countTypes")
+//    const list = document.querySelector(".listbody")
+//    const countTypes = document.querySelector(".countTypes")
 
-    const RoomAdultData = document.querySelector("._roomServiceModal")
+//    const RoomAdultData = document.querySelector("._roomServiceModal")
 
 
-    if (RoomPlus != null) {
-      RoomPlus.addEventListener("click", (e) => {
-        e.preventDefault()
-        count++;
-        RoomMSayi.value = count.valueOf()
+//    if (RoomPlus != null) {
+//      RoomPlus.addEventListener("click", (e) => {
+//        e.preventDefault()
+//        count++;
+//        RoomMSayi.value = count.valueOf()
 
-        const newInnerHtml = `
+//        const newInnerHtml = `
     
        
-          <li>
-          <div class="countTypes">
-          ${count}
-          </div>
+//          <li>
+//          <div class="countTypes">
+//          ${count}
+//          </div>
      
-            <select name="RoomTypes" id="RoomTypes">
+//            <select name="RoomTypes" id="RoomTypes">
     
-              <option value="full board and treatment">full board and treatment
-              </option>
-              <option value="full board without treatment">full board without
-                treatment</option>
+//              <option value="full board and treatment">full board and treatment
+//              </option>
+//              <option value="full board without treatment">full board without
+//                treatment</option>
              
-            </select>
-          </li>
+//            </select>
+//          </li>
         
     
-          `
-        list.innerHTML += newInnerHtml
+//          `
+//        list.innerHTML += newInnerHtml
 
 
 
-      })
-    }
-    if (RoomMinus != null) {
-      RoomMinus.addEventListener("click", () => {
-        if (count > 1) {
-          count--;
-          const { children } = list;
+//      })
+//    }
+//    if (RoomMinus != null) {
+//      RoomMinus.addEventListener("click", () => {
+//        if (count > 1) {
+//          count--;
+//          const { children } = list;
 
-          if (children.length) {
-            console.log(children.length);
-            list.removeChild(children[children.length - 1]);
-          }
-
-
-          if (RoomMSayi.value == 1) {
-            RoomMSayi.value = 1
-          }
-          else {
-            RoomMSayi.value = count.valueOf()
-          }
-
-        }
-      })
-    }
-  }
-  addAdult();
+//          if (children.length) {
+//            console.log(children.length);
+//            list.removeChild(children[children.length - 1]);
+//          }
 
 
-  function AddChild() {
-    var childPlus = document.querySelector(".roomPlusChild")
-    var childMinus = document.querySelector(".roomMinusChild")
-    var childSay = document.querySelector(".roomSayChild")
-    var Child = document.querySelector(".listbodyChild")
-    let count = 0
+//          if (RoomMSayi.value == 1) {
+//            RoomMSayi.value = 1
+//          }
+//          else {
+//            RoomMSayi.value = count.valueOf()
+//          }
+
+//        }
+//      })
+//    }
+//  }
+//  addAdult();
+
+
+//  function AddChild() {
+//    var childPlus = document.querySelector(".roomPlusChild")
+//    var childMinus = document.querySelector(".roomMinusChild")
+//    var childSay = document.querySelector(".roomSayChild")
+//    var Child = document.querySelector(".listbodyChild")
+//    let count = 0
 
 
 
-    if (childPlus != null) {
+//    if (childPlus != null) {
 
-      childPlus.addEventListener('click', (e) => {
-        e.preventDefault()
-        count++;
-          childSay.value = count.valueOf()
-        const ChildInnerHtml = `
-         <li>
-         <div class="countTypes">
-          ${count}
-          </div>
+//      childPlus.addEventListener('click', (e) => {
+//        e.preventDefault()
+//        count++;
+//          childSay.value = count.valueOf()
+//        const ChildInnerHtml = `
+//         <li>
+//         <div class="countTypes">
+//          ${count}
+//          </div>
     
-        <select name="RoomTypes" id="RoomTypes">
+//        <select name="RoomTypes" id="RoomTypes">
     
-          <option value="full board and treatment">full board and treatment
-          </option>
-          <option value="full board without treatment">full board without
-            treatment</option>
-        </select>
+//          <option value="full board and treatment">full board and treatment
+//          </option>
+//          <option value="full board without treatment">full board without
+//            treatment</option>
+//        </select>
     
     
-        <select  name="AgeChild" id=" ageChild">
+//        <select  name="AgeChild" id=" ageChild">
     
-          <option selected="selected" value="Age">Age</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-        </select>
-      </li> 
+//          <option selected="selected" value="Age">Age</option>
+//          <option value="1">1</option>
+//          <option value="2">2</option>
+//          <option value="3">3</option>
+//          <option value="4">4</option>
+//          <option value="5">5</option>
+//          <option value="6">6</option>
+//          <option value="7">7</option>
+//          <option value="8">8</option>
+//          <option value="9">9</option>
+//          <option value="10">10</option>
+//          <option value="11">11</option>
+//          <option value="12">12</option>
+//          <option value="13">13</option>
+//          <option value="14">14</option>
+//          <option value="15">15</option>
+//          <option value="16">16</option>
+//          <option value="17">17</option>
+//        </select>
+//      </li> 
         
-        `
-        Child.innerHTML += ChildInnerHtml
-      })
-    }
+//        `
+//        Child.innerHTML += ChildInnerHtml
+//      })
+//    }
 
-    if (childMinus != null) {
+//    if (childMinus != null) {
 
-      childMinus.addEventListener('click', (e) => {
-        e.preventDefault()
+//      childMinus.addEventListener('click', (e) => {
+//        e.preventDefault()
 
-        if (count > 0) {
-          count--;
-          const { children } = Child;
+//        if (count > 0) {
+//          count--;
+//          const { children } = Child;
 
-          if (children.length) {
-            console.log(children.length);
-            Child.removeChild(children[children.length - 1]);
-          }
-
-
-          if (childSay.value == 0) {
-            childSay.value = 0
-          }
-          else {
-              childSay.value = count.valueOf()
-          }
-
-        }
+//          if (children.length) {
+//            console.log(children.length);
+//            Child.removeChild(children[children.length - 1]);
+//          }
 
 
+//          if (childSay.value == 0) {
+//            childSay.value = 0
+//          }
+//          else {
+//              childSay.value = count.valueOf()
+//          }
 
-      })
-    }
-  }
-  AddChild()
+//        }
 
 
-}
-AddRomms()
 
-function AddRomms() {
-    const AddromsData = document.querySelector(".addroomsTable")
-    const RoomData = document.querySelector(".addRoomModal_item")
+//      })
+//    }
+//  }
+//  AddChild()
 
-    let count = 0
 
-    if (RoomData != null) {
-        RoomData.addEventListener("click", function (e) {
-            e.preventDefault()
-            count++
+//}
+//AddRomms()
 
-            const RommInnerHTML = `
+//function AddRomms() {
+//    const AddromsData = document.querySelector(".addroomsTable")
+//    const RoomData = document.querySelector(".addRoomModal_item")
+
+//    let count = 0
+
+//    if (RoomData != null) {
+//        RoomData.addEventListener("click", function (e) {
+//            e.preventDefault()
+//            count++
+
+//            const RommInnerHTML = `
     
    
-    <span>Room ${count}</span>
+//    <span>Room ${count}</span>
   
-    <div class="Room_itemModal">
-      <div class="_ModalItemHead">
-        <p>Adults</p>
-        <span class="roomMinus">-</span>
-        <span class="roomSay">0</span>
-        <span class="roomPlus">+</span>
+//    <div class="Room_itemModal">
+//      <div class="_ModalItemHead">
+//        <p>Adults</p>
+//        <span class="roomMinus">-</span>
+//        <span class="roomSay">0</span>
+//        <span class="roomPlus">+</span>
   
-      </div>
-      <div class="_roomServiceModal">
-        <ul class="listbody">
+//      </div>
+//      <div class="_roomServiceModal">
+//        <ul class="listbody">
         
-        <li>
-        <div class="countTypes">
+//        <li>
+//        <div class="countTypes">
       
-        </div>
+//        </div>
    
-          <select name="RoomTypes" id="RoomTypes">
+//          <select name="RoomTypes" id="RoomTypes">
   
-            <option value="full board and treatment">full board and treatment
-            </option>
-            <option value="full board without treatment">full board without
-              treatment</option>
-            <option value="half board and treatment">half board and treatment
-            </option>
-            <option value="half board without treatment">half board without
-              treatment</option>
-          </select>
-        </li>
+//            <option value="full board and treatment">full board and treatment
+//            </option>
+//            <option value="full board without treatment">full board without
+//              treatment</option>
+//            <option value="half board and treatment">half board and treatment
+//            </option>
+//            <option value="half board without treatment">half board without
+//              treatment</option>
+//          </select>
+//        </li>
         
-        </ul>
-      </div>
-    </div>
+//        </ul>
+//      </div>
+//    </div>
   
-    <div class="Modal_item_child">
-      <div class="_ModalItemHeadChild">
-        <p>Children</p>
-        <span class="roomMinusChild">-</span>
-        <span class="roomSayChild">0</span>
-        <span class="roomPlusChild">+</span>
+//    <div class="Modal_item_child">
+//      <div class="_ModalItemHeadChild">
+//        <p>Children</p>
+//        <span class="roomMinusChild">-</span>
+//        <span class="roomSayChild">0</span>
+//        <span class="roomPlusChild">+</span>
   
   
        
-      </div>
-    </div>
-    <div class="_roomServiceModal">
-      <ul class="listbodyChild">
-      <li>
-      <div class="countTypes">
+//      </div>
+//    </div>
+//    <div class="_roomServiceModal">
+//      <ul class="listbodyChild">
+//      <li>
+//      <div class="countTypes">
       
-       </div>
+//       </div>
  
-     <select name="RoomTypes" id="RoomTypes">
+//     <select name="RoomTypes" id="RoomTypes">
  
-       <option value="full board and treatment">full board and treatment
-       </option>
-       <option value="full board without treatment">full board without
-         treatment</option>
-       <option vallue="half board and treatment">half board and treatment
-       </option>
-       <option value="half board without treatment">half board without
-         treatment</option>
-     </select>
+//       <option value="full board and treatment">full board and treatment
+//       </option>
+//       <option value="full board without treatment">full board without
+//         treatment</option>
+//       <option vallue="half board and treatment">half board and treatment
+//       </option>
+//       <option value="half board without treatment">half board without
+//         treatment</option>
+//     </select>
  
  
-     <select  name="AgeChild" id=" ageChild">
+//     <select  name="AgeChild" id=" ageChild">
  
-       <option selected="selected" value="Age">Age</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10">10</option>
-       <option value="11">11</option>
-       <option value="12">12</option>
-       <option value="13">13</option>
-       <option value="14">14</option>
-       <option value="15">15</option>
-       <option value="16">16</option>
-       <option value="17">17</option>
-       <option value="118">18</option>
-     </select>
-   </li> 
+//       <option selected="selected" value="Age">Age</option>
+//       <option value="1">1</option>
+//       <option value="2">2</option>
+//       <option value="3">3</option>
+//       <option value="4">4</option>
+//       <option value="5">5</option>
+//       <option value="6">6</option>
+//       <option value="7">7</option>
+//       <option value="8">8</option>
+//       <option value="9">9</option>
+//       <option value="10">10</option>
+//       <option value="11">11</option>
+//       <option value="12">12</option>
+//       <option value="13">13</option>
+//       <option value="14">14</option>
+//       <option value="15">15</option>
+//       <option value="16">16</option>
+//       <option value="17">17</option>
+//       <option value="118">18</option>
+//     </select>
+//   </li> 
       
-      </ul>
-    </div>
+//      </ul>
+//    </div>
     
-    `
+//    `
 
-            AddromsData.innerHTML += RommInnerHTML
-        })
-    }
-    function addAdult() {
+//            AddromsData.innerHTML += RommInnerHTML
+//        })
+//    }
+//    function addAdult() {
 
-        var RoomMinus = document.querySelector(".roomMinus")
-        var RoomMSayi = document.querySelector(".roomSay")
-        var RoomPlus = document.querySelector(".roomPlus")
-        let count = 0
+//        var RoomMinus = document.querySelector(".roomMinus")
+//        var RoomMSayi = document.querySelector(".roomSay")
+//        var RoomPlus = document.querySelector(".roomPlus")
+//        let count = 0
 
-        const list = document.querySelector(".listbody")
-        const countTypes = document.querySelector(".countTypes")
+//        const list = document.querySelector(".listbody")
+//        const countTypes = document.querySelector(".countTypes")
 
-        const RoomAdultData = document.querySelector("._roomServiceModal")
+//        const RoomAdultData = document.querySelector("._roomServiceModal")
 
 
-        if (RoomPlus != null) {
-            RoomPlus.addEventListener("click", (e) => {
-                e.preventDefault()
-                count++;
-                RoomMSayi.innerHTML = count
+//        if (RoomPlus != null) {
+//            RoomPlus.addEventListener("click", (e) => {
+//                e.preventDefault()
+//                count++;
+//                RoomMSayi.innerHTML = count
 
-                const newInnerHtml = `
+//                const newInnerHtml = `
     
        
-          <li>
-          <div class="countTypes">
-          ${count}
-          </div>
+//          <li>
+//          <div class="countTypes">
+//          ${count}
+//          </div>
      
-            <select name="Withtreatment" id="RoomTypes">
+//            <select name="Withtreatment" id="RoomTypes">
     
-              <option value="true">full board and treatment
-              </option>
-              <option value="false">full board without
-                treatment</option>
+//              <option value="true">full board and treatment
+//              </option>
+//              <option value="false">full board without
+//                treatment</option>
              
-            </select>
-          </li>
+//            </select>
+//          </li>
         
     
-          `
-                list.innerHTML += newInnerHtml
+//          `
+//                list.innerHTML += newInnerHtml
 
 
 
-            })
-        }
-        if (RoomMinus != null) {
-            RoomMinus.addEventListener("click", () => {
-                if (count > 0) {
-                    count--;
-                    const { children } = list;
+//            })
+//        }
+//        if (RoomMinus != null) {
+//            RoomMinus.addEventListener("click", () => {
+//                if (count > 0) {
+//                    count--;
+//                    const { children } = list;
 
-                    if (children.length) {
-                        console.log(children.length);
-                        list.removeChild(children[children.length - 1]);
-                    }
-
-
-                    if (RoomMSayi.innerHTML == 0) {
-                        RoomMSayi.innerHTML = 0
-                    }
-                    else {
-                        RoomMSayi.innerHTML = count
-                    }
-
-                }
-            })
-        }
-    }
-    addAdult();
+//                    if (children.length) {
+//                        console.log(children.length);
+//                        list.removeChild(children[children.length - 1]);
+//                    }
 
 
-    function AddChild() {
-        var childPlus = document.querySelector(".roomPlusChild")
-        var childMinus = document.querySelector(".roomMinusChild")
-        var childSay = document.querySelector(".roomSayChild")
-        var Child = document.querySelector(".listbodyChild")
-        let count = 0
+//                    if (RoomMSayi.innerHTML == 0) {
+//                        RoomMSayi.innerHTML = 0
+//                    }
+//                    else {
+//                        RoomMSayi.innerHTML = count
+//                    }
+
+//                }
+//            })
+//        }
+//    }
+//    addAdult();
+
+
+//    function AddChild() {
+//        var childPlus = document.querySelector(".roomPlusChild")
+//        var childMinus = document.querySelector(".roomMinusChild")
+//        var childSay = document.querySelector(".roomSayChild")
+//        var Child = document.querySelector(".listbodyChild")
+//        let count = 0
 
 
 
-        if (childPlus != null) {
+//        if (childPlus != null) {
 
-            childPlus.addEventListener('click', (e) => {
-                e.preventDefault()
-                count++;
-                childSay.innerHTML = count
+//            childPlus.addEventListener('click', (e) => {
+//                e.preventDefault()
+//                count++;
+//                childSay.innerHTML = count
 
-                const ChildInnerHtml = `
-         <li>
-         <div class="countTypes">
-          ${count}
-          </div>
+//                const ChildInnerHtml = `
+//         <li>
+//         <div class="countTypes">
+//          ${count}
+//          </div>
     
-        <select name="RoomTypes" id="RoomTypes">
+//        <select name="RoomTypes" id="RoomTypes">
     
-          <option value="full board and treatment">full board and treatment
-          </option>
-          <option value="full board without treatment">full board without
-            treatment</option>
-          <option vallue="half board and treatment">half board and treatment
-          </option>
-          <option value="half board without treatment">half board without
-            treatment</option>
-        </select>
+//          <option value="full board and treatment">full board and treatment
+//          </option>
+//          <option value="full board without treatment">full board without
+//            treatment</option>
+//          <option vallue="half board and treatment">half board and treatment
+//          </option>
+//          <option value="half board without treatment">half board without
+//            treatment</option>
+//        </select>
     
     
-        <select  name="AgeChild" id=" ageChild">
+//        <select  name="AgeChild" id=" ageChild">
     
-          <option selected="selected" value="Age">Age</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="118">18</option>
-        </select>
-      </li> 
+//          <option selected="selected" value="Age">Age</option>
+//          <option value="1">1</option>
+//          <option value="2">2</option>
+//          <option value="3">3</option>
+//          <option value="4">4</option>
+//          <option value="5">5</option>
+//          <option value="6">6</option>
+//          <option value="7">7</option>
+//          <option value="8">8</option>
+//          <option value="9">9</option>
+//          <option value="10">10</option>
+//          <option value="11">11</option>
+//          <option value="12">12</option>
+//          <option value="13">13</option>
+//          <option value="14">14</option>
+//          <option value="15">15</option>
+//          <option value="16">16</option>
+//          <option value="17">17</option>
+//          <option value="118">18</option>
+//        </select>
+//      </li> 
         
-        `
-                Child.innerHTML += ChildInnerHtml
-            })
-        }
+//        `
+//                Child.innerHTML += ChildInnerHtml
+//            })
+//        }
 
-        if (childMinus != null) {
+//        if (childMinus != null) {
 
-            childMinus.addEventListener('click', (e) => {
-                e.preventDefault()
+//            childMinus.addEventListener('click', (e) => {
+//                e.preventDefault()
 
-                if (count > 0) {
-                    count--;
-                    const { children } = Child;
+//                if (count > 0) {
+//                    count--;
+//                    const { children } = Child;
 
-                    if (children.length) {
-                        console.log(children.length);
-                        Child.removeChild(children[children.length - 1]);
-                    }
-
-
-                    if (childSay.innerHTML == 0) {
-                        childSay.innerHTML = 0
-                    }
-                    else {
-                        childSay.innerHTML = count
-                    }
-
-                }
+//                    if (children.length) {
+//                        console.log(children.length);
+//                        Child.removeChild(children[children.length - 1]);
+//                    }
 
 
+//                    if (childSay.innerHTML == 0) {
+//                        childSay.innerHTML = 0
+//                    }
+//                    else {
+//                        childSay.innerHTML = count
+//                    }
 
-            })
-        }
-    }
-    AddChild()
+//                }
 
 
-}
-AddRomms()
+
+//            })
+//        }
+//    }
+//    AddChild()
 
 
+//}
+//AddRomms()
 
 
 
 
 
 
-function Increment() {
-  let count = 0;
-  const plus = document.querySelector("#plus")
-  const Count = document.querySelector("#counts");
-  const Minus = document.querySelector("#minus");
-  if (plus != null) {
-    plus.addEventListener("click", function (e) {
-      e.preventDefault()
-      count++
-      Count.innerHTML = count
-    })
-  }
-  if (Minus != null) {
-    Minus.addEventListener("click", function (e) {
-      e.preventDefault()
-      if (count > 0) {
-        count--;
-        if (Count.innerHTML == 0) {
-          Count.innerHTML = 0
-        }
-        else {
-          Count.innerHTML = count
-        }
-      }
-    })
-  }
-}
-Increment()
+
+
+//function Increment() {
+//  let count = 0;
+//  const plus = document.querySelector("#plus")
+//  const Count = document.querySelector("#counts");
+//  const Minus = document.querySelector("#minus");
+//  if (plus != null) {
+//    plus.addEventListener("click", function (e) {
+//      e.preventDefault()
+//      count++
+//      Count.innerHTML = count
+//    })
+//  }
+//  if (Minus != null) {
+//    Minus.addEventListener("click", function (e) {
+//      e.preventDefault()
+//      if (count > 0) {
+//        count--;
+//        if (Count.innerHTML == 0) {
+//          Count.innerHTML = 0
+//        }
+//        else {
+//          Count.innerHTML = count
+//        }
+//      }
+//    })
+//  }
+//}
+//Increment()
 
 
 
-function Increment1() {
-  let count = 0;
-  const pluse = document.querySelector(".plu")
-  const Count = document.querySelector(".deyer");
-  const Minuse = document.querySelector(".min");
-  const childAges = document.querySelector(".childAges")
+//function Increment1() {
+//  let count = 0;
+//  const pluse = document.querySelector(".plu")
+//  const Count = document.querySelector(".deyer");
+//  const Minuse = document.querySelector(".min");
+//  const childAges = document.querySelector(".childAges")
 
-  if (pluse != null) {
-    pluse.addEventListener("click", function (e) {
-      e.preventDefault();
+//  if (pluse != null) {
+//    pluse.addEventListener("click", function (e) {
+//      e.preventDefault();
 
-      count++
-      Count.innerHTML = count;
+//      count++
+//      Count.innerHTML = count;
 
-      childAges.style.opacity = "1";
+//      childAges.style.opacity = "1";
 
 
 
-    })
-  }
-  if (Minuse != null) {
-    Minuse.addEventListener("click", function (e) {
-      e.preventDefault()
-      if (count > 0) {
-        count--;
-        if (Count.innerHTML == 0) {
-          Count.innerHTML = 0
-        }
-        else {
-          Count.innerHTML = count
-        }
-      }
-    })
-  }
-}
-Increment1()
+//    })
+//  }
+//  if (Minuse != null) {
+//    Minuse.addEventListener("click", function (e) {
+//      e.preventDefault()
+//      if (count > 0) {
+//        count--;
+//        if (Count.innerHTML == 0) {
+//          Count.innerHTML = 0
+//        }
+//        else {
+//          Count.innerHTML = count
+//        }
+//      }
+//    })
+//  }
+//}
+//Increment1()
 
 
 $(document).ready(function () {

@@ -140,7 +140,7 @@
                         </div>
                         <div class="RightAccorment">
                            
-                            @if (Model.Adults[i].Treatment)
+                            @if (Model.Adults[i].Treatment && Model.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
                             {
                                   <p>@localizer["3 meals a day and treatment"]</p>
                            
@@ -185,35 +185,36 @@
 
                         </div>
                         <div class="RightAccorment">
-                           
-                            @if (Model.Children[i].Treatment)
-                            {
-                                <p>@localizer["Age"]: @Model.Children[i].Age</p>
-                                <p>@localizer["3 meals a day and treatment"]</p>
+                                            @if (Model.Adults[i].Treatment && Model.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
+                                            {
+                                               
+                                                    <p>@localizer["Age"]: @Model.Children[i].Age</p>
+                                                    <p>@localizer["3 meals a day and treatment"]</p>
 
-                                    <input type="hidden"  asp-for="Children[i].Id" value="@Model.Children[i].Id">
-                                    <select    name="ChildrenItems[]">
-                                       
-                                    @foreach (Treatment item in Model.Hotel.Treatments)
-                                    {
-                                        
-                                        <option value="@item.Id"> 
-                                            @item.Name / @item.Price AZN
-                                    </option>
-                                    }
+                                                    <input type="hidden"  asp-for="Children[i].Id" value="@Model.Children[i].Id">
+                                                    <select    name="ChildrenItems[]">
 
-                                </select>
-                                  <br />
-                           @localizer["Treatment packet's price will be added to Total Price"]
+                                                        @foreach (Treatment item in Model.Hotel.Treatments)
+                                                        {
+
+                                                            <option value="@item.Id"> 
+                                                                @item.Name / @item.Price AZN
+                                                            </option>
+                                                        }
+
+                                                    </select>
+                                                    <br />
+                                                    @localizer["Treatment packet's price will be added to Total Price"]
 
 
-                            }
-                            else
-                            {
-                            
-                                <p>@localizer["3 meals a day"]</p>
+                                                
+                                            }
+                                            else
+                                            {
 
-                            }
+                                                <p>@localizer["3 meals a day"]</p>
+
+                                            }
 
                                 </div>
                                </div>

@@ -148,29 +148,32 @@ namespace Hotel_management.Controllers
             {
                 return BadRequest();
             }
-          
 
-            for (int i = 0; i < dBbooking.Adults.Where(a=>a.Treatment).Count(); i++)
+            if (dBbooking.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
             {
-                dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_modelId = booking.AdultsItems[i];
-                dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model = await _context.Treatments.FirstOrDefaultAsync(t => t.Id == booking.AdultsItems[i]);
-                dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price + dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price;
-
-
-            }
-
-            if (dBbooking.Child > 0)
-            {
-                for (int i = 0; i < dBbooking.Children.Where(a => a.Treatment).Count(); i++)
+                for (int i = 0; i < dBbooking.Adults.Where(a => a.Treatment).Count(); i++)
                 {
-                    dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_modelId = booking.ChildrenItems[i];
-                    dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model = await _context.Treatments.FirstOrDefaultAsync(t => t.Id == booking.ChildrenItems[i]);
-                    dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price + dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price;
+                    dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_modelId = booking.AdultsItems[i];
+                    dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model = await _context.Treatments.FirstOrDefaultAsync(t => t.Id == booking.AdultsItems[i]);
+                    dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price + dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price;
 
 
                 }
 
+                if (dBbooking.Child > 0)
+                {
+                    for (int i = 0; i < dBbooking.Children.Where(a => a.Treatment).Count(); i++)
+                    {
+                        dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_modelId = booking.ChildrenItems[i];
+                        dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model = await _context.Treatments.FirstOrDefaultAsync(t => t.Id == booking.ChildrenItems[i]);
+                        dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price + dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price;
+
+
+                    }
+
+                }
             }
+          
 
             dBbooking.Name = Name;
             dBbooking.SurName = SurName;

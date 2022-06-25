@@ -14,11 +14,12 @@
 {
     <div id="removeAddMoreChild">
 
-<li>
+<li style="border:none">
     
  <select asp-for="Treatment">
      <option value="true">
          @localizer["3 meals a day and treatment"]
+         <p>(Only for Chenot)</p>
 
      </option>
      <option value="false">
@@ -26,7 +27,7 @@
      </option>
  </select>
    
- 
+
     <select  asp-for="Age">
  
        
