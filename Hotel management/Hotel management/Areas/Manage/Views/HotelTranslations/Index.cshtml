@@ -12,11 +12,12 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr style="    display: flex;
+    justify-content: space-between;">
             <th>
                 @Html.DisplayNameFor(model => model.hotel)
             </th>
-            <th>
+            <th  >
                 @Html.DisplayNameFor(model => model.Description_en)
             </th>
             <th>
@@ -30,20 +31,39 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+        <tr style="    display: flex;
+    justify-content: space-between; flex-wrap:wrap ;   border-top: 1px solid;">
              <td>
                 @Html.DisplayFor(modelItem => item.hotel.Name)
             </td>
-            <td>
+            <td style="    white-space: nowrap;
+    width: 119px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   
+
+    display: inline-block;">
                 @Html.DisplayFor(modelItem => item.Description_en)
             </td>
-            <td>
+            <td  style="    white-space: nowrap;
+    width: 119px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   
+
+    display: inline-block;">
                 @Html.DisplayFor(modelItem => item.Description_ru)
             </td>
-            <td>
+            <td  style="    white-space: nowrap;
+    width: 119px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   
+
+    display: inline-block;">
                 @Html.DisplayFor(modelItem => item.hotel.Description)
             </td>
-             <td class="d-flex">
+             <td class="d-flex" style="gap:10px">
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
                 <a class="btn btn-success" asp-action="Details" asp-route-id="@item.Id">Details</a> 
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>

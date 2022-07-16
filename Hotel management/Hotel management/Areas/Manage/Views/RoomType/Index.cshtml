@@ -8,46 +8,51 @@
     decimal totalPage = ViewBag.TotalPage;
 }
 
-<h1>Index</h1>
+<h1>RoomType Page</h1>
 
 <p>
     <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-6 col-sm-12">
+
+
+            <table class="table">
     <thead>
-        <tr>
+        <tr style="display:flex;flex-wrap:wrap"  >
              <th>
-                @Html.DisplayNameFor(model => model.Hotel)
+               <i style="font-size:20px;color:black" class="fas fa-hotel"></i>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-              Oneweek Low
+              <b>1</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> Low
             </th>
             <th>
-               Twoweeks Low
+             <b>2</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> Low
             </th>
             <th>
-              Threeweeks Low
+            <b>3</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> Low
             </th>
              <th>
-               Oneweek Mid
+             <b>1</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> Mid
             </th>
             <th>
-               Twoweeks Mid
+            <b>2</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> Mid
             </th>
             <th>
-                Threeweeks Mid
+           <b>3</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> Mid
             </th>
             <th>
-               Oneweek High
+             <b>1</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> High
             </th>
             <th>
-               Twoweeks High
+             <b>2</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> High
             </th>
             <th>
-                Threeweeks High
+             <b>3</b><i style="font-size:20px;color:black" class="fas fa-calendar-week"></i> High
             </th>
               
         
@@ -55,77 +60,75 @@
                 @Html.DisplayNameFor(model => model.Roomarea)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Mainimg)
+             <i style="font-size:20px;color:black" class="fas fa-image"></i>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.People)
+                <i style="font-size:20px;color:black" class="fas fa-users"></i>
+            
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Children)
+             <i style="font-size:20px;color:black" class="fas fa-child"></i>
             </th>
          
            
            
             <th>
-                Settings
+              <i style="font-size:20px;color:blue" class="fas fa-cogs"></i>
             </th>
-        </tr>
+        </t>
     </thead>
     <tbody>
 @foreach (RoomType item in Model) {
-        <tr>
-              <td>
+        <tr style="display:flex;flex-wrap:wrap"  id="room_tr">
+              <td style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.Hotel.Name)
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.Name) 
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.OneweekPrice) AZN
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.TwoweeksPrice) AZN
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.ThreeweeksPrice) AZN
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OneweekPriceMid) AZN
-            </td>
-            <td>
+            <td  style="font-size:12px !important" >
                 @Html.DisplayFor(modelItem => item.TwoweeksPriceMid) AZN
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.ThreeweeksPriceMid) AZN
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.OneweekPriceHigh) AZN
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.TwoweeksPriceHigh) AZN
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.ThreeweeksPriceHigh) AZN
             </td>
           
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.Roomarea) m2
             </td>
-            <td>
+            <td >
                <img style="width:100px; height:100px;" src="~/images/Rooms/@item.Mainimg" alt="Alternate Text" />
             </td>
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.People)
             </td>
 
-            <td>
+            <td  style="font-size:12px !important">
                 @Html.DisplayFor(modelItem => item.Children)
             </td>
        
            
             <td class="d-flex">
-                <a asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning">Edit</a>
-                <a  new { onclick="return confirm('Are sure wants to delete the current Item?');" } asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>
+                <a style="margin:0px 5px"  asp-action="Update" asp-route-id="@item.Id" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                <a  new { onclick="return confirm('Are sure wants to delete the current Item?');" } asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
             </td>
         </tr>
 }
@@ -154,4 +157,11 @@
 
         </ul>
     </nav>
+</div>
+
+
+        </div>
+
+    </div>
+
 </div>

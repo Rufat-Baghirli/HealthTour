@@ -39,14 +39,20 @@
                 else
                 {
                     <td>
-                <img style="width:100px; height:100px;" src="~/images/Hotels/@hotel.Mainimg" alt="Alternate Text" />
+                <img style="width:100px; height:100px;     object-fit: cover;" src="~/images/Hotels/@hotel.Mainimg" alt="Alternate Text" />
             </td>
                 }
 
             <td>@hotel.Name</td>
             <td>@hotel.Location.City</td>
-            <td>@hotel.Description</td>
-            <td class="d-flex">
+            <td style="    white-space: nowrap;
+    width: 119px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+   
+
+    display: inline-block;">@hotel.Description</td>
+            <td >
                 <a class="btn btn-success" asp-action="Detail" asp-route-Id="@hotel?.Id">Detail</a>
                 <a class="btn btn-warning" asp-action="Update" asp-route-Id="@hotel?.Id">Update</a>
                 <a new { onclick="return confirm('Are sure wants to delete the current Item?');" } asp-action="Delete" asp-route-id="@hotel?.Id" class="btn btn-danger"> Delete </a>
