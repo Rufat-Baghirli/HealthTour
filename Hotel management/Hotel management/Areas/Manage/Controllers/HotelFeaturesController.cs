@@ -24,7 +24,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             }
             public async Task<ActionResult> Index()
         {
-            IEnumerable<HotelFeature>features  = await _context.HotelFeatures.Include(f=>f.Hotel).ToListAsync();
+            IEnumerable<HotelFeature>features  = await _context.HotelFeatures.Where(r=>r.IsDeleted==false).Include(f=>f.Hotel).ToListAsync();
             return View(features);
         }
 
@@ -114,35 +114,28 @@ namespace Hotel_management.Areas.Manage.Controllers
 
         }
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || id == 0)
+
+            if (id is null or 0)
                 return NotFound();
-            if (!await _context.HotelFeatures.AnyAsync(l => l.Id == id))
+            HotelFeature feature = await _context.HotelFeatures.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == id);
+
+
+            if (feature == null)
                 return BadRequest();
-            HotelFeature? hotelFeature = await _context.HotelFeatures.Include(f=>f.HotelFeatureDetails).FirstOrDefaultAsync(l => l.Id == id);
+           
 
 
 
-            return View(hotelFeature);
+            feature.IsDeleted = true;
 
 
-
-
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(HotelFeature feature)
-        {
-
-            _context.HotelFeatures.Remove(feature);
-            _context.HotelFeatureDetails.RemoveRange(feature.HotelFeatureDetails);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
 
-
-
+            return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _env;
 
-        public ExtraPriceController(AppDbContext context,IWebHostEnvironment env)
+        public ExtraPriceController(AppDbContext context, IWebHostEnvironment env)
         {
             _context = context;
             _env = env;
@@ -23,8 +23,8 @@ namespace Hotel_management.Areas.Manage.Controllers
 
         public async Task<IActionResult> Index()
         {
-            IEnumerable<ExtraPrice> Extraprice = await _context.ExtraPrices.Where(r=>r.IsDeleted == false && r.Hotel.isDeleted==false).
-                Include(e=>e.Hotel).
+            IEnumerable<ExtraPrice> Extraprice = await _context.ExtraPrices.Where(r => r.IsDeleted == false && r.Hotel.isDeleted == false).
+                Include(e => e.Hotel).
                 ToListAsync();
             return View(Extraprice);
         }
@@ -47,13 +47,13 @@ namespace Hotel_management.Areas.Manage.Controllers
 
 
 
-            extra.Hotel = await _context.Hotels.Include(r=>r.RoomTypes).FirstOrDefaultAsync(r => r.Id == extra.HotelId);
-          
+            extra.Hotel = await _context.Hotels.Include(r => r.Rooms).FirstOrDefaultAsync(r => r.Id == extra.HotelId);
+
 
             await _context.ExtraPrices.AddAsync(extra);
             await _context.SaveChangesAsync();
 
-           return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Update(int? Id)
@@ -61,10 +61,10 @@ namespace Hotel_management.Areas.Manage.Controllers
             ViewBag.Hotels = await _context.Hotels.Where(r => r.isDeleted == false).ToListAsync();
 
 
-            if (Id == null|| Id==0)
+            if (Id == null || Id == 0)
                 return NotFound();
 
-            ExtraPrice Extraprice = await _context.ExtraPrices.Include(r=>r.Hotel).FirstOrDefaultAsync(e => e.Id == Id);
+            ExtraPrice Extraprice = await _context.ExtraPrices.Include(r => r.Hotel).FirstOrDefaultAsync(e => e.Id == Id);
 
             if (Extraprice == null)
                 return BadRequest();
@@ -73,7 +73,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? Id,ExtraPrice extraPrice)
+        public async Task<IActionResult> Update(int? Id, ExtraPrice extraPrice)
         {
             ViewBag.Hotels = await _context.Hotels.Where(r => r.isDeleted == false).ToListAsync();
 
@@ -82,19 +82,23 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return NotFound();
 
             ExtraPrice dbPrice = await _context.ExtraPrices.Include(r => r.Hotel).Where(
-                r=>r.Hotel.isDeleted == false).FirstOrDefaultAsync(e => e.Id == Id);
+                r => r.Hotel.isDeleted == false).FirstOrDefaultAsync(e => e.Id == Id);
             if (dbPrice == null)
                 return BadRequest();
 
 
             if (!ModelState.IsValid)
                 return View(dbPrice);
-            
+
             dbPrice.BabyPrice = extraPrice.BabyPrice;
+            dbPrice.BabyPricewithtreatment = extraPrice.BabyPricewithtreatment;
             dbPrice.HotelId = extraPrice.HotelId;
             dbPrice.ChildPrice = extraPrice.ChildPrice;
+            dbPrice.ChildPricewithtreatment = extraPrice.ChildPricewithtreatment;
             dbPrice.YoungPrice = extraPrice.YoungPrice;
-       
+            dbPrice.YoungPricewithtreatment = extraPrice.YoungPricewithtreatment;
+
+
 
 
 
@@ -103,7 +107,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult>Delete(int? Id)
+        public async Task<IActionResult> Delete(int? Id)
         {
             if (Id == null || Id == 0)
                 return NotFound();
@@ -113,7 +117,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return BadRequest();
             Extraprice.IsDeleted = true;
             await _context.SaveChangesAsync();
-         return  RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index));
 
         }
     }

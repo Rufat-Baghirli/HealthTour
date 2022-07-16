@@ -23,7 +23,7 @@
               <select class="form-control" asp-for="RoomFeaturesId">
             @foreach (RoomFeatures features in ViewBag.Features)
             {
-                <option value="@features.Id">Xüsusiyyət:@features.Features/RoomID: @features.Room.Id/Otel: @features.Room.Hotel.Name</option>
+                <option value="@features.Id">Xüsusiyyət:@features.Features/RoomID: @features.RoomType.Id/Otel: @features.RoomType.Hotel.Name</option>
                 
             }
         </select>

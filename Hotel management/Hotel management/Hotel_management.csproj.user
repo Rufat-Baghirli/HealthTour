@@ -10,8 +10,8 @@
     <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
     <WebStackScaffolding_IsPartialViewSelected>True</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
-    <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
-    <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
+    <Controller_SelectedScaffolderID>MvcControllerWithContextScaffolder</Controller_SelectedScaffolderID>
+    <Controller_SelectedScaffolderCategoryPath>root/Common/MVC/Controller</Controller_SelectedScaffolderCategoryPath>
     <NameOfLastUsedPublishProfile>C:\Users\Ali Aliyev\Desktop\HotelManagement\HotelsReservations-main\Hotel-backend\Hotel management\Hotel management\Properties\PublishProfiles\htn - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
     <WebStackScaffolding_LayoutPageFile>~/Areas/Manage/Views/Shared/_Layout.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_ControllerDialogWidth>650</WebStackScaffolding_ControllerDialogWidth>

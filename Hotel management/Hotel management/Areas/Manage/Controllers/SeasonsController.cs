@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Hotel_management.DAL;
 using Hotel_management.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin")]
+
     public class SeasonsController : Controller
     {
         private readonly AppDbContext _context;

@@ -16,11 +16,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.BabyPrice)
             </th>
+              <th>
+                @Html.DisplayNameFor(model => model.BabyPricewithtreatment)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ChildPrice)
             </th>
+                        <th>
+                @Html.DisplayNameFor(model => model.ChildPricewithtreatment)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.YoungPrice)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.YoungPricewithtreatment)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Hotel)
@@ -39,11 +49,20 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.BabyPrice)
                     </td>
+                      <td>
+                        @Html.DisplayFor(modelItem => item.BabyPricewithtreatment)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ChildPrice)
                     </td>
+                      <td>
+                        @Html.DisplayFor(modelItem => item.ChildPricewithtreatment)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.YoungPrice)
+                    </td>
+                      <td>
+                        @Html.DisplayFor(modelItem => item.YoungPricewithtreatment)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Hotel.Name)

@@ -20,7 +20,7 @@
                 @Html.DisplayNameFor(model => model.RoomFeatures)
             </th>
              <th>
-            @Html.DisplayNameFor(model => model.RoomFeatures.Room)
+            @Html.DisplayNameFor(model => model.RoomFeatures.RoomType)
         </th>
        
              <th>
@@ -42,10 +42,10 @@
                 @Html.DisplayFor(modelItem => item.RoomFeatures.Features)
             </td>
              <td>
-            @Html.DisplayFor(modelItem => item.RoomFeatures.Room.Id)
+            @Html.DisplayFor(modelItem => item.RoomFeatures.RoomType.Id)
              </td>
               <td>
-            @Html.DisplayFor(modelItem => item.RoomFeatures.Room.Hotel.Name)
+            @Html.DisplayFor(modelItem => item.RoomFeatures.RoomType.Hotel.Name)
         </td>
             <td class="d-flex">
                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Delete</a>

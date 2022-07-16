@@ -385,7 +385,7 @@
 
 
 
-        @foreach (Room room in hotel.Rooms)
+        @foreach (RoomType room in hotel.Rooms)
         {
             <section id="HotelListContainer">
 
@@ -407,7 +407,7 @@
                                     <div class="HotelItemContent">
                                         <ul>
                                             <li>
-                                                <h5>@room.RoomType.Name Room</h5>
+                                                <h5>@room.Name Room</h5>
                                             </li>
                                             <li> <i class="fas fa-users"></i>  @(room.People + room.Children) people (including up to @room.Children children)</li>
                                             <li>
@@ -510,6 +510,8 @@
 
 
                                                                 </div>
+                                                                <br>
+                                                                <h1>@localizer["Hotel Features"]</h1>
                                                                 @foreach (var item in hotel.HotelFeatures)
                                                                 {
                                                                     <div
@@ -720,32 +722,34 @@
                                                     {
                                                         @if (item.RoomFeaturesTranslation!=null)
                                                         {
-                                                        @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                     
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.RoomFeaturesTranslation.Features_en</h3>
+                                                                        <h6>@item.RoomFeaturesTranslation.Features_en</h6>
 
                                                                         <ul>
+                                                                               @foreach (var featuredetail in item.RoomFeatureDetails)
+                                                            {
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_en</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_en</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
                                                                              </li>
+                                                                             }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
 
                                                         }
                                                         else
@@ -755,16 +759,16 @@
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.Features</h3>
+                                                                        <h6>@item.Features</h6>
 
                                                                         <ul>
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_en</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_en</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
@@ -782,85 +786,91 @@
                                                     {
                                                         @if (item.RoomFeaturesTranslation!=null)
                                                         {
-                                                        @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                     
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.RoomFeaturesTranslation.Features_ru</h3>
+                                                                        <h6>@item.RoomFeaturesTranslation.Features_ru</h6>
 
                                                                         <ul>
+                                                                               @foreach (var featuredetail in item.RoomFeatureDetails)
+                                                            {
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
                                                                              </li>
+                                                                             }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
 
                                                         }
                                                          else
                                                         {
-                                                             @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
-
+                                                            
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.Features</h3>
+                                                                        <h6>@item.Features</h6>
 
                                                                         <ul>
+                                                                             @foreach (var featuredetail in item.RoomFeatureDetails)
+                                                            {
+
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
                                                                              </li>
+                                                                             }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
                                                         }
                                                     }
                                                     else
                                                     {
-                                                         @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                        
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.Features</h3>
+                                                                        <h6>@item.Features</h6>
 
                                                                         <ul>
+                                                                             @foreach (var featuredetail in item.RoomFeatureDetails)
+                                                            {
                                                                             <li> 
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                 
                                                                              </li>
+                                                            }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
                                                     }
 
 

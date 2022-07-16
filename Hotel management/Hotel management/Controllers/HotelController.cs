@@ -23,16 +23,16 @@ namespace Hotel_management.Controllers
         {
             HotelVM vm = new HotelVM
             {
-                Hotels = await _context.Hotels.Where(h => h.isDeleted == false).Include(h => h.Location).Include(h => h.ExtraPrice).Include(h => h.HotelFeatures).ThenInclude(h=>h.HotelFeatureTranslations).Include(h => h.HotelFeatures).ThenInclude(h => h.HotelFeatureDetails).
-                ThenInclude(h=>h.hotelFeatureDetailsTranslations).
-                         Include(h => h.HotelImages).Include(h => h.HotelStar).Include(h => h.Reviews).Include(h => h.RoomTypes.Where(r => r.IsDeleted == false)).
+                Hotels = await _context.Hotels.Where(h => h.isDeleted == false).Include(h => h.Location).Include(h => h.ExtraPrice).Include(h => h.HotelFeatures.Where(r=>r.IsDeleted==false)).ThenInclude(h => h.HotelFeatureTranslations).Include(h => h.HotelFeatures.Where(h=>h.IsDeleted==false)).ThenInclude(h => h.HotelFeatureDetails).
+                ThenInclude(h => h.hotelFeatureDetailsTranslations).
+                         Include(h => h.HotelImages).Include(h => h.HotelStar).Include(h => h.Reviews).Include(h => h.Rooms.Where(r => r.IsDeleted == false)).
                          Include(h => h.Treatments)
-                         .Include(t=>t.hotelTranslations)
+                         .Include(t => t.hotelTranslations)
                          .ToListAsync(),
 
 
             };
-          
+
 
             return View(vm);
         }
@@ -40,7 +40,7 @@ namespace Hotel_management.Controllers
         public async Task<IActionResult> HotelDetails(int? Id)
         {
             if (Id == null)
-                return NotFound();
+                return RedirectToAction("Error", "Home");
 
             Hotel hotel = await _context.Hotels.Where(h => h.isDeleted == false).
                Include(h => h.Location).
@@ -50,24 +50,23 @@ namespace Hotel_management.Controllers
                Include(h => h.HotelImages).
                Include(h => h.HotelStar).
                Include(h => h.Reviews).
-               Include(h => h.RoomTypes.Where(r => r.IsDeleted == false)).
+               Include(h => h.Rooms.Where(r => r.IsDeleted == false)).
                Include(h => h.Treatments).
                Include(t => t.hotelTranslations).
-               Include(r=>r.Rooms.Where(r=>r.isDeleted==false)).
+               Include(r => r.Rooms.Where(r => r.IsDeleted == false)).
                ThenInclude(r => r.RoomImages)
               .Include(r => r.Rooms).
-               ThenInclude(r => r.RoomType).
-               Include(r=>r.Rooms).
               ThenInclude(r => r.RoomFeatures).
               ThenInclude(f => f.RoomFeaturesTranslation).
               Include(r => r.Rooms).
               ThenInclude(r => r.RoomFeatures).
               ThenInclude(f => f.RoomFeatureDetails).
               ThenInclude(f => f.RoomFeatureDetailTranslations).
-              FirstOrDefaultAsync(h=>h.Id == Id);
+              FirstOrDefaultAsync(h => h.Id == Id);
 
             if (hotel == null)
-                return NotFound();
+                return RedirectToAction("Error", "Home");
+
             HotelVM vm = new HotelVM
             {
                 Hotel = hotel

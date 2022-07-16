@@ -10,11 +10,12 @@ namespace Hotel_management.Models
         [Required]
         public IEnumerable<HotelFeatureDetails> HotelFeatureDetails { get; set; }
         public int HotelId { get; set; }
-        public Hotel Hotel { get; set; }
+        public Hotel? Hotel { get; set; }
         public HotelFeatureTranslations? HotelFeatureTranslations { get; set; }
+        public bool IsDeleted { get; set; }
 
-    
-    
-      
+
+
+
     }
 }

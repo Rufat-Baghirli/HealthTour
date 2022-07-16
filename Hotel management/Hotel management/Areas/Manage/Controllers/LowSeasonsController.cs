@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Hotel_management.DAL;
 using Hotel_management.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin")]
+
     public class LowSeasonsController : Controller
     {
         private readonly AppDbContext _context;
@@ -49,7 +52,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         // GET: Manage/LowSeasons/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.LowSeason == null).Include(h => h.HighSeason).Include(h => h.MidSeason).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Where(h => h.LowSeason == null).Include(h => h.HighSeason).Include(h => h.MidSeason).Include(h => h.Hotel).ToListAsync();
             return View();
         }
 
@@ -61,7 +64,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         public async Task<IActionResult> Create([Bind("Id,SeasonId,January,February,March,April,May,June,July,August,September,October,November,December")] LowSeason lowSeason)
         {
 
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.LowSeason == null).Include(h => h.HighSeason).Include(h => h.MidSeason).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Where(h => h.LowSeason == null).Include(h => h.HighSeason).Include(h => h.MidSeason).Include(h=>h.Hotel).ToListAsync();
 
 
             if (ModelState.IsValid)
@@ -201,7 +204,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.LowSeason == null).Include(h => h.HighSeason).Include(h => h.MidSeason).Include(h=>h.Hotel).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Include(h => h.HighSeason).Include(h => h.MidSeason).Include(h=>h.Hotel).ToListAsync();
 
             return View(lowSeason);
         }
@@ -217,7 +220,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.LowSeason == null).Include(h => h.HighSeason).Include(h => h.MidSeason).Include(h => h.Hotel).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Include(h => h.HighSeason).Include(h => h.MidSeason).Include(h => h.Hotel).ToListAsync();
 
 
             if (ModelState.IsValid)

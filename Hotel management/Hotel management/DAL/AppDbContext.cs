@@ -11,7 +11,6 @@ namespace Hotel_management.DAL
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<HotelFeature> HotelFeatures { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomFeatures> RoomFeatures { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<HotelImages> HotelImages { get; set; }

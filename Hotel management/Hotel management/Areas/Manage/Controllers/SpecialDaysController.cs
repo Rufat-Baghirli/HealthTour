@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Hotel_management.DAL;
 using Hotel_management.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin")]
+
     public class SpecialDaysController : Controller
     {
         private readonly AppDbContext _context;
@@ -23,7 +26,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         // GET: Manage/SpecialDays
         public async Task<IActionResult> Index()
         {
-            var SpecialDays = _context.SpecialDays.Include(s => s.RoomType).ThenInclude(h=>h.Hotel);
+            var SpecialDays = _context.SpecialDays.Include(s => s.RoomType).ThenInclude(h => h.Hotel);
             return View(await SpecialDays.ToListAsync());
         }
 
@@ -49,7 +52,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         // GET: Manage/SpecialDays/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.RoomTypes = await _context.RoomTypes.Include(h=>h.Hotel).ToListAsync();
+            ViewBag.RoomTypes = await _context.RoomTypes.Include(h => h.Hotel).ToListAsync();
             return View();
         }
 
@@ -165,14 +168,14 @@ namespace Hotel_management.Areas.Manage.Controllers
             {
                 _context.SpecialDays.Remove(specialDays);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SpecialDaysExists(int id)
         {
-          return (_context.SpecialDays?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.SpecialDays?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

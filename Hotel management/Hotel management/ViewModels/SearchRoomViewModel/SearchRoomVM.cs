@@ -30,9 +30,10 @@ namespace Hotel_management.ViewModels.SearchRoomViewModel
         public List<int>? MidMonthvalues { get; set; }
         [Range(1, 12)]
         public List<int>? HighMonthvalues { get; set; }
-
         public List<Adult>Adults { get; set; }
         public List<Child>? Childs { get; set; }
+
+
 
 
 

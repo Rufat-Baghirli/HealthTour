@@ -12,7 +12,7 @@
 @using (Html.BeginCollectionItem("Adults"))
 {
 
-    <div id="removeAddMoreAdult" style="width:380px">
+    <div id="removeAddMoreAdult" style="width: 259px;">
       
             <li>
          
@@ -20,12 +20,9 @@
          <select asp-for="Treatment">
      <option value="true">
          @localizer["3 meals a day and treatment"]
-         <p>(Only for Chenot)</p>
-
+       
      </option>
-     <option value="false">
-         @localizer["3 meals a day"]
-     </option>
+    
  </select>
 
              
@@ -45,8 +42,7 @@
     -ms-flex-align: center;
     align-items: center;
     padding: 0.6rem;
-    cursor: pointer;
-    margin-left: 2rem;" class="removeAdult btn">-</button>
+    cursor: pointer;" class="removeAdult btn">-</button>
  
           </li>
            

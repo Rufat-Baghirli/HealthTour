@@ -9,7 +9,7 @@
     ViewBag.Search = Model;
 
 }
- 
+                          <span style="color:white"> @localizer["Only 3, 7, 14 day packages are available for Chenot hotel"]</span>
 <form method="get" asp-controller="Search" asp-action="SearchResult" autocomplete="off">
         <div asp-validation-summary="All" class="text-danger"></div>
                             <br />
@@ -101,7 +101,8 @@
                           
   <div class="Room_itemModal">
                                             <div class="_ModalItemHead">
-                                              <p>@localizer["Adults"]</p>
+                                              <p>@localizer["Adults"] (Min:1,Max:2)</p>
+
                                              
                                               <span id="addAdult" class="roomPlus">+</span>
     
@@ -119,7 +120,7 @@
                                       
                                       <div class="Modal_item_child">
       <div class="_ModalItemHeadChild">
-        <p>@localizer["Children"]</p>
+        <p>@localizer["Children or additional adults"] </p>
 
         <span id="addChild" class="roomPlusChild">+</span>
   

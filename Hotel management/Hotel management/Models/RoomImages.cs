@@ -10,10 +10,10 @@ namespace Hotel_management.Models
             [Required]
             [StringLength(255)]
             public string Name { get; set; }
-            public int RoomId { get; set; }
-            public virtual Room Room { get; set; }
+            public int? RoomId { get; set; }
+        public virtual RoomType? Room { get; set; }
 
-        
+
     }
 
 }

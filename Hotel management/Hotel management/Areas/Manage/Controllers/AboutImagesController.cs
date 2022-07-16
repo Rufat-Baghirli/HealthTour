@@ -79,9 +79,9 @@ namespace Hotel_management.Areas.Manage.Controllers
                     return View(aboutImg);
                 }
 
-                if (aboutImg.ImgFile.CheckLength(1024))
+                if (aboutImg.ImgFile.CheckLength(5120))
                 {
-                    ModelState.AddModelError("ImgFile", "Seklin olcusu Maksimum 1 mb Ola Biler");
+                    ModelState.AddModelError("ImgFile", "Seklin olcusu Maksimum 5 mb Ola Biler");
                     return View(aboutImg);
                 }
 

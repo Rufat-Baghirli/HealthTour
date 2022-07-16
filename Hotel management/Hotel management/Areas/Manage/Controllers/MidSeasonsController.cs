@@ -7,10 +7,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Hotel_management.DAL;
 using Hotel_management.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
     [Area("Manage")]
+    [Authorize(Roles = "Admin")]
+
     public class MidSeasonsController : Controller
     {
         private readonly AppDbContext _context;
@@ -62,7 +65,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SeasonId,January,February,March,April,May,June,July,August,September,October,November,December")] MidSeason midSeason)
         {
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.MidSeason == null).Include(h => h.HighSeason).Include(h => h.LowSeason).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Where(h => h.MidSeason == null).Include(h => h.HighSeason).Include(h => h.LowSeason).Include(h => h.Hotel).ToListAsync();
 
 
             if (ModelState.IsValid)
@@ -201,7 +204,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             {
                 return NotFound();
             }
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.MidSeason == null).Include(h => h.HighSeason).Include(h => h.LowSeason).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Include(h => h.HighSeason).Include(h => h.LowSeason).Include(h => h.Hotel).ToListAsync();
 
             return View(midSeason);
         }
@@ -213,7 +216,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,SeasonId,January,February,March,April,May,June,July,August,September,October,November,December")] MidSeason midSeason)
         {
-            ViewBag.Seasons = await _context.Seasons.Where(h => h.MidSeason == null).Include(h => h.HighSeason).Include(h => h.LowSeason).ToListAsync();
+            ViewBag.Seasons = await _context.Seasons.Include(h => h.HighSeason).Include(h => h.LowSeason).ToListAsync();
 
 
             if (id != midSeason.Id)

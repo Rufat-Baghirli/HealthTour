@@ -11,18 +11,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <select asp-for="Name" 
-                    class="form-control">
-               @foreach (var type in Html.GetEnumSelectList<RoomType.Type>())
-            {
-                <option value="@type.Text">@type.Text</option>
-                
-            }
-            </select>
+                <input asp-for="Name" class="form-control" />
+             
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -82,6 +76,32 @@
                 <span asp-validation-for="HotelId" class="text-danger"></span>
 
             </div>
+               <div class="form-group">
+                <label asp-for="RoomImagesFile"></label>
+        <input class="form-control" accept="image/*" asp-for="RoomImagesFile">
+        <span class="alert-danger" asp-validation-for="RoomImagesFile"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="People" class="control-label"></label>
+                <input asp-for="People" class="form-control" />
+                <span asp-validation-for="People" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Children" class="control-label"></label>
+                <input asp-for="Children" class="form-control" />
+                <span asp-validation-for="Children" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MainimgFile"   class="control-label"></label>
+                <input asp-for="MainimgFile" accept="image/*" class="form-control" />
+                <span asp-validation-for="MainimgFile" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                <label asp-for="Roomarea" class="control-label"></label>
+                <input asp-for="Roomarea" class="form-control" />
+                <span asp-validation-for="Roomarea" class="text-danger"></span>
+            </div>
+         
             
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

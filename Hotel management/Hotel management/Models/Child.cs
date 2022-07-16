@@ -11,7 +11,7 @@ namespace Hotel_management.Models
         [Key]
         public Guid Id { get; set; }
         [Required]
-        [Range(0, 17)]
+        [Range(0, 100)]
         public int Age { get; set; }
         [Display(Name = "Price")]
         public double Price { get; set; }

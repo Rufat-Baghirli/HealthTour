@@ -29,10 +29,11 @@ namespace Hotel_management.Controllers
         public async Task<IActionResult> Reserve(int? Id, int adult, int Child, double Totalprice)
         {
             if (Id == null)
+
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home");
             }
-            Room room = await _context.Rooms.Include(r => r.Hotel).ThenInclude(h => h.HotelStar).Include(r => r.Hotel).ThenInclude(r => r.Treatments).Include(r => r.RoomType).FirstOrDefaultAsync(r => r.Id == Id);
+            RoomType room = await _context.RoomTypes.Include(r => r.Hotel).ThenInclude(h => h.HotelStar).Include(r => r.Hotel).ThenInclude(r => r.Treatments).FirstOrDefaultAsync(r => r.Id == Id);
 
             if (room == null)
             {
@@ -66,7 +67,7 @@ namespace Hotel_management.Controllers
 
             };
 
-          
+
 
             for (int i = 0; i < adult; i++)
             {
@@ -75,14 +76,14 @@ namespace Hotel_management.Controllers
                 {
 
 
-                 Adult adult0 =  new Adult
+                    Adult adult0 = new Adult
                     {
 
                         Id = (Guid)TempData[$"AdultsGuid{i}"],
                         Price = (double)TempData[$"AdultsPrice{i}"],
                         Treatment = (bool)TempData[$"AdultsTreatment{i}"],
                     };
-                    
+
                     if (await _context.Adults.FirstOrDefaultAsync(c => c.Id == adult0.Id) == null)
                         newAdults.Add(adult0);
                 }
@@ -106,9 +107,10 @@ namespace Hotel_management.Controllers
                         Id = (Guid)TempData[$"ChildsGuid{i}"],
                         Price = (double)TempData[$"ChildsPrice{i}"],
                         Age = (int)TempData[$"Age{i}"],
-                        Treatment = (bool)TempData[$"ChildrenTreatment{i}"],
+                        Treatment = (bool)TempData[$"ChildrenTreatment{i}"]
+                        
                     };
-                    if( await _context.Children.FirstOrDefaultAsync(c=>c.Id== child.Id) == null)
+                    if (await _context.Children.FirstOrDefaultAsync(c => c.Id == child.Id) == null)
                         newChilds.Add(child);
                 }
 
@@ -134,12 +136,13 @@ namespace Hotel_management.Controllers
 
             if (TempData["BookingId"] == null)
             {
-                return NotFound();
+                return RedirectToAction("Error", "Home");
+
             }
 
-            
-            Booking dBbooking = await _context.Bookings.Include(b => b.Adults).FirstOrDefaultAsync(b => b.Id == (int)TempData["BookingId"]);
-            dBbooking.Room = await _context.Rooms.Include(r => r.RoomType).Include(r => r.Hotel).ThenInclude(h => h.Location).Include(r => r.Hotel).ThenInclude(r => r.Treatments).FirstOrDefaultAsync(b => b.Id == dBbooking.RoomId);
+
+            Booking dBbooking = await _context.Bookings.Include(b => b.Adults).Include(c=>c.Children).FirstOrDefaultAsync(b => b.Id == (int)TempData["BookingId"]);
+            dBbooking.Room = await _context.RoomTypes.Include(r => r.Hotel).ThenInclude(h => h.Location).Include(r => r.Hotel).ThenInclude(r => r.Treatments).FirstOrDefaultAsync(b => b.Id == dBbooking.RoomId);
             dBbooking.Ordernumber = $"Ord-0000-{dBbooking.Id}";
 
 
@@ -155,7 +158,7 @@ namespace Hotel_management.Controllers
                 {
                     dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_modelId = booking.AdultsItems[i];
                     dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model = await _context.Treatments.FirstOrDefaultAsync(t => t.Id == booking.AdultsItems[i]);
-                    dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price + dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price;
+                    dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Adults.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price;
 
 
                 }
@@ -166,29 +169,30 @@ namespace Hotel_management.Controllers
                     {
                         dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_modelId = booking.ChildrenItems[i];
                         dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model = await _context.Treatments.FirstOrDefaultAsync(t => t.Id == booking.ChildrenItems[i]);
-                        dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price + dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price;
+                        dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Price = dBbooking.Children.Where(a => a.Treatment).ElementAt(i).Treatment_model.Price;
 
 
                     }
 
                 }
+                if (dBbooking.Child < 1)
+                {
+                    dBbooking.TotalPrice = dBbooking.TotalPrice + dBbooking.Adults.Sum(t => t.Price);
+                }
+                else
+                {
+                    dBbooking.TotalPrice = dBbooking.TotalPrice + (dBbooking.Adults.Sum(t => t.Price) + dBbooking.Children.Sum(c => c.Price)) * dBbooking.Night;
+
+                }
             }
-          
+
 
             dBbooking.Name = Name;
             dBbooking.SurName = SurName;
             dBbooking.Email = Email;
             dBbooking.PhoneNumber = PhoneNumber;
             dBbooking.IsDeleted = false;
-            if(dBbooking.Child < 1)
-            {
-                dBbooking.TotalPrice = dBbooking.Adults.Sum(t => t.Price) * dBbooking.Night;
-            }
-            else
-            {
-                dBbooking.TotalPrice = (dBbooking.Adults.Sum(t => t.Price) + dBbooking.Children.Sum(c => c.Price)) * dBbooking.Night;
-
-            }
+        
             double dailyprice = dBbooking.TotalPrice / dBbooking.Night;
 
             await _context.SaveChangesAsync();
@@ -211,7 +215,7 @@ namespace Hotel_management.Controllers
                 }
 
                 emailbody = emailbody.Replace("{{User Name}}", $"{Name} {SurName}").Replace("{{BOOKING-CODE}}", $"{dBbooking.Ordernumber}").
-                    Replace("{{Hotel Name}}", $"{dBbooking.Room.Hotel.Name}").Replace("{{Room Type Name}}", $"{dBbooking.Room.RoomType.Name}").Replace("{{Total Guests}}", $"{dBbooking.Guest}").
+                    Replace("{{Hotel Name}}", $"{dBbooking.Room.Hotel.Name}").Replace("{{Room Type Name}}", $"{dBbooking.Room.Name}").Replace("{{Total Guests}}", $"{dBbooking.Guest}").
                     Replace("{{Checkin}}", $"{dBbooking.Checkin}").Replace("{{Checkout}}", $"{dBbooking.Checkout}").Replace("{{Mobile}}", $"{dBbooking.PhoneNumber}").Replace("{{Price}}", $"{dailyprice}").
                     Replace("{{night}}", $"{dBbooking.Night}").Replace("{{TotalPrice}}", $"{dBbooking.TotalPrice}").Replace("{{City}}", $"{dBbooking.Room.Hotel.Location.City}")
                     .Replace("{{Adults}}", $"{dBbooking.Adult}").Replace("{{Children}}", $"{dBbooking.Child}");
@@ -241,7 +245,7 @@ namespace Hotel_management.Controllers
 
 
                 emailbody2 = emailbody2.Replace("{{User Name}}", $"{Name} {SurName}").Replace("{{BOOKING-CODE}}", $"{dBbooking.Ordernumber}").
-                    Replace("{{Hotel Name}}", $"{dBbooking.Room.Hotel.Name}").Replace("{{Room Type Name}}", $"{dBbooking.Room.RoomType.Name}").Replace("{{Total Guests}}", $"{dBbooking.Guest}").
+                    Replace("{{Hotel Name}}", $"{dBbooking.Room.Hotel.Name}").Replace("{{Room Type Name}}", $"{dBbooking.Room.Name}").Replace("{{Total Guests}}", $"{dBbooking.Guest}").
                     Replace("{{Checkin}}", $"{dBbooking.Checkin}").Replace("{{Checkout}}", $"{dBbooking.Checkout}").Replace("{{Mobile}}", $"{dBbooking.PhoneNumber}").Replace("{{Price}}", $"{dailyprice}").
                     Replace("{{night}}", $"{dBbooking.Night}").Replace("{{TotalPrice}}", $"{dBbooking.TotalPrice}").Replace("{{City}}", $"{dBbooking.Room.Hotel.Location.City}")
                     .Replace("{{Adults}}", $"{dBbooking.Adult}").Replace("{{Children}}", $"{dBbooking.Child}");
@@ -255,14 +259,14 @@ namespace Hotel_management.Controllers
                 smtp.Send(message);
                 smtp.Disconnect(true);
             }
-            
+
 
             return RedirectToAction("Index", "Home");
         }
 
 
 
-       
+
 
 
     }

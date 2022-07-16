@@ -23,8 +23,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         public async Task<ActionResult> Index()
         {
             IEnumerable<RoomFeatureDetail> details = await _context.RoomFeatureDetails.Include(h => h.RoomFeatures).
-            ThenInclude(h => h.Room).ThenInclude(r=>r.RoomType).Include(h => h.RoomFeatures).
-            ThenInclude(h => h.Room).ThenInclude(r => r.Hotel).ToListAsync();
+            ThenInclude(h => h.RoomType).ThenInclude(r => r.Hotel).ToListAsync();
             return View(details);
         }
 
@@ -33,8 +32,8 @@ namespace Hotel_management.Areas.Manage.Controllers
 
         public async Task<ActionResult> Create()
         {
-            ViewBag.Features = await _context.RoomFeatures.Include(h => h.Room).ThenInclude(r=>r.RoomType).Include(r=>r.Room).
-                ThenInclude(r=>r.Hotel)
+            ViewBag.Features = await _context.RoomFeatures.Include(h => h.RoomType).
+                ThenInclude(r => r.Hotel)
                 .ToListAsync();
 
 
@@ -45,7 +44,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(RoomFeatureDetail feature)
         {
-            ViewBag.Features = await _context.RoomFeatures.Include(h => h.Room).ThenInclude(r => r.RoomType).Include(r => r.Room).
+            ViewBag.Features = await _context.RoomFeatures.Include(h => h.RoomType).
                   ThenInclude(r => r.Hotel)
                   .ToListAsync();
 

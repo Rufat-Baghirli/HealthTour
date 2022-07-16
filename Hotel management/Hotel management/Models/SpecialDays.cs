@@ -6,7 +6,7 @@ namespace Hotel_management.Models
     {
         public int Id { get; set; }
         public double Price { get; set; }
-       public RoomType? RoomType { get; set; }
+        public RoomType? RoomType { get; set; }
         public int RoomTypeId { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]

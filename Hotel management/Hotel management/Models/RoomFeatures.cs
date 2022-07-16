@@ -9,8 +9,9 @@ namespace Hotel_management.Models
         public string Features { get; set; }
         public IEnumerable<RoomFeatureDetail>? RoomFeatureDetails { get; set; }
         [Required(ErrorMessage ="Otaq secilmelidir")]
-        public int RoomId { get; set; }
-        public Room Room { get; set; }
-        public RoomFeaturesTranslation RoomFeaturesTranslation { get; set; }
+        public int RoomTypeId { get; set; }
+        public RoomType? RoomType { get; set; }
+        public RoomFeaturesTranslation? RoomFeaturesTranslation { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

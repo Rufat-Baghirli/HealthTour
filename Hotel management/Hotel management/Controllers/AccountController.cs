@@ -50,7 +50,7 @@ namespace Hotel_management.Controllers
             if (appUser.EmailConfirmed == false)
             {
                 ModelState.AddModelError("", $"{_localizer["Your email has not been verified"]}");
-                return View();
+                return View(loginVM);
             }
 
             Microsoft.AspNetCore.Identity.SignInResult signinResult = await _signInManager

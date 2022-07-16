@@ -10,19 +10,63 @@
 
 <h4>RoomType</h4>
 <hr />
+<div class="card" style="width:100%">
+
+
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <h1 style="color:black" class="text-center"> Əsas şəkil</h1>
+        </li>
+        <li class="list-group-item">
+            <img class="img-fluid"style="width:100% !important;height:600px" src="~/images/Rooms/@Model.Mainimg">
+        </li>
+    </ul>
+   
+  
+
+</div>
+ @if (Model.RoomImages != null)
+    {
+       
+<div class="card" style="width:100%">
+          <h1 style="color:black" class="text-center pt-3"> Otelin şəkilləri</h1>
+   
+
+   <ul class="d-flex list-unstyled">
+          
+      
+          @foreach (RoomImages img in Model.RoomImages)
+        {
+        <li class="">
+            <img class="img-fluid" style="width:500px !important" src="~/images/Rooms/@img.Name">
+            <div class="pt-3 text-center">
+         <a class="btn btn-danger" asp-action="DeleteImage" asp-route-Id="@img.Id">Şəkli sil</a>
+
+            </div>
+
+        </li>
+          
+           
+        
+        }
+
+       
+    </ul>
+   
+   
+
+</div>
+    }
+   
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Update">
+        <form asp-action="Update" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-              <select class="form-control" asp-for="Name">
-          
-                <option value="@Model.Name">@Model.Name</option>
-                
-            
-        </select>
+                <input asp-for="Name" class="form-control" />
+             
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -80,7 +124,34 @@
         </select>
                 <span asp-validation-for="HotelId" class="text-danger"></span>
             </div>
-          
+        
+            <div class="form-group">
+                <label asp-for="Roomarea" class="control-label"></label>
+                <input asp-for="Roomarea" class="form-control" />
+                <span asp-validation-for="Roomarea" class="text-danger"></span>
+            </div>
+           <div class="form-group">
+                <label asp-for="MainimgFile"   class="control-label"></label>
+                <input asp-for="MainimgFile" accept="image/*" class="form-control" />
+                <span asp-validation-for="MainimgFile" class="text-danger"></span>
+            </div>
+
+             <div class="form-group">
+                <label asp-for="RoomImagesFile"></label>
+        <input class="form-control" accept="image/*" asp-for="RoomImagesFile">
+        <span class="alert-danger" asp-validation-for="RoomImagesFile"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="People" class="control-label"></label>
+                <input asp-for="People" class="form-control" />
+                <span asp-validation-for="People" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Children" class="control-label"></label>
+                <input asp-for="Children" class="form-control" />
+                <span asp-validation-for="Children" class="text-danger"></span>
+            </div>
+        
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

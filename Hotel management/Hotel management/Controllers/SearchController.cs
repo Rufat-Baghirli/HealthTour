@@ -14,13 +14,13 @@ namespace Hotel_management.Controllers
 {
     public class SearchController : Controller
     {
-  
+
         private readonly AppDbContext _context;
         private readonly UserManager<AppUser> _usermanager;
         private readonly IStringLocalizer<SharedResource> _localizer;
 
 
-      
+
 
         public SearchController(AppDbContext context, UserManager<AppUser> usermanager, IStringLocalizer<SharedResource> localizer)
         {
@@ -35,7 +35,8 @@ namespace Hotel_management.Controllers
         {
 
             
-            if (vm.Adults!=null)
+
+            if (vm.Adults != null)
             {
                 for (int y = 0; y < vm.Adults.Count; y++)
                 {
@@ -48,7 +49,7 @@ namespace Hotel_management.Controllers
                 }
             }
 
-            if (vm.Childs!=null)
+            if (vm.Childs != null)
             {
                 for (int z = 0; z < vm.Childs.Count; z++)
                 {
@@ -60,27 +61,32 @@ namespace Hotel_management.Controllers
                     }
                 };
             }
-           
-            if (vm.Checkout<vm.Checkin ||
-                vm.Checkout<DateTime.Today ||
-                vm.Checkin <DateTime.Today 
+
+            if (vm.Checkout < vm.Checkin ||
+                vm.Checkout < DateTime.Today ||
+                vm.Checkin < DateTime.Today
                 )
             {
                 TempData["SearchRoomError"] = _localizer["No results were found for these dates"].ToString();
 
 
                 return View();
-               
+
 
             }
-           
 
-            if (vm.Adults==null || vm.Adults.Count < 1)
+
+            if (vm.Adults == null || vm.Adults.Count < 1)
             {
                 TempData["SearchRoomError"] = _localizer["At least 1 person must be included"].ToString();
-               return View();
+                return View();
             }
-            
+            else if (vm.Adults.Count>2)
+            {
+                TempData["SearchRoomError"] = _localizer["Maximum two adults can be added"].ToString();
+                return View();
+            }
+
 
             if (vm.Childs != null)
             {
@@ -89,7 +95,7 @@ namespace Hotel_management.Controllers
                     for (int j = i + 1; j < vm.Childs.Count; j++)
                     {
 
-                    
+
                         if (vm.Childs[i].Id == vm.Childs[j].Id)
                         {
                             foreach (Child child in vm.Childs)
@@ -100,7 +106,7 @@ namespace Hotel_management.Controllers
                         }
                     }
                 }
-                
+
 
             }
 
@@ -108,22 +114,22 @@ namespace Hotel_management.Controllers
 
 
 
-            IQueryable<Hotel> Hotels = from h in _context.Hotels.Include(h => h.Location).Include(h => h.ExtraPrice).Include(h => h.HotelFeatures).ThenInclude(h=>h.HotelFeatureTranslations)
-                         .Include(h => h.HotelFeatures).ThenInclude(h=>h.HotelFeatureDetails).ThenInclude(h=>h.hotelFeatureDetailsTranslations).
-                         Include(h => h.HotelImages).Include(h => h.HotelStar).Include(h => h.Reviews).Include(h => h.RoomTypes).ThenInclude(h=>h.SpecialDays).Include(h => h.Treatments).Include(h => h.hotelTranslations).
-                         Include(h=>h.Season).ThenInclude(h=>h.HighSeason).Include(h => h.Season).ThenInclude(h => h.MidSeason).Include(h => h.Season).ThenInclude(h => h.LowSeason)
-                         where
-                                        h.isDeleted ==false &&
-                                        ((h.Name.ToLower().Contains(vm.Location.ToLower()))
-                                        ||
-                                        (h.Location.City.ToLower().Contains(vm.Location.ToLower())))
-                                        
-                                       
+            IQueryable<Hotel> Hotels = from h in _context.Hotels.Include(h => h.Location).Include(h => h.ExtraPrice).Include(h => h.HotelFeatures).ThenInclude(h => h.HotelFeatureTranslations)
+                         .Include(h => h.HotelFeatures.Where(h=>h.IsDeleted==false)).ThenInclude(h => h.HotelFeatureDetails).ThenInclude(h => h.hotelFeatureDetailsTranslations).
+                         Include(h => h.HotelImages).Include(h => h.HotelStar).Include(h => h.Reviews).Include(h => h.Rooms).ThenInclude(h => h.SpecialDays).Include(h => h.Treatments).Include(h => h.hotelTranslations).
+                         Include(h => h.Season).ThenInclude(h => h.HighSeason).Include(h => h.Season).ThenInclude(h => h.MidSeason).Include(h => h.Season).ThenInclude(h => h.LowSeason)
+                                       where
+                                                      h.isDeleted == false &&
+                                                      ((h.Name.ToLower().Contains(vm.Location.ToLower()))
+                                                      ||
+                                                      (h.Location.City.ToLower().Contains(vm.Location.ToLower())))
 
-                                      
-                                        select h;
-           
-           
+
+                                                      
+
+                                       select h;
+
+
             if (Hotels == null || Hotels.Count() < 1)
             {
                 TempData["SearchRoomError"] = _localizer["No suitable hotel was found"].ToString();
@@ -135,90 +141,118 @@ namespace Hotel_management.Controllers
             {
                 if (!hotel.Name.ToLower().Contains("Chenot".ToLower()))
                 {
-                    if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin)<7)
+                    if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) < 7)
                     {
                         TempData["SearchRoomError"] = _localizer["It is not possible to book less than 7 days at these hotels"].ToString();
+                        return View();
+                    }
+                }
+                else
+                {
+                    if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) != 3 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) != 7 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) != 14)
+                    {
+                        TempData["SearchRoomError"] = _localizer["Only 3, 7, 14 day packages are available for Chenot hotel"].ToString();
                         return View();
                     }
                 }
             }
 
             vm.Hotels = await Hotels.ToListAsync();
-            IQueryable<Booking> roomsbooked = from b in _context.Bookings.Where(b=>b.IsDeleted==false)
-                              where
-                              
-                              ((vm.Checkin >= b.Checkin) && (vm.Checkin <= b.Checkout))
-                              ||
-                              ((vm.Checkout >= b.Checkin) && (vm.Checkout <= b.Checkout))
-                              ||
-                              ((vm.Checkin <= b.Checkout) && (vm.Checkout >= b.Checkin) && (vm.Checkout <= b.Checkout))
-                              ||
-                              ((vm.Checkin >= b.Checkin) && (vm.Checkin <= b.Checkout) && (vm.Checkout >= b.Checkout))
-                              ||
-                              ((vm.Checkin <= b.Checkin) && (vm.Checkout >= b.Checkout))
+         
 
 
 
 
-                              select b;
-
-
-
-
-          if(vm.Childs == null)
+            if (vm.Childs == null)
             {
-                List<Room> availablerooms = await _context.Rooms.
+                IQueryable<RoomType> availablerooms = from r in  _context.RoomTypes.
               Where
-              (r => (r.People >= vm.Adults.Count()) 
-               && r.isDeleted == false && (!roomsbooked.Any(b => b.RoomId == r.Id) || roomsbooked == null) && Hotels.Any(h => h.Id == r.HotelId)).
+              (r => (r.People >= vm.Adults.Count())
+               && r.IsDeleted == false && Hotels.Any(h => h.Id == r.HotelId)).
               Include(r => r.Hotel).
-              Include(r => r.RoomImages).Include(r => r.RoomType)
-              .Include(r => r.RoomFeatures).
+              Include(r => r.RoomImages)
+              .Include(r => r.RoomFeatures.Where(r=>r.IsDeleted==false)).
               ThenInclude(f => f.RoomFeaturesTranslation)
-              .Include(r => r.RoomFeatures).
-              ThenInclude(f => f.RoomFeatureDetails).ThenInclude(r=>r.RoomFeatureDetailTranslations)
-              .ToListAsync();
-                if (availablerooms == null || availablerooms.Count < 1)
+              .Include(r => r.RoomFeatures.Where(r => r.IsDeleted == false)).
+              ThenInclude(f => f.RoomFeatureDetails).ThenInclude(r => r.RoomFeatureDetailTranslations)
+                                                select r;
+                if (availablerooms == null || availablerooms.Count() < 1)
                 {
                     TempData["SearchRoomError"] = _localizer["No suitable rooms were found"].ToString();
-                    ;
+                    
                     return View();
                 };
                 foreach (Hotel hotel in vm.Hotels)
                 {
-                    hotel.Rooms = availablerooms.Where(h => h.HotelId == hotel.Id);
+                    if (vm.Adults.Count==1)
+                    {
+                        hotel.Rooms = await availablerooms.Where(h => h.HotelId == hotel.Id && hotel.Name.ToLower().Contains("Double".ToLower()) == false).ToListAsync();
+                        if (hotel.Rooms == null || hotel.Rooms.Count() < 1)
+                        {
+                            TempData["SearchRoomError"] = _localizer["No suitable rooms were found"].ToString();
+                            return View();
+                        };
+
+                    }
+                    else if (vm.Adults.Count == 2)
+                    {
+                        hotel.Rooms = await availablerooms.Where(h => h.HotelId == hotel.Id).ToListAsync();
+                        if (hotel.Rooms == null || hotel.Rooms.Count() < 1)
+                        {
+                            TempData["SearchRoomError"] = _localizer["No suitable rooms were found"].ToString();
+                            return View();
+                        };
+                    }
                 };
             }
             else
             {
-                List<Room> availablerooms = await _context.Rooms.
+                IQueryable<RoomType> availablerooms = from r in _context.RoomTypes.
               Where
               (r => (r.People >= vm.Adults.Count()) && (r.Children >= vm.Childs.Count())
-               && r.isDeleted == false && (!roomsbooked.Any(b => b.RoomId == r.Id) || roomsbooked == null) && Hotels.Any(h => h.Id == r.HotelId)).
+               && r.IsDeleted == false && Hotels.Any(h => h.Id == r.HotelId)).
               Include(r => r.Hotel).
               ThenInclude(h => h.HotelFeatures).
               ThenInclude(h => h.HotelFeatureDetails).
-              Include(r => r.RoomType).
               Include(r => r.RoomImages)
-              .Include(r => r.RoomFeatures).
+              .Include(r => r.RoomFeatures.Where(r => r.IsDeleted == false)).
               ThenInclude(f => f.RoomFeaturesTranslation)
-              .Include(r => r.RoomFeatures).
+              .Include(r => r.RoomFeatures.Where(r => r.IsDeleted == false)).
               ThenInclude(f => f.RoomFeatureDetails).ThenInclude(r => r.RoomFeatureDetailTranslations)
-              .ToListAsync();
-                if (availablerooms == null || availablerooms.Count < 1)
+                                                      select r;
+                if (availablerooms == null || availablerooms.Count() < 1)
                 {
                     TempData["SearchRoomError"] = _localizer["No suitable rooms were found"].ToString();
                     return View();
                 };
                 foreach (Hotel hotel in vm.Hotels)
                 {
-                    hotel.Rooms = availablerooms.Where(h => h.HotelId == hotel.Id);
+                    if (vm.Adults.Count == 1)
+                    {
+                        hotel.Rooms = await availablerooms.Where(h => h.HotelId == hotel.Id && hotel.Name.ToLower().Contains("Double".ToLower()) == false).ToListAsync();
+                        if (hotel.Rooms == null || hotel.Rooms.Count() < 1)
+                        {
+                            TempData["SearchRoomError"] = _localizer["No suitable rooms were found"].ToString();
+                            return View();
+                        };
+
+                    }
+                    else if (vm.Adults.Count == 2)
+                    {
+                        hotel.Rooms =  await availablerooms.Where(h => h.HotelId == hotel.Id).ToListAsync();
+                        if (hotel.Rooms == null || hotel.Rooms.Count() < 1)
+                        {
+                            TempData["SearchRoomError"] = _localizer["No suitable rooms were found"].ToString();
+                            return View();
+                        };
+                    }
+                 
                 };
             }
 
 
 
-
+            
 
 
             foreach (Hotel hotel in vm.Hotels)
@@ -374,30 +408,31 @@ namespace Hotel_management.Controllers
                         vm.HighMonthvalues.Add(12);
                     }
 
-                    foreach (Room room in hotel.Rooms)
+                    foreach (RoomType room in hotel.Rooms)
                     {
-                       
 
-                            foreach (Adult adult in vm.Adults)
+
+                        foreach (Adult adult in vm.Adults)
+                        {
+
+
+
+                            if (vm.Childs != null)
                             {
 
-
-                            
-                                if (vm.Childs != null)
+                                foreach (Child child in vm.Childs)
                                 {
 
-                                    foreach (Child child in vm.Childs)
+                                    if (hotel.Name.ToLower().Contains("Chenot".ToLower()))
                                     {
-
-                             
-                                    if (child.Age <= 6)
+                                        if (child.Age <= 5)
                                         {
 
 
                                             child.Price = room.Hotel.ExtraPrice.BabyPrice;
 
                                         }
-                                        else if (child.Age > 6 && child.Age <= 11)
+                                        else if (child.Age > 5 && child.Age <= 11)
                                         {
 
                                             child.Price = room.Hotel.ExtraPrice.ChildPrice;
@@ -405,292 +440,347 @@ namespace Hotel_management.Controllers
 
 
                                         }
-                                        else if (child.Age > 11 && child.Age <= 17)
+                                        else if (child.Age > 11)
                                         {
 
 
                                             child.Price = room.Hotel.ExtraPrice.YoungPrice;
 
                                         }
-                                    
-                                  
-                                  
                                     }
-                                }
-
-
-                            
-                                foreach (RoomType roomType in hotel.RoomTypes)
-                                {
-                                    if (roomType.SpecialDays != null && roomType.SpecialDays.Count() > 0 )
+                                    else
                                     {
-                                        foreach (SpecialDays specialDays in roomType.SpecialDays)
+                                        if (child.Treatment)
                                         {
-                                            if(vm.Checkin >=  specialDays.Start && vm.Checkout <= specialDays.End && vm.Checkin <= vm.Checkout)
+                                            if (child.Age <= 5)
                                             {
-                                                adult.Price = specialDays.Price; 
+
+
+                                                child.Price = room.Hotel.ExtraPrice.BabyPricewithtreatment;
+
                                             }
+                                            else if (child.Age > 5 && child.Age <= 11)
+                                            {
+
+                                                child.Price = room.Hotel.ExtraPrice.ChildPricewithtreatment;
+
+
+
+                                            }
+                                            else if (child.Age > 11)
+                                            {
+
+
+                                                child.Price = room.Hotel.ExtraPrice.YoungPricewithtreatment;
+
+                                            }
+                                        }
                                         else
                                         {
-                                            if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 13 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 1)
+                                            if (child.Age <= 5)
                                             {
 
 
-                                                foreach (int low in vm.LowMonthvalues)
-                                                {
-                                                    foreach (int mid in vm.MidMonthvalues)
-                                                    {
-                                                        foreach (int high in vm.HighMonthvalues)
-                                                        {
+                                                child.Price = room.Hotel.ExtraPrice.BabyPrice;
 
+                                            }
+                                            else if (child.Age > 5 && child.Age <= 11)
+                                            {
 
-                                                            if (vm.Checkin.Month == low)
-                                                            {
-                                                                adult.Price = room.RoomType.OneweekPrice;
-
-                                                            }
-
-                                                            else if (vm.Checkin.Month == mid)
-                                                            {
-
-                                                                adult.Price = room.RoomType.OneweekPriceMid;
-
-
-                                                            }
-                                                            else if (vm.Checkin.Month == high)
-                                                            {
-                                                                adult.Price = room.RoomType.OneweekPriceHigh;
-                                                            }
-
-
-
-                                                        }
-                                                    }
-                                                }
-
-
-
-
+                                                child.Price = room.Hotel.ExtraPrice.ChildPrice;
 
 
 
                                             }
-                                            else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 20 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 14)
+                                            else if (child.Age > 11)
                                             {
 
 
-
-                                                foreach (int low in vm.LowMonthvalues)
-                                                {
-                                                    foreach (int mid in vm.MidMonthvalues)
-                                                    {
-                                                        foreach (int high in vm.HighMonthvalues)
-                                                        {
-
-
-                                                            if (vm.Checkin.Month == low)
-                                                            {
-                                                                adult.Price = room.RoomType.TwoweeksPrice;
-
-                                                            }
-
-                                                            else if (vm.Checkin.Month == mid)
-                                                            {
-
-                                                                adult.Price = room.RoomType.TwoweeksPriceMid;
-
-
-                                                            }
-                                                            else if (vm.Checkin.Month == high)
-                                                            {
-                                                                adult.Price = room.RoomType.TwoweeksPriceHigh;
-                                                            }
-                                                        }
-
-                                                    }
-                                                }
-
-                                            }
-
-                                            else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 21)
-                                            {
-
-
-                                                foreach (int low in vm.LowMonthvalues)
-                                                {
-                                                    foreach (int mid in vm.MidMonthvalues)
-                                                    {
-                                                        foreach (int high in vm.HighMonthvalues)
-                                                        {
-
-                                                            if (vm.Checkin.Month == low)
-                                                            {
-                                                                adult.Price = room.RoomType.ThreeweeksPrice;
-
-                                                            }
-
-                                                            else if (vm.Checkin.Month == mid)
-                                                            {
-
-                                                                adult.Price = room.RoomType.ThreeweeksPriceMid;
-
-
-                                                            }
-                                                            else if (vm.Checkin.Month == high)
-                                                            {
-                                                                adult.Price = room.RoomType.ThreeweeksPriceHigh;
-                                                            }
-
-
-                                                        }
-                                                    }
-                                                }
+                                                child.Price = room.Hotel.ExtraPrice.YoungPrice;
 
                                             }
                                         }
                                     }
+                                  
+
+
+                                }
+                            }
+
+
+
+
+                            if (room.SpecialDays != null && room.SpecialDays.Count() > 0)
+                            {
+                                foreach (SpecialDays specialDays in room.SpecialDays)
+                                {
+                                    if (vm.Checkin >= specialDays.Start && vm.Checkout <= specialDays.End && vm.Checkin <= vm.Checkout)
+                                    {
+                                        
+                                        adult.Price = specialDays.Price / vm.Adults.Count;
+                                    }
+                                    else
+                                    {
+                                        if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 13 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 1)
+                                        {
+
+
+                                            foreach (int low in vm.LowMonthvalues)
+                                            {
+                                                foreach (int mid in vm.MidMonthvalues)
+                                                {
+                                                    foreach (int high in vm.HighMonthvalues)
+                                                    {
+
+
+                                                        if (vm.Checkin.Month == low)
+                                                        {
+                                                            adult.Price = room.OneweekPrice / vm.Adults.Count;
+
+                                                        }
+
+                                                        else if (vm.Checkin.Month == mid)
+                                                        {
+
+                                                            adult.Price = room.OneweekPriceMid / vm.Adults.Count;
+
+
+                                                        }
+                                                        else if (vm.Checkin.Month == high)
+                                                        {
+                                                            adult.Price = room.OneweekPriceHigh / vm.Adults.Count;
+                                                        }
+
+
+
+                                                    }
+                                                }
+                                            }
+
+
+
+
+
+
+
+                                        }
+                                        else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 20 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 14)
+                                        {
+
+
+
+                                            foreach (int low in vm.LowMonthvalues)
+                                            {
+                                                foreach (int mid in vm.MidMonthvalues)
+                                                {
+                                                    foreach (int high in vm.HighMonthvalues)
+                                                    {
+
+
+                                                        if (vm.Checkin.Month == low)
+                                                        {
+                                                            adult.Price = room.TwoweeksPrice / vm.Adults.Count;
+
+                                                        }
+
+                                                        else if (vm.Checkin.Month == mid)
+                                                        {
+
+                                                            adult.Price = room.TwoweeksPriceMid / vm.Adults.Count;
+
+
+                                                        }
+                                                        else if (vm.Checkin.Month == high)
+                                                        {
+                                                            adult.Price = room.TwoweeksPriceHigh / vm.Adults.Count;
+                                                        }
+                                                    }
+
+                                                }
+                                            }
+
+                                        }
+
+                                        else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 21)
+                                        {
+
+
+                                            foreach (int low in vm.LowMonthvalues)
+                                            {
+                                                foreach (int mid in vm.MidMonthvalues)
+                                                {
+                                                    foreach (int high in vm.HighMonthvalues)
+                                                    {
+
+                                                        if (vm.Checkin.Month == low)
+                                                        {
+                                                            adult.Price = room.ThreeweeksPrice / vm.Adults.Count;
+
+                                                        }
+
+                                                        else if (vm.Checkin.Month == mid)
+                                                        {
+
+                                                            adult.Price = room.ThreeweeksPriceMid / vm.Adults.Count;
+
+
+                                                        }
+                                                        else if (vm.Checkin.Month == high)
+                                                        {
+                                                            adult.Price = room.ThreeweeksPriceHigh / vm.Adults.Count;
+                                                        }
+
+
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+
+
+
+                            }
+                            else
+                            {
+                                if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 13 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 1)
+                                {
+
+
+                                    foreach (int low in vm.LowMonthvalues)
+                                    {
+                                        if (vm.Checkin.Month == low)
+                                        {
+                                            adult.Price = room.OneweekPrice / vm.Adults.Count;
+
+                                        }
+                                    }
+                                    foreach (int mid in vm.MidMonthvalues)
+                                    {
+
+                                        if (vm.Checkin.Month == mid)
+                                        {
+
+                                            adult.Price = room.OneweekPriceMid / vm.Adults.Count;
+
+
+                                        }
+                                    }
+                                        foreach (int high in vm.HighMonthvalues)
+                                    {
 
                                    
 
-                                    }
-                                else
+                                        if (vm.Checkin.Month == high)
+                                        {
+                                            adult.Price = room.OneweekPriceHigh / vm.Adults.Count;
+                                        }
+                               
+                                }
+                            
+                        
+
+
+
+
+
+
+
+                    }
+                                else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 20 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 14)
                                 {
-                                    if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 13 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 1)
+
+
+
+                                    foreach (int low in vm.LowMonthvalues)
                                     {
-
-
-                                        foreach (int low in vm.LowMonthvalues)
+                                        foreach (int mid in vm.MidMonthvalues)
                                         {
-                                            foreach (int mid in vm.MidMonthvalues)
+                                            foreach (int high in vm.HighMonthvalues)
                                             {
-                                                foreach (int high in vm.HighMonthvalues)
+
+
+                                                if (vm.Checkin.Month == low)
+                                                {
+                                                    adult.Price = room.TwoweeksPrice / vm.Adults.Count;
+
+                                                }
+
+                                                else if (vm.Checkin.Month == mid)
                                                 {
 
-
-                                                    if (vm.Checkin.Month == low)
-                                                    {
-                                                        adult.Price = room.RoomType.OneweekPrice;
-
-                                                    }
-
-                                                    else if (vm.Checkin.Month == mid)
-                                                    {
-
-                                                        adult.Price = room.RoomType.OneweekPriceMid;
-
-
-                                                    }
-                                                    else if (vm.Checkin.Month == high)
-                                                    {
-                                                        adult.Price = room.RoomType.OneweekPriceHigh;
-                                                    }
-
+                                                    adult.Price = room.TwoweeksPriceMid / vm.Adults.Count;
 
 
                                                 }
-                                            }
-                                        }
-
-
-
-
-
-
-
-                                    }
-                                    else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) <= 20 && Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 14)
-                                    {
-
-
-
-                                        foreach (int low in vm.LowMonthvalues)
-                                        {
-                                            foreach (int mid in vm.MidMonthvalues)
-                                            {
-                                                foreach (int high in vm.HighMonthvalues)
+                                                else if (vm.Checkin.Month == high)
                                                 {
+                                                    adult.Price = room.TwoweeksPriceHigh / vm.Adults.Count;
+                                                }
+                                            }
+
+                                        }
+                                    }
+
+                                }
+
+                                else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 21)
+                                {
 
 
-                                                    if (vm.Checkin.Month == low)
-                                                    {
-                                                        adult.Price = room.RoomType.TwoweeksPrice;
+                                    foreach (int low in vm.LowMonthvalues)
+                                    {
+                                        foreach (int mid in vm.MidMonthvalues)
+                                        {
+                                            foreach (int high in vm.HighMonthvalues)
+                                            {
 
-                                                    }
+                                                if (vm.Checkin.Month == low)
+                                                {
+                                                    adult.Price = room.ThreeweeksPrice / vm.Adults.Count;
 
-                                                    else if (vm.Checkin.Month == mid)
-                                                    {
-
-                                                        adult.Price = room.RoomType.TwoweeksPriceMid;
-
-
-                                                    }
-                                                    else if (vm.Checkin.Month == high)
-                                                    {
-                                                        adult.Price = room.RoomType.TwoweeksPriceHigh;
-                                                    }
                                                 }
 
-                                            }
-                                        }
-
-                                    }
-
-                                    else if (Helpers.Extentions.Compare(vm.Checkout, vm.Checkin) >= 21)
-                                    {
-
-
-                                        foreach (int low in vm.LowMonthvalues)
-                                        {
-                                            foreach (int mid in vm.MidMonthvalues)
-                                            {
-                                                foreach (int high in vm.HighMonthvalues)
+                                                else if (vm.Checkin.Month == mid)
                                                 {
 
-                                                    if (vm.Checkin.Month == low)
-                                                    {
-                                                        adult.Price = room.RoomType.ThreeweeksPrice;
-
-                                                    }
-
-                                                    else if (vm.Checkin.Month == mid)
-                                                    {
-
-                                                        adult.Price = room.RoomType.ThreeweeksPriceMid;
-
-
-                                                    }
-                                                    else if (vm.Checkin.Month == high)
-                                                    {
-                                                        adult.Price = room.RoomType.ThreeweeksPriceHigh;
-                                                    }
+                                                    adult.Price = room.ThreeweeksPriceMid / vm.Adults.Count;
 
 
                                                 }
+                                                else if (vm.Checkin.Month == high)
+                                                {
+                                                    adult.Price = room.ThreeweeksPriceHigh / vm.Adults.Count;
+                                                }
+
+
                                             }
                                         }
-
                                     }
+
                                 }
                             }
+
                             
-                           
-                            
-                              
 
 
-                                if (vm.Childs != null)
-                                {
-                                    room.TotalPrice = (vm.Adults.Sum(p => p.Price) + vm.Childs.Sum(p => p.Price)) * Helpers.Extentions.Compare(vm.Checkout, vm.Checkin);
-                                }
-                                else
-                                {
-                                    room.TotalPrice = vm.Adults.Sum(p => p.Price) * Helpers.Extentions.Compare(vm.Checkout, vm.Checkin);
 
 
-                                }
+
+                            if (vm.Childs != null)
+                            {
+                                room.TotalPrice = (vm.Adults.Sum(p => p.Price) + vm.Childs.Sum(p => p.Price)) * Helpers.Extentions.Compare(vm.Checkout, vm.Checkin);
+                            }
+                            else
+                            {
+                                room.TotalPrice = vm.Adults.Sum(p => p.Price) * Helpers.Extentions.Compare(vm.Checkout, vm.Checkin);
+
+
                             }
                         }
-                    
+                    }
+
                 }
             }
 
@@ -701,27 +791,27 @@ namespace Hotel_management.Controllers
 
 
             
-            
+
             await _context.SaveChangesAsync();
 
-          
+            
             return View(vm);
         }
         public async Task<IActionResult> AddAdult()
-      {
+        {
 
             Adult model = new Adult
             {
                 Id = Guid.NewGuid()
             };
 
-         
 
-            
-           
+
+
+
             return PartialView("_AddAdult", model);
         }
-     
+
 
 
 
@@ -731,14 +821,14 @@ namespace Hotel_management.Controllers
         public async Task<IActionResult> AddChild()
         {
 
-            Child model =   new Child();
+            Child model = new Child();
 
 
-           
+
             return PartialView("_AddChild", model);
         }
 
-      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendComment(int Id, SearchRoomVM riview)
@@ -757,6 +847,6 @@ namespace Hotel_management.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-  
+
     }
 }

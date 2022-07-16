@@ -23,7 +23,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             }
             public async Task<ActionResult> Index()
             {
-                IEnumerable<HotelFeatureDetails> details = await _context.HotelFeatureDetails.Include(h => h.HotelFeature).
+                IEnumerable<HotelFeatureDetails> details = await _context.HotelFeatureDetails.Where(h=>h.HotelFeature.IsDeleted==false).Include(h => h.HotelFeature).
                 ThenInclude(h=>h.Hotel).ToListAsync();
                 return View(details);
             }
@@ -33,7 +33,7 @@ namespace Hotel_management.Areas.Manage.Controllers
 
         public async Task<ActionResult> Create()
         {
-            ViewBag.Features = await _context.HotelFeatures.Include(h=>h.Hotel).ToListAsync();
+            ViewBag.Features = await _context.HotelFeatures.Where(h => h.IsDeleted == false).Include(h=>h.Hotel).ToListAsync();
 
 
             return View();
@@ -43,12 +43,12 @@ namespace Hotel_management.Areas.Manage.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(HotelFeatureDetails feature)
         {
-            ViewBag.Features = await _context.HotelFeatures.Include(h=>h.Hotel).ToListAsync();
+            ViewBag.Features = await _context.HotelFeatures.Where(h=>h.IsDeleted==false).Include(h=>h.Hotel).ToListAsync();
 
 
 
 
-            if (await _context.HotelFeatureDetails.Where(h => h.HotelFeatureId == feature.HotelFeatureId).AnyAsync(g => g.Detail.ToLower() == feature.Detail.ToLower()))
+            if (await _context.HotelFeatureDetails.Where(h => h.HotelFeatureId == feature.HotelFeatureId && h.HotelFeature.IsDeleted==false).AnyAsync(g => g.Detail.ToLower() == feature.Detail.ToLower()))
             {
                 ModelState.AddModelError("Detail", $"{feature.Detail} Adda xususiyyet artiq movcuddur");
                 return View(feature);
@@ -86,7 +86,10 @@ namespace Hotel_management.Areas.Manage.Controllers
             [ValidateAntiForgeryToken]
             public async Task<IActionResult> Delete(HotelFeatureDetails feature)
             {
-
+            if (feature.hotelFeatureDetailsTranslations!=null)
+            {
+                _context.HotelFeatureDetailsTranslations.Remove(feature.hotelFeatureDetailsTranslations);
+            }
                 _context.HotelFeatureDetails.Remove(feature);
                 await _context.SaveChangesAsync();
 

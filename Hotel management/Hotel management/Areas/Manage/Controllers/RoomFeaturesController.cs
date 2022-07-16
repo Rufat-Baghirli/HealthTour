@@ -1,170 +1,146 @@
-﻿using Hotel_management.DAL;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using Hotel_management.DAL;
 using Hotel_management.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
     [Area("Manage")]
     [Authorize(Roles = "Admin")]
+
     public class RoomFeaturesController : Controller
     {
         private readonly AppDbContext _context;
-        private readonly IWebHostEnvironment _env;
 
-        public RoomFeaturesController(AppDbContext context, IWebHostEnvironment env)
+        public RoomFeaturesController(AppDbContext context)
         {
             _context = context;
-            _env = env;
-
-        }
-        public async Task<ActionResult> Index()
-        {
-            IEnumerable<RoomFeatures> features = await _context.RoomFeatures.
-                Include(f => f.Room).ThenInclude(r=>r.RoomType).
-                Include(f => f.Room).ThenInclude(r=>r.Hotel).
-                ToListAsync();
-            return View(features);
         }
 
-
-
-
-        public async Task<ActionResult> Create()
+        // GET: Manage/RoomFeatures
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Rooms = await _context.Rooms.Include(r => r.Hotel).Include(r => r.RoomType).ToListAsync();
+            var roomFeatures = _context.RoomFeatures.Where(r=>r.IsDeleted==false).Include(r => r.RoomType).ThenInclude(h=>h.Hotel);
+            return View(await roomFeatures.ToListAsync());
+        }
 
-
-
+     
+        // GET: Manage/RoomFeatures/Create
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.RoomTypes = await _context.RoomTypes.Where(r=>r.IsDeleted==false).Include(h => h.Hotel).ToListAsync();
             return View();
         }
 
+        // POST: Manage/RoomFeatures/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(RoomFeatures feature)
+        public async Task<IActionResult> Create([Bind("Id,Features,RoomTypeId")] RoomFeatures roomFeatures)
         {
-            ViewBag.Rooms = await _context.Rooms.Include(r=>r.Hotel).Include(r=>r.RoomType).ToListAsync();
+            ViewBag.RoomTypes = await _context.RoomTypes.Where(r => r.IsDeleted == false).Include(h => h.Hotel).ToListAsync();
 
-
-
-            if (await _context.RoomFeatures.Where(h => h.RoomId == feature.RoomId).AnyAsync(g => g.Features.ToLower() == feature.Features.ToLower()))
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Features", $" {feature.Features} Adda xususiyyet artiq movcuddur");
-                return View(feature);
+                _context.Add(roomFeatures);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-            if (feature.RoomId != 0 && !await _context.Rooms.AnyAsync(a => a.Id == feature.RoomId))
-            {
-                ModelState.AddModelError("HotelId", "Otel Mutleq Secilmelidi");
-                return View(feature);
-            }
-
-            //feature.RoomFeatureDetails = null;
-
-            await _context.RoomFeatures.AddAsync(feature);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return View(roomFeatures);
         }
 
-        public async Task<IActionResult> Update(int? id)
+        // GET: Manage/RoomFeatures/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            ViewBag.Rooms = await _context.Rooms.Include(r=>r.Hotel).Include(r=>r.RoomType).ToListAsync();
+            ViewBag.RoomTypes = await _context.RoomTypes.Where(r => r.IsDeleted == false).Include(h => h.Hotel).ToListAsync();
 
-            if (id == null || id == 0)
+            if (id == null || _context.RoomFeatures == null)
+            {
                 return NotFound();
-            RoomFeatures ft = await _context.RoomFeatures.
-                Include(r=>r.Room).ThenInclude(r=>r.RoomType).
-                  Include(r => r.Room).ThenInclude(r => r.Hotel)
-                .FirstOrDefaultAsync(g => g.Id == id);
-            if (ft == null)
-                return BadRequest();
+            }
 
-            return View(ft);
+            var roomFeatures = await _context.RoomFeatures.FindAsync(id);
+            if (roomFeatures == null)
+            {
+                return NotFound();
+            }
+           
+            return View(roomFeatures);
         }
 
+        // POST: Manage/RoomFeatures/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int? id, RoomFeatures feature)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Features,RoomTypeId")] RoomFeatures roomFeatures)
         {
-            ViewBag.Rooms = await _context.Rooms.Include(r => r.Hotel).Include(r => r.RoomType).ToListAsync();
+            ViewBag.RoomTypes = await _context.RoomTypes.Where(r => r.IsDeleted == false).Include(h => h.Hotel).ToListAsync();
 
-
-            if (id == null || id == 0)
+            if (id != roomFeatures.Id)
+            {
                 return NotFound();
-
-            RoomFeatures dbfeature = await _context.RoomFeatures.
-                Include(r => r.Room).ThenInclude(r => r.RoomType).
-                  Include(r => r.Room).ThenInclude(r => r.Hotel)
-                .FirstOrDefaultAsync(g => g.Id == id);
-
-            if (dbfeature == null)
-                return BadRequest();
-
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(dbfeature);
-            //}
-            if (await _context.RoomFeatures.AnyAsync(g => g.Features.ToLower() == feature.Features.ToLower()))
-            {
-                ModelState.AddModelError("Features", $" {feature.Features} Adda xususiyyet artiq movcuddur");
-                return View(feature);
             }
-            if (feature.RoomId != 0 && !await _context.Rooms.AnyAsync(a => a.Id == feature.RoomId))
+
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("RoomId", "Otaq Mutleq Secilmelidi");
-                return View(feature);
+                try
+                {
+                    _context.Update(roomFeatures);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!RoomFeaturesExists(roomFeatures.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-            dbfeature.RoomId = feature.RoomId;
-            dbfeature.Features = feature.Features;
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-
-
-
+          
+            return View(roomFeatures);
         }
 
 
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || id == 0)
+
+            if (id is null or 0)
                 return NotFound();
-            if (!await _context.RoomFeatures.AnyAsync(l => l.Id == id))
+            RoomFeatures feature = await _context.RoomFeatures.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == id);
+
+
+            if (feature == null)
                 return BadRequest();
-            RoomFeatures? roomFeature = await _context.RoomFeatures.
-                Include(f => f.RoomFeatureDetails).Include(r=>r.Room).ThenInclude(r=>r.RoomType).
-                Include(r=>r.Room).ThenInclude(r=>r.Hotel)
-                .FirstOrDefaultAsync(l => l.Id == id);
-
-           if( roomFeature==null)
-           return NotFound();
-
-
-            return View(roomFeature);
 
 
 
 
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(RoomFeatures feature)
-        {
-            if (feature.RoomFeatureDetails != null)
-            {
-                _context.RoomFeatureDetails.RemoveRange(feature.RoomFeatureDetails);
+            feature.IsDeleted = true;
 
-            }
-            _context.RoomFeatures.Remove(feature);
-          
+
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
 
+            return RedirectToAction(nameof(Index));
+        }
 
-
+        private bool RoomFeaturesExists(int id)
+        {
+          return (_context.RoomFeatures?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
-    }
-
-
+}

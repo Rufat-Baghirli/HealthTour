@@ -26,8 +26,8 @@ namespace Hotel_management.Areas.Manage.Controllers
         // GET: Manage/RoomFeaturesTranslations
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.RoomFeaturesTranslation.Include(r => r.RoomFeatures);
-            return View(await appDbContext.ToListAsync());
+            var RoomFeaturesTranslation = _context.RoomFeaturesTranslation.Include(r => r.RoomFeatures).ThenInclude(r=>r.RoomType).ThenInclude(r=>r.Hotel).Where(r=>r.RoomFeatures.IsDeleted==false);
+            return View(await RoomFeaturesTranslation.ToListAsync());
         }
 
         // GET: Manage/RoomFeaturesTranslations/Details/5
@@ -38,7 +38,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return NotFound();
             }
 
-            var roomFeaturesTranslation = await _context.RoomFeaturesTranslation
+            var roomFeaturesTranslation = await _context.RoomFeaturesTranslation.Where(r => r.RoomFeatures.IsDeleted == false)
                 .Include(r => r.RoomFeatures)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (roomFeaturesTranslation == null)
@@ -52,7 +52,7 @@ namespace Hotel_management.Areas.Manage.Controllers
         // GET: Manage/RoomFeaturesTranslations/Create
         public IActionResult Create()
         {
-            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures, "Id", "Features");
+            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures.Where(r => r.IsDeleted == false), "Id", "Features");
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures, "Id", "Features", roomFeaturesTranslation.RoomFeaturesId);
+            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures.Where(r=>r.IsDeleted==false), "Id", "Features", roomFeaturesTranslation.RoomFeaturesId);
             return View(roomFeaturesTranslation);
         }
 
@@ -86,7 +86,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             {
                 return NotFound();
             }
-            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures, "Id", "Features", roomFeaturesTranslation.RoomFeaturesId);
+            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures.Where(r => r.IsDeleted == false), "Id", "Features", roomFeaturesTranslation.RoomFeaturesId);
             return View(roomFeaturesTranslation);
         }
 
@@ -122,7 +122,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures, "Id", "Features", roomFeaturesTranslation.RoomFeaturesId);
+            ViewData["RoomFeaturesId"] = new SelectList(_context.RoomFeatures.Where(r => r.IsDeleted == false), "Id", "Features", roomFeaturesTranslation.RoomFeaturesId);
             return View(roomFeaturesTranslation);
         }
 

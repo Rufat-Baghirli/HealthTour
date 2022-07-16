@@ -78,9 +78,9 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return View(tour);
             }
 
-            if (tour.Imagefile.CheckLength(500))
+            if (tour.Imagefile.CheckLength(5120))
             {
-                ModelState.AddModelError("Imagefile", "Seklin olcusu Maksimum 500 kb Ola Biler");
+                ModelState.AddModelError("Imagefile", "Seklin olcusu Maksimum 5 Mb Ola Biler");
                 return View(tour);
             }
 
@@ -141,9 +141,9 @@ namespace Hotel_management.Areas.Manage.Controllers
                     return View(tour);
                 }
 
-                if (tour.Imagefile.CheckLength(500))
+                if (tour.Imagefile.CheckLength(5120))
                 {
-                    ModelState.AddModelError("Imagefile", "Seklin Olcusu Maksimum 500 kb Ola Biler");
+                    ModelState.AddModelError("Imagefile", "Seklin Olcusu Maksimum 5 Mb Ola Biler");
                     return View(tour);
                 }
 

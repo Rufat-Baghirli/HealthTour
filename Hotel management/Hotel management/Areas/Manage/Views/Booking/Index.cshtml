@@ -28,11 +28,10 @@
                       <th> Adults</th>
                 
               
-                @if(Model.Any(b=>b.Child > 0))
-                {
+           
                     
                       <th> Children</th>
-                }
+                
                 
             
 
@@ -45,7 +44,7 @@
         {
         <tr>
             <th scope="row">@booking.Hotel.Name</th>
-            <th scope="row">@booking.Room.RoomType.Name</th>
+            <th scope="row">@booking.Room.Name</th>
             <td>@booking.ReserveTime</td>
             <td>@booking.Checkin</td>
             <td>@booking.Checkout</td>
@@ -60,10 +59,19 @@
             @for (int i = 0; i < booking.Adults.Count; i++)
 {
       @if (booking.Adults[i].Treatment)
-                {
-                     
-                    <li>Adult(@(i+1).)  3 dəfə yemək və @booking.Adults[i].Treatment_model.Name müalicə paketi </li> 
-                       
+                            {
+                                @if (booking.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
+                                {
+                                    
+                                 
+
+                                    <li>Adult(@(i+1).)  3 dəfə yemək və @booking.Adults[i].Treatment_model.Name müalicə paketi </li>
+                                }
+                                else
+                                {
+                                     <li>Adult(@(i+1).)  3 dəfə yemək və  müalicə paketi </li>
+                                }
+
                     }
                     else
                     {
@@ -82,19 +90,31 @@
 {
       @if (booking.Children[i].Treatment)
                 {
+                     @if (booking.Hotel.Name.ToLower().Contains("Chenot".ToLower())){
                      <li>
-                      3 dəfə yemək və  @booking.Children[i].Treatment_model.Name müalicə paketi / <br/>   Yaş - @booking.Children[i].Age 
-                        </li>
-                    }
+                      3 dəfə yemək və  @booking.Children[i].Treatment_model.Name müalicə paketi / <br/> Yaş-@booking.Children[i].Age 
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                      3 dəfə yemək və  müalicə paketi / <br/> Yaş-@booking.Children[i].Age 
+                                        </li>
+                                    }
+                                }
                     else
                     {
                         <li>
-                        3 dəfə yemək / <br/>   Yaş - @booking.Children[i].Age 
+                        3 dəfə yemək / <br/>Yaş-@booking.Children[i].Age 
                    </li>
                     }
 }
 </ul>
-</td>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
                 }
             <td style="color:green">Active</td>      
             <td>

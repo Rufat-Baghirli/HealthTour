@@ -1,35 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Hotel_management.Models
 {
     public class RoomType
     {
 
-        public enum Type
-        {
-            [Display(Name = "Standart Single")]
-            Standart,
-            [Display(Name = "Standart Double")]
-            StandartDouble,
-            [Display(Name = "Superior Single")]
-            Superior,
-            [Display(Name = "Superior Double")]
-            SuperiorDouble,
-            [Display(Name = "Suite Single")]
-            Suite,
-            [Display(Name = "Suite Double")]
-            SuiteDouble,
-            [Display(Name = "Deluxe")]
-            Deluxe,
-            [Display(Name = "King Suite")]
-            KingSuite
 
-        }
         public int Id { get; set; }
         [Required(ErrorMessage = "Ad mutleq secilmelidir!")]
-        [Display(Name ="Type")]
+        [Display(Name = "Type")]
         public string? Name { get; set; }
-        public IEnumerable<Room>? Rooms { get; set; }
         [Required]
         public double OneweekPrice { get; set; }
         [Required]
@@ -53,7 +34,24 @@ namespace Hotel_management.Models
         public bool IsDeleted { get; set; }
 
         public IEnumerable<SpecialDays>? SpecialDays { get; set; }
+        public double TotalPrice { get; set; }
+        [Required(ErrorMessage = "Sekil mutleq secilmelidir")]
+        [NotMapped]
+        public IFormFile MainimgFile { get; set; }
+        public IEnumerable<Booking>? Bookings { get; set; }
 
-      
+        public IEnumerable<RoomFeatures>? RoomFeatures { get; set; }
+        public float Roomarea { get; set; }
+        [StringLength(255)]
+        public string? Mainimg { get; set; }
+        public virtual IEnumerable<RoomImages>? RoomImages { get; set; }
+
+        [NotMapped]
+        public IFormFile[]? RoomImagesFile { get; set; }
+        public int People { get; set; }
+        public int Children { get; set; }
+
+
+
     }
 }

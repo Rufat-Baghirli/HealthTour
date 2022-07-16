@@ -125,7 +125,7 @@
                                     <img src="~/images/Rooms/@Model.Room.Mainimg" alt="">
                                     <div class="_bodySocialDetail">
                                         <i class="fa-solid fa-user"></i>
-                                        <p>@Model.Room.RoomType.Name</p>
+                                        <p>@Model.Room.Name</p>
                                     </div>
 
                                 </div>
@@ -146,15 +146,38 @@
                            
     
         <input type="hidden"  asp-for="Adults[i].Id" value="@Model.Adults[i].Id">
-                                    <select    name="AdultsItems[]">
-                                        
-                                    @foreach (Treatment item in Model.Hotel.Treatments)
+                                    <select style="max-width: 280px;"   name="AdultsItems[]">
+                                            @if (Model.Night==3)
+                                                {
+                                                     @foreach (Treatment item in Model.Hotel.Treatments.Where(t=>t.Name.ToLower().Contains("3")))
                                     {
                                         
                                         <option value="@item.Id"> 
                                              @item.Name / @item.Price AZN
                                     </option>
-                                    }
+                                                    }
+                                                }
+                                                else if (Model.Night==7)
+                                                {
+                                                     @foreach (Treatment item in Model.Hotel.Treatments.Where(t=>t.Name.ToLower().Contains("7")))
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                             @item.Name / @item.Price AZN
+                                    </option>
+                                                    }
+                                                }
+                                                else if (Model.Night==14)
+                                                {
+                                                     @foreach (Treatment item in Model.Hotel.Treatments.Where(t=>t.Name.ToLower().Contains("14")))
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                             @item.Name / @item.Price AZN
+                                    </option>
+                                                    }
+                                                }
+
 
                                 </select>
                                 <br />
@@ -167,7 +190,7 @@
                             else
                             {
                           
-                                <p>@localizer["3 meals a day"]</p>
+                                <p>@localizer["3 meals a day and treatment"]</p>
 
                             }
 
@@ -185,29 +208,57 @@
 
                         </div>
                         <div class="RightAccorment">
-                                            @if (Model.Adults[i].Treatment && Model.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
+                                            @if (Model.Children[i].Treatment && Model.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
                                             {
                                                
                                                     <p>@localizer["Age"]: @Model.Children[i].Age</p>
                                                     <p>@localizer["3 meals a day and treatment"]</p>
 
                                                     <input type="hidden"  asp-for="Children[i].Id" value="@Model.Children[i].Id">
-                                                    <select    name="ChildrenItems[]">
+                                                    <select  style="max-width: 280px;"  name="ChildrenItems[]">
 
-                                                        @foreach (Treatment item in Model.Hotel.Treatments)
-                                                        {
-
-                                                            <option value="@item.Id"> 
-                                                                @item.Name / @item.Price AZN
-                                                            </option>
-                                                        }
+                                                      @if (Model.Night==3)
+                                                {
+                                                     @foreach (Treatment item in Model.Hotel.Treatments.Where(t=>t.Name.ToLower().Contains("3")))
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                             @item.Name / @item.Price AZN
+                                    </option>
+                                                    }
+                                                }
+                                                else if (Model.Night==7)
+                                                {
+                                                     @foreach (Treatment item in Model.Hotel.Treatments.Where(t=>t.Name.ToLower().Contains("7")))
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                             @item.Name / @item.Price AZN
+                                    </option>
+                                                    }
+                                                }
+                                                else if (Model.Night==14)
+                                                {
+                                                     @foreach (Treatment item in Model.Hotel.Treatments.Where(t=>t.Name.ToLower().Contains("14")))
+                                    {
+                                        
+                                        <option value="@item.Id"> 
+                                             @item.Name / @item.Price AZN
+                                    </option>
+                                                    }
+                                                }
 
                                                     </select>
                                                     <br />
-                                                    @localizer["Treatment packet's price will be added to Total Price"]
+                                                @localizer["Treatment packet's price will be added to Total Price"]
 
 
                                                 
+                                            }
+                                            else if(Model.Children[i].Treatment && !Model.Hotel.Name.ToLower().Contains("Chenot".ToLower()))
+                                            {
+                                                   <p>@localizer["Age"]: @Model.Children[i].Age</p>
+                                                    <p>@localizer["3 meals a day and treatment"]</p>
                                             }
                                             else
                                             {

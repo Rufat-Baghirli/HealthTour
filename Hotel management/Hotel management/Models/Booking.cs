@@ -6,8 +6,8 @@ namespace Hotel_management.Models
     public class Booking
     {
         public int Id { get; set; }
-        public int RoomId { get; set; }
-        public Room Room { get; set; }
+        public int? RoomId { get; set; }
+        public RoomType? Room { get; set; }
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
         [DataType(DataType.Date)]
 
@@ -19,7 +19,7 @@ namespace Hotel_management.Models
 
         public DateTime Checkout { get; set; }
         [Display(Name = "Hotel")]
-        public Hotel Hotel { get; set; }
+        public Hotel? Hotel { get; set; }
         public DateTime ReserveTime { get; set; } = DateTime.Now;
         public int Night { get; set; }
         [EmailAddress, DataType(DataType.EmailAddress),Display(Name="Email")]

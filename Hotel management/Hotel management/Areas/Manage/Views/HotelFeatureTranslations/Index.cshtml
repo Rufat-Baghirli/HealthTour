@@ -22,7 +22,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.HotelFeature)
             </th>
-            <th></th>
+            <th> @Html.DisplayNameFor(model => model.HotelFeature.Hotel)</th>
+
+            <th>Settings</th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HotelFeature.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelFeature.Hotel.Name)
             </td>
             <td class="d-flex">
                 <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 

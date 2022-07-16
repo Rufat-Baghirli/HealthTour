@@ -155,10 +155,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhvdGVsRmVhdHVyZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HotelFeatures/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhvdGVsRmVhdHVyZXNcRGVsZXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/HotelFeatures/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXEhvdGVsRmVhdHVyZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -331,16 +327,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21GZWF0dXJlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomFeatures/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21GZWF0dXJlc1xEZWxldGUuY3NodG1s
+[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomFeatures/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21GZWF0dXJlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomFeatures/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21GZWF0dXJlc1xJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomFeatures/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21GZWF0dXJlc1xVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomType/Create.cshtml]
@@ -353,22 +345,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/RoomType/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21UeXBlXFVwZGF0ZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Room/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21cQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Room/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21cRGV0YWlscy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Room/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21cSW5kZXguY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Room/Update.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcTWFuYWdlXFZpZXdzXFJvb21cVXBkYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Ali Aliyev/Desktop/HotelManagement/HotelsReservations-main/Hotel-backend/Hotel management/Hotel management/Areas/Manage/Views/Seasons/Create.cshtml]

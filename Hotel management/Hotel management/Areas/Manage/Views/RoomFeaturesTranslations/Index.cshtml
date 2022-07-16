@@ -13,6 +13,9 @@
 <table class="table">
     <thead>
         <tr>
+             <th>
+                @Html.DisplayNameFor(model => model.RoomFeatures.RoomType)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Features_en)
             </th>
@@ -22,12 +25,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.RoomFeatures)
             </th>
-            <th></th>
+            <th>Settings</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.RoomFeatures.RoomType.Name)/ @Html.DisplayFor(modelItem => item.RoomFeatures.RoomType.Hotel.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Features_en)
             </td>

@@ -180,6 +180,9 @@
   <data name="Children" xml:space="preserve">
     <value>Uşaqlar</value>
   </data>
+  <data name="Children or additional adults" xml:space="preserve">
+    <value>Uşaqlar və ya əlavə böyüklər</value>
+  </data>
   <data name="Choose Room Details" xml:space="preserve">
     <value>Otaq Xüsusiyyətlərini seçin</value>
   </data>
@@ -279,6 +282,9 @@
   <data name="Mail us" xml:space="preserve">
     <value>Bizə poçt göndərin</value>
   </data>
+  <data name="Maximum two adults can be added" xml:space="preserve">
+    <value>Ən çox iki böyük əlavə edilə bilər</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Ad</value>
   </data>
@@ -299,6 +305,9 @@
   </data>
   <data name="Not included in the price" xml:space="preserve">
     <value>Qiymətə daxil deyil</value>
+  </data>
+  <data name="Only 3, 7, 14 day packages are available for Chenot hotel" xml:space="preserve">
+    <value>Chenot oteli üçün yalnız 3, 7, 14 günlük paketlər mövcuddur</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Şifrə</value>

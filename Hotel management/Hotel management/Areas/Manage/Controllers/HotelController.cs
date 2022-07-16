@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hotel_management.Extensions;
+using System.Text;
 
 namespace Hotel_management.Areas.Manage.Controllers
 {
@@ -21,14 +22,14 @@ namespace Hotel_management.Areas.Manage.Controllers
             _env = env;
 
         }
-    
+
         public async Task<ActionResult> Index()
         {
-            return View(await _context.Hotels.Include(r=>r.Location).Where(r=>r.isDeleted==false).ToListAsync());
+            return View(await _context.Hotels.Include(r => r.Location).Where(r => r.isDeleted == false).ToListAsync());
         }
 
 
-        
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -41,10 +42,10 @@ namespace Hotel_management.Areas.Manage.Controllers
 
 
             return View();
-          
+
         }
 
-  
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(Hotel hotel)
@@ -55,14 +56,14 @@ namespace Hotel_management.Areas.Manage.Controllers
 
             try
             {
-              
-               
+
+
                 if (hotel.LocationId <= 0 && !await _context.Locations.AnyAsync(a => a.Id == hotel.LocationId))
                 {
                     ModelState.AddModelError("LocationId", "Location Mutleq Secilmelidi");
                     return View(hotel);
                 }
-               
+
 
 
 
@@ -73,18 +74,18 @@ namespace Hotel_management.Areas.Manage.Controllers
                         ModelState.AddModelError("HotelImagesFile", "Maksimum 10 Sekil Yukleye Bilersiniz");
                         return View(hotel);
                     }
-                    
+
                 }
-              
+
 
                 if (await _context.Hotels.AnyAsync(g => g.Name.ToLower() == hotel.Name.ToLower()))
                 {
                     ModelState.AddModelError("Name", $"Bu {hotel.Name} Adda Artiq Otel Var");
                     return View(hotel);
                 }
-               
 
-              
+
+
 
                 if (hotel.MainimgFile == null)
                 {
@@ -93,16 +94,16 @@ namespace Hotel_management.Areas.Manage.Controllers
 
                 }
 
-               
+
                 if (!hotel.MainimgFile.CheckContentType("image"))
                 {
                     ModelState.AddModelError("MainImageFile", "MainImageFile tipini Duzgun Secin");
                     return View(hotel);
                 }
 
-                if (hotel.MainimgFile.CheckLength(500))
+                if (hotel.MainimgFile.CheckLength(5120))
                 {
-                    ModelState.AddModelError("MainImageFile", "MainImageFile Uzunlugu Maksimum 500 kb Ola Biler");
+                    ModelState.AddModelError("MainImageFile", "MainImageFile Uzunlugu Maksimum 5 Mb Ola Biler");
                     return View(hotel);
                 }
 
@@ -127,9 +128,9 @@ namespace Hotel_management.Areas.Manage.Controllers
                                     return View(hotel);
                                 }
 
-                                if (file.CheckLength(500))
+                                if (file.CheckLength(5120))
                                 {
-                                    ModelState.AddModelError("HotelImagesFile", $"{file.FileName} Uzunlugu Maksimum 500 kb Ola Biler");
+                                    ModelState.AddModelError("HotelImagesFile", $"{file.FileName} Uzunlugu Maksimum 5 Mb Ola Biler");
                                     return View(hotel);
                                 }
                                 HotelImages HotelImage = new HotelImages
@@ -143,7 +144,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                             hotel.HotelImages = HotelImages;
                         }
                     }
-                    
+
                     else
                     {
                         ModelState.AddModelError("hotel.HotelImagesFile", "Hotel images mutleq secilmelidir");
@@ -155,7 +156,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 {
                     ModelState.AddModelError("hotel.HotelImagesFile", "Hotel images mutleq secilmelidir");
                 }
-             
+
                 await _context.Hotels.AddAsync(hotel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -201,7 +202,7 @@ namespace Hotel_management.Areas.Manage.Controllers
             if (dbhotel == null)
                 return NotFound();
 
-           
+
 
             if (hotel.Location != null && !await _context.Locations.AnyAsync(a => a.Id == hotel.LocationId))
             {
@@ -209,7 +210,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return View(hotel);
             }
 
-           
+
             int canUpload = 10 - dbhotel.HotelImages.Count();
 
             if (hotel.HotelImagesFile != null && canUpload < hotel.HotelImagesFile.Length)
@@ -229,9 +230,9 @@ namespace Hotel_management.Areas.Manage.Controllers
                     return View(dbhotel);
                 }
 
-                if (hotel.MainimgFile.CheckLength(500))
+                if (hotel.MainimgFile.CheckLength(5120))
                 {
-                    ModelState.AddModelError("MainimgFile", "MainimgFile Uzunlugu Maksimum 500 kb Ola Biler");
+                    ModelState.AddModelError("MainimgFile", "MainimgFile Uzunlugu Maksimum 5 Mb Ola Biler");
                     return View(dbhotel);
                 }
 
@@ -240,41 +241,40 @@ namespace Hotel_management.Areas.Manage.Controllers
                 dbhotel.Mainimg = await hotel.MainimgFile.SaveFileAsync(filePath);
 
             }
-           
 
 
 
 
-            if (hotel.HotelImagesFile !=null)
+            if (hotel.HotelImagesFile != null)
+            {
+                foreach (IFormFile file in hotel.HotelImagesFile)
                 {
-                    foreach (IFormFile file in hotel.HotelImagesFile)
+                    if (!file.CheckContentType("image"))
                     {
-                        if (!file.CheckContentType("image"))
-                        {
-                            ModelState.AddModelError("HotelImagesFile", $"{file.FileName} tipini Duzgun Secin");
-                            return View(hotel);
-                        }
-
-                        if (file.CheckLength(500))
-                        {
-                            ModelState.AddModelError("HotelImagesFile", $"{file.FileName} Uzunlugu Maksimum 500 kb Ola Biler");
-                            return View(hotel);
-                        }
-
-                        dbhotel.HotelImages.ToList().Add(new HotelImages
-                        {
-                            Name = await file.SaveFileAsync(filePath)
-                        });
+                        ModelState.AddModelError("HotelImagesFile", $"{file.FileName} tipini Duzgun Secin");
+                        return View(hotel);
                     }
+
+                    if (file.CheckLength(5120))
+                    {
+                        ModelState.AddModelError("HotelImagesFile", $"{file.FileName} Uzunlugu Maksimum 5 Mb Ola Biler");
+                        return View(hotel);
+                    }
+
+                    dbhotel.HotelImages.ToList().Add(new HotelImages
+                    {
+                        Name = await file.SaveFileAsync(filePath)
+                    });
                 }
-           
+            }
+
             dbhotel.LocationId = hotel.LocationId;
             dbhotel.Name = hotel.Name;
             dbhotel.Rooms = hotel.Rooms;
             dbhotel.HotelFeatures = hotel.HotelFeatures;
             dbhotel.Description = hotel.Description;
             dbhotel.MapLocation = hotel.MapLocation;
-         
+
 
             await _context.SaveChangesAsync();
 
@@ -297,8 +297,9 @@ namespace Hotel_management.Areas.Manage.Controllers
             string path = Path.Combine(_env.WebRootPath, "images", "Hotels");
             Helpers.Exmethods.DeleteFile(path, hotel.Mainimg);
 
-          
-            if (hotel.HotelImages != null){
+
+            if (hotel.HotelImages != null)
+            {
                 foreach (HotelImages hotelImage in hotel.HotelImages)
                 {
                     Helpers.Exmethods.DeleteFile(path, hotelImage.Name);
@@ -306,15 +307,15 @@ namespace Hotel_management.Areas.Manage.Controllers
             }
 
 
-          
+
 
 
             hotel.isDeleted = true;
-            if(hotel.Rooms != null)
+            if (hotel.Rooms != null)
             {
-                foreach(Room room in hotel.Rooms)
+                foreach (RoomType room in hotel.Rooms)
                 {
-                    room.isDeleted = true;
+                    room.IsDeleted = true;
                 }
             }
 
@@ -348,12 +349,12 @@ namespace Hotel_management.Areas.Manage.Controllers
 
         public async Task<IActionResult> Detail(int? Id)
         {
-            if(Id == null)
+            if (Id == null)
             {
                 return NotFound();
             }
 
-            Hotel hotel = await _context.Hotels.Include(c=>c.HotelImages).Include(h => h.HotelFeatures).ThenInclude(h => h.HotelFeatureDetails).Include(r=>r.HotelStar).Include(h=>h.Location).Include(r=>r.Rooms).FirstOrDefaultAsync(h => h.Id == Id);
+            Hotel hotel = await _context.Hotels.Include(c => c.HotelImages).Include(h => h.HotelFeatures).ThenInclude(h => h.HotelFeatureDetails).Include(r => r.HotelStar).Include(h => h.Location).Include(r => r.Rooms).FirstOrDefaultAsync(h => h.Id == Id);
             if (hotel == null)
             {
                 return BadRequest();
@@ -361,5 +362,7 @@ namespace Hotel_management.Areas.Manage.Controllers
 
             return View(hotel);
         }
+
+
     }
 }

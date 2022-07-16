@@ -31,14 +31,15 @@ namespace Hotel_management.Areas.Manage.Controllers
                 AppUserVM appUserVM = new AppUserVM
                 {
                     Id = appUser.Id,
-                    Name = appUser.Name,
-                    SurName = appUser.SurName,
-                    Email = appUser.Email,
-                    Role = (await _userManager.GetRolesAsync(appUser))[0],
-                    UserName = appUser.UserName,
-                    IsDeleted = appUser.IsDeleted,
-                    
-                };
+                Name = appUser.Name,
+                SurName = appUser.SurName,
+                Email = appUser.Email,
+                Role = (await _userManager.GetRolesAsync(appUser))[0],
+                UserName = appUser.UserName,
+                IsDeleted = appUser.IsDeleted,
+
+            };
+             
 
                 appUserVMs.Add(appUserVM);
             }

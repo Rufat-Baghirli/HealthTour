@@ -177,6 +177,9 @@
   <data name="Children" xml:space="preserve">
     <value>Дети</value>
   </data>
+  <data name="Children or additional adults" xml:space="preserve">
+    <value>Дети или дополнительные взрослые</value>
+  </data>
   <data name="Choose Room Details" xml:space="preserve">
     <value>Выберите детали номера</value>
   </data>
@@ -282,6 +285,9 @@
   <data name="Mail us" xml:space="preserve">
     <value>Напишите нам</value>
   </data>
+  <data name="Maximum two adults can be added" xml:space="preserve">
+    <value>Можно добавить не более двух взрослых</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Имя</value>
   </data>
@@ -302,6 +308,9 @@
   </data>
   <data name="Not included in the price" xml:space="preserve">
     <value>Не включено в цену</value>
+  </data>
+  <data name="Only 3, 7, 14 day packages are available for Chenot hotel" xml:space="preserve">
+    <value>Для отеля Chenot доступны только пакеты на 3, 7, 14 дней.</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>

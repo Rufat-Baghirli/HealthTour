@@ -8,6 +8,7 @@
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_HotelLayout.cshtml";
+
      AppUser user = null;
     if (User.Identity.IsAuthenticated)
     {
@@ -15,7 +16,10 @@
     }
 }
 
- <section  style="background-image:url('../../images/Hotels/@Model.Hotel.Mainimg')"  id="vacation">
+ <section  style="background-image:url('../../images/Hotels/@Model.Hotel.Mainimg');background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-clip: border-box;"  id="vacation">
 
       <div class="VacationBody">
        
@@ -28,6 +32,7 @@
 
                 <div class="tab-content">
                   <div class="tab-pane active" id="tab1">
+                          <span style="color:white"> @localizer["Only 3, 7, 14 day packages are available for Chenot hotel"]</span>
          
                   <form method="get" asp-controller="Search" asp-action="SearchResult" autocomplete="off">
         <div asp-validation-summary="All" class="text-danger"></div>
@@ -510,7 +515,7 @@
 
 
 
-        @foreach (Room room in Model.Hotel.Rooms)
+        @foreach (RoomType room in Model.Hotel.Rooms)
         {
             <section id="HotelListContainer">
 
@@ -532,7 +537,7 @@
                                     <div class="HotelItemContent">
                                         <ul>
                                             <li>
-                                                <h5>@room.RoomType.Name Room</h5>
+                                                <h5>@room.Name Room</h5>
                                             </li>
                                             <li> <i class="fas fa-users"></i>  @(room.People + room.Children) @localizer["people"] (@localizer["including up to"] @room.Children @localizer["Children"].Value.ToLower())</li>
                                             <li>
@@ -560,7 +565,7 @@
                                                                                 <img src="~/images/Rooms/@room.Mainimg"
                                                                                 class="d-block w-100" alt="...">
                                                                             </div>
-                                                                            @foreach (var item in room.RoomImages)
+                                                                            @foreach (RoomImages item in room.RoomImages)
                                                                             {
                                                                                 <div class="carousel-item">
                                                                                     <img src="~/images/Rooms/@item.Name"
@@ -599,7 +604,7 @@
                                                                                 <ul>
                                                                                     <h6>@localizer["The most popular room features"]</h6>
 
-                                                                                     @foreach (var item in room.RoomFeatures.Take(5))
+                                                                                     @foreach (RoomFeatures item in room.RoomFeatures.Take(5))
                                                                                     {
                                                                                        @if (CultureInfo.CurrentCulture.Name.ToLower()=="en" && item.RoomFeaturesTranslation!=null)
                                                                                        {
@@ -1010,20 +1015,20 @@
                                 @if (DateTime.UtcNow.Month == 12 || DateTime.UtcNow.Month  == 1 || DateTime.UtcNow.Month  == 2)
                                 {
                                    
-                                    <h1>  @room.RoomType.OneweekPrice AZN  </h1>
+                                    <h1>  @room.OneweekPrice AZN  </h1>
 
                                 }
                                 else if (DateTime.UtcNow.Month == 3 || DateTime.UtcNow.Month== 4 || DateTime.UtcNow.Month == 5 || DateTime.UtcNow.Month== 11)
                                 {
 
-                                                                       <h1> @room.RoomType.OneweekPriceMid AZN</h1>  
+                                                                       <h1> @room.OneweekPriceMid AZN</h1>  
 
 
 
                                 }
                                 else
                                 {
-                                    <h1> @room.RoomType.OneweekPriceHigh AZN</h1>  
+                                    <h1> @room.OneweekPriceHigh AZN</h1>  
                                 }
                                                    
                                                    
@@ -1057,6 +1062,8 @@
 
 
         @section Scripts {
+            
+  
              <script>
         $(document).ready(function () {
             $('#Location').autocomplete({
@@ -1098,6 +1105,8 @@
         });
     });
     </script>
+
+
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
 }

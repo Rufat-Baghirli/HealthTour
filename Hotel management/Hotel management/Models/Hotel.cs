@@ -21,19 +21,16 @@ namespace Hotel_management.Models
         public Location? Location { get; set; }
         public int LocationId { get; set; }
         public IEnumerable<HotelFeature>? HotelFeatures { get; set; }
-        [Required]
-        [Range(0,50)]
-        [Column(TypeName = "Money")]
-       
-        //public double DistancetoCenter { get; set; }
-        public IEnumerable<Room>? Rooms { get; set; }
+        //[Required]
+
+
+        public IEnumerable<RoomType>? Rooms { get; set; }
         [NotMapped]
         public IFormFile MainimgFile { get; set; }
         public bool isDeleted { get; set; }
         public HotelStars? HotelStar { get; set; }
         public int HotelStarId { get; set; }
         public IEnumerable<Treatment>? Treatments{ get; set; }
-        public IEnumerable<RoomType>? RoomTypes { get; set; }
 
         public List<Review>? Reviews { get; set; }
         public ExtraPrice? ExtraPrice { get; set; }

@@ -11,7 +11,7 @@ namespace Hotel_management.Models;
         public string Description_en { get; set; }
         public string Description_ru { get; set; }
         public int HotelId { get; set; }
-        public Hotel hotel { get; set; }
+        public Hotel? hotel { get; set; }
         
 
 

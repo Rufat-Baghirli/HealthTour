@@ -8,8 +8,7 @@ namespace Hotel_management.Models
         [Required]
         public string Detail { get; set; }
         public int RoomFeaturesId { get; set; }
-        public RoomFeatures RoomFeatures { get; set; }
-         public HotelFeature HotelFeature { get; set; }
+        public RoomFeatures? RoomFeatures { get; set; }
         public RoomFeatureDetailTranslations? RoomFeatureDetailTranslations { get; set; }     
     }
 }

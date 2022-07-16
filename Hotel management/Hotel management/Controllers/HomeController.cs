@@ -12,12 +12,12 @@ namespace Hotel_management.Controllers
 
     public class HomeController : Controller
     {
- 
+
         private readonly AppDbContext _context;
         private readonly IStringLocalizer<SharedResource> _localizer;
 
 
-        public HomeController(AppDbContext context,IStringLocalizer<SharedResource> localizer)
+        public HomeController(AppDbContext context, IStringLocalizer<SharedResource> localizer)
         {
 
             _context = context;
@@ -26,17 +26,17 @@ namespace Hotel_management.Controllers
 
         public async Task<IActionResult> Index()
         {
-            
+
             HomeVM homeVM = new HomeVM
             {
-                Hotels = await _context.Hotels.Where(h=>h.isDeleted==false).
+                Hotels = await _context.Hotels.Where(h => h.isDeleted == false).
                 Include(l => l.Location).
-                Include(r => r.Rooms.Where(r=>r.isDeleted==false)).
+                Include(r => r.Rooms.Where(r => r.IsDeleted == false)).
                 Include(h => h.HotelImages).
                 Include(h => h.HotelStar).
                 Include(h => h.hotelTranslations).
                 ToListAsync(),
-              
+
 
 
             };

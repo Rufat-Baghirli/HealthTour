@@ -23,15 +23,14 @@ namespace Hotel_management.Areas.Manage.Controllers
         public async Task<IActionResult> Index()
         {
 
-            return View(await _context.Bookings.Where(b=>b.IsDeleted==false).Include(b=>b.Adults).ThenInclude(t=>t.Treatment_model).Include(b=>b.Children).ThenInclude(t => t.Treatment_model).Include(h=>h.Hotel).ThenInclude(r=>r.Rooms).
-                ThenInclude(r=>r.RoomType).ToListAsync());
+            return View(await _context.Bookings.Where(b => b.IsDeleted == false).Include(b => b.Adults).ThenInclude(t => t.Treatment_model).Include(b => b.Children).ThenInclude(t => t.Treatment_model).Include(h => h.Hotel).ThenInclude(r => r.Rooms).ToListAsync());
         }
 
         public async Task<IActionResult> ChangeStatus(int? Id)
         {
             if (Id == null) return NotFound();
 
-            Booking booking = await _context.Bookings.FirstOrDefaultAsync(b=>b.Id==Id);
+            Booking booking = await _context.Bookings.FirstOrDefaultAsync(b => b.Id == Id);
 
             if (booking == null) return NotFound();
 
