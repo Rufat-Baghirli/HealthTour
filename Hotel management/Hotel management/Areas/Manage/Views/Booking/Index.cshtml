@@ -10,52 +10,52 @@
 
 <table class="table table-striped table-hover">
     <thead>
-        <tr>
-            <th scope="col">HotelName</th>
-            <th scope="col">Room Type</th>
-            <th scope="col">Reserve Time</th>
-            <th scope="col">Checkin Date</th>
-            <th scope="col">Checkout Date</th>
-            <th scope="col">Ordernumber</th>
-            <th scope="col">Ad</th>
-            <th scope="col">Soyad</th>
-            <th scope="col">Email</th>
-            <th scope="col">Nomre</th>
-            <th scope="col">Cəm Qiymət</th>
+        <tr style="display:flex;flex-wrap:wrap">
+            <th style="font-size:13px" scope="col"><i class="fas fa-hotel"></i></th>
+            <th style="font-size:13px"  scope="col">Room Type</th>
+            <th style="font-size:13px"  scope="col">Reserve Time</t>
+            <th style="font-size:13px" scope="col">Checkin Date</th>
+            <th style="font-size:13px"  scope="col">Checkout Date</th>
+            <th style="font-size:13px"  scope="col">Ordernumber</th>
+            <th style="font-size:13px"  scope="col">Ad</th>
+            <th style="font-size:13px"  scope="col">Soyad</th>
+            <th style="font-size:13px"   scope="col"><i class="fas fa-envelope"></i></th>
+            <th style="font-size:13px"  scope="col"><i class="fas fa-phone-alt"></i></th>
+            <th style="font-size:13px"  scope="col">Cəm Qiymət</th>
 
           
                 
-                      <th> Adults</th>
+                      <th style="font-size:13px" > Adults</th>
                 
               
            
                     
-                      <th> Children</th>
+                      <th style="font-size:13px" > Children</th>
                 
                 
             
 
-            <th scope="col">Status</th>
-            <th scope="col">Settings</th>
+            <th style="font-size:13px"  scope="col">Status</th>
+            <th style="font-size:13px"  scope="col"><i class="fas fa-cog"></i></th>
         </tr>
     </thead>
     <tbody>
         @foreach (Booking booking in Model)
         {
-        <tr>
-            <th scope="row">@booking.Hotel.Name</th>
-            <th scope="row">@booking.Room.Name</th>
-            <td>@booking.ReserveTime</td>
-            <td>@booking.Checkin</td>
-            <td>@booking.Checkout</td>
-            <td>@booking.Ordernumber</td>
-            <td>@booking.Name</td>
-            <td>@booking.SurName</td>
-            <td>@booking.Email</td>
-            <td>@booking.PhoneNumber</td>
-            <td>@booking.TotalPrice</td>
-            <td>
-                <ul>
+        <tr style="display:flex;flex-wrap:wrap">
+            <td style="font-size:13px" scope="row">@booking.Hotel.Name</td>
+            <td style="font-size:13px" scope="row">@booking.Room.Name</td>
+            <td style="font-size:13px" >@booking.ReserveTime</td>
+            <td style="font-size:13px">@booking.Checkin</td>
+            <td style="font-size:13px">@booking.Checkout</td>
+            <td style="font-size:13px">@booking.Ordernumber</td>
+            <td style="font-size:13px">@booking.Name</td>
+            <td style="font-size:13px">@booking.SurName</td>
+            <td style="font-size:13px">@booking.Email</td>
+            <td style="font-size:13px">@booking.PhoneNumber</td>
+            <td style="font-size:13px">@booking.TotalPrice</td>
+            <td style="font-size:13px">
+                <ul style="padding:0">
             @for (int i = 0; i < booking.Adults.Count; i++)
 {
       @if (booking.Adults[i].Treatment)
@@ -117,7 +117,7 @@
                     <td></td>
                 }
             <td style="color:green">Active</td>      
-            <td>
+            <td style="font-size:13px">
               
                     <a new { onclick="return confirm('Are sure wants to delete the current Item?');" } class="btn btn-danger" asp-action="ChangeStatus" asp-route-Id="@booking.Id" asp-route-status="false">Delete</a>
          

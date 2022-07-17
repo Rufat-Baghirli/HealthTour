@@ -2582,7 +2582,7 @@ main #OtelHomeDetails .RaightSideMelumatlar {
   overflow: hidden;
 }
 
-main #OtelHomeDetails .RaightSideMelumatlar img {
+/*main #OtelHomeDetails .RaightSideMelumatlar img {
   -webkit-animation-name: fade;
           animation-name: fade;
   -webkit-animation-delay: 1s;
@@ -2594,7 +2594,7 @@ main #OtelHomeDetails .RaightSideMelumatlar img {
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   -o-animation-direction: alternate;
-}
+}*/
 
 @-webkit-keyframes fade {
   0% {
