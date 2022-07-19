@@ -11,8 +11,7 @@ using System.Reflection;
 using Hotel_management;
 using Microsoft.AspNetCore.Localization.Routing;
 using Hotel_management.Controllers;
-//using Hotel_management.Resources;
-//using Hotel_management.Resources;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

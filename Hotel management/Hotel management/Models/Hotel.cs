@@ -7,13 +7,13 @@ namespace Hotel_management.Models
     {
         public int Id { get; set; }
         [Required]
-        [StringLength(50),MinLength(4)]
+        [StringLength(50),MinLength(1)]
         public string Name { get; set; }
         [Required]
-        [StringLength(1023), MinLength(10)]
+        [StringLength(1023), MinLength(1)]
         public string Description { get; set; }
         public string? Mainimg { get;set; }
-        public virtual IEnumerable<HotelImages>? HotelImages { get; set; }
+        public virtual ICollection<HotelImages>? HotelImages { get; set; }
         [NotMapped]
       
         public IFormFile[]? HotelImagesFile { get; set; }

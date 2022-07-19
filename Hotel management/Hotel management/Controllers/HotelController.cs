@@ -45,7 +45,7 @@ namespace Hotel_management.Controllers
             Hotel hotel = await _context.Hotels.Where(h => h.isDeleted == false).
                Include(h => h.Location).
                Include(h => h.ExtraPrice).
-              Include(h => h.HotelFeatures).ThenInclude(h => h.HotelFeatureTranslations).Include(h => h.HotelFeatures).ThenInclude(h => h.HotelFeatureDetails).
+              Include(h => h.HotelFeatures.Where(h=>h.IsDeleted==false)).ThenInclude(h => h.HotelFeatureTranslations).Include(h => h.HotelFeatures.Where(h => h.IsDeleted == false)).ThenInclude(h => h.HotelFeatureDetails).
                 ThenInclude(h => h.hotelFeatureDetailsTranslations).
                Include(h => h.HotelImages).
                Include(h => h.HotelStar).
@@ -56,10 +56,10 @@ namespace Hotel_management.Controllers
                Include(r => r.Rooms.Where(r => r.IsDeleted == false)).
                ThenInclude(r => r.RoomImages)
               .Include(r => r.Rooms).
-              ThenInclude(r => r.RoomFeatures).
+              ThenInclude(r => r.RoomFeatures.Where(r => r.IsDeleted == false)).
               ThenInclude(f => f.RoomFeaturesTranslation).
               Include(r => r.Rooms).
-              ThenInclude(r => r.RoomFeatures).
+              ThenInclude(r => r.RoomFeatures.Where(r=>r.IsDeleted==false)).
               ThenInclude(f => f.RoomFeatureDetails).
               ThenInclude(f => f.RoomFeatureDetailTranslations).
               FirstOrDefaultAsync(h => h.Id == Id);

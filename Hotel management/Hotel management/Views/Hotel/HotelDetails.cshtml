@@ -359,7 +359,7 @@
                                             <h4>@item.HotelFeatureTranslations.Name_en</h4>
                                             <ul>
 
-                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                @foreach (HotelFeatureDetails dtl in item.HotelFeatureDetails)
                                                 {
                                                     @if (dtl.hotelFeatureDetailsTranslations != null)
                                                     {
@@ -388,7 +388,7 @@
                                             <h4>@item.Name</h4>
                                             <ul>
 
-                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                @foreach (HotelFeatureDetails dtl in item.HotelFeatureDetails)
                                                 {
                                                     @if (dtl.hotelFeatureDetailsTranslations != null)
                                                     {
@@ -421,8 +421,8 @@
                                             <h4>@item.HotelFeatureTranslations.Name_ru</h4>
                                             <ul>
 
-                                                @foreach (var dtl in item.HotelFeatureDetails)
-                                                {
+                                        @foreach (HotelFeatureDetails dtl in item.HotelFeatureDetails)
+                                        {
                                                     @if (dtl.hotelFeatureDetailsTranslations != null)
                                                     {
 
@@ -450,7 +450,7 @@
                                             <h4>@item.Name</h4>
                                             <ul>
 
-                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                @foreach (HotelFeatureDetails dtl in item.HotelFeatureDetails)
                                                 {
                                                     @if (dtl.hotelFeatureDetailsTranslations != null)
                                                     {
@@ -480,7 +480,7 @@
                                         <h4>@item.Name</h4>
                                         <ul>
                                           
-                                                @foreach (var dtl in item.HotelFeatureDetails)
+                                                @foreach (HotelFeatureDetails dtl in item.HotelFeatureDetails)
                                                 {
                                                     <li><span>
                                                             @dtl.Detail
@@ -641,163 +641,7 @@
 
 
                                                                 </div>
-                                                              @foreach (var item in Model.Hotel.HotelFeatures)
-                                                                {
-                                                                    <div
-                                                                class="col-lg-6 col-md-6 col-sm-12 Modal-ContentSliderList">
-
-                                                                        <div class="LeftSideListItem">
-
-                                                                            
-
-                                                                             @if (CultureInfo.CurrentCulture.Name.ToLower() == "en")
-                                {
-                                    @if (item.HotelFeatureTranslations!=null)
-                                    {
-                                            <div class="YemekICecekItem">
-                                            <h4>@item.HotelFeatureTranslations.Name_en</h4>
-                                            <ul>
-
-                                                @foreach (var dtl in item.HotelFeatureDetails)
-                                                {
-                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
-                                                    {
-
-
-                                                        <li><span>
-                                                                @dtl.hotelFeatureDetailsTranslations.Detail_en
-                                                            </span></li>
-                                                    }
-                                                    else
-                                                    {
-
-                                                        <li><span>
-                                                                @dtl.Detail
-                                                            </span></li>
-                                                    }
-                                                }
-
-
-                                            </ul>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                         <div class="YemekICecekItem">
-                                            <h4>@item.Name</h4>
-                                            <ul>
-
-                                                @foreach (var dtl in item.HotelFeatureDetails)
-                                                {
-                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
-                                                    {
-
-
-                                                        <li><span>
-                                                                @dtl.hotelFeatureDetailsTranslations.Detail_en
-                                                            </span></li>
-                                                    }
-                                                    else
-                                                    {
-
-                                                        <li><span>
-                                                                @dtl.Detail
-                                                            </span></li>
-                                                    }
-                                                }
-
-
-                                            </ul>
-                                        </div>
-                                    }
-                                }
-                                else if(CultureInfo.CurrentCulture.Name.ToLower() == "ru")
-                                {
-                                    
-                                    @if (item.HotelFeatureTranslations!=null)
-                                    {
-                                            <div class="YemekICecekItem">
-                                            <h4>@item.HotelFeatureTranslations.Name_ru</h4>
-                                            <ul>
-
-                                                @foreach (var dtl in item.HotelFeatureDetails)
-                                                {
-                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
-                                                    {
-
-
-                                                        <li><span>
-                                                                @dtl.hotelFeatureDetailsTranslations.Detail_ru
-                                                            </span></li>
-                                                    }
-                                                    else
-                                                    {
-
-                                                        <li><span>
-                                                                @dtl.Detail
-                                                            </span></li>
-                                                    }
-                                                }
-
-
-                                            </ul>
-                                        </div>
-                                    }
-                                    else
-                                    {
-                                         <div class="YemekICecekItem">
-                                            <h4>@item.Name</h4>
-                                            <ul>
-
-                                                @foreach (var dtl in item.HotelFeatureDetails)
-                                                {
-                                                    @if (dtl.hotelFeatureDetailsTranslations != null)
-                                                    {
-
-
-                                                        <li><span>
-                                                                @dtl.hotelFeatureDetailsTranslations.Detail_ru
-                                                            </span></li>
-                                                    }
-                                                    else
-                                                    {
-
-                                                        <li><span>
-                                                                @dtl.Detail
-                                                            </span></li>
-                                                    }
-                                                }
-
-
-                                            </ul>
-                                        </div>
-                                    }
-                                }
-                                else
-                                {
-                                    <div class="YemekICecekItem">
-                                        <h4>@item.Name</h4>
-                                        <ul>
-                                          
-                                                @foreach (var dtl in item.HotelFeatureDetails)
-                                                {
-                                                    <li><span>
-                                                            @dtl.Detail
-                                                        </span></li>
-                                                }
-                                            
-
-                                        </ul>
-                                    </div>
-                                }
-
-
-
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                }
+                                                         
 
                                                             </div>
                                                             <button type="button" class="close" data-dismiss="modal"
@@ -837,59 +681,61 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="CenterLeft">
-                                            <ul>
-
+                                            <ul class="text-center">
+                                                
                                                 @foreach (RoomFeatures item in room.RoomFeatures)
                                                 {
                                                     @if (CultureInfo.CurrentCulture.Name.ToLower()=="en")
                                                     {
                                                         @if (item.RoomFeaturesTranslation!=null)
                                                         {
-                                                        @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                     
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.RoomFeaturesTranslation.Features_en</h3>
+                                                                        <h6>@item.RoomFeaturesTranslation.Features_en</h6>
 
                                                                         <ul>
+                                                                               @foreach (RoomFeatureDetail featuredetail in item.RoomFeatureDetails)
+                                                            {
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_en</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_en</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
                                                                              </li>
+                                                                             }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
 
                                                         }
                                                         else
                                                         {
-                                                             @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                    @foreach (RoomFeatureDetail featuredetail in item.RoomFeatureDetails)
+                                                    {
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.Features</h3>
+                                                                        <h6>@item.Features</h6>
 
                                                                         <ul>
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_en</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_en</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
@@ -907,85 +753,91 @@
                                                     {
                                                         @if (item.RoomFeaturesTranslation!=null)
                                                         {
-                                                        @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                     
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.RoomFeaturesTranslation.Features_ru</h3>
+                                                                        <h6>@item.RoomFeaturesTranslation.Features_ru</h6>
 
                                                                         <ul>
+                                                                               @foreach (RoomFeatureDetail featuredetail in item.RoomFeatureDetails)
+                                                            {
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
                                                                              </li>
+                                                                             }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
 
                                                         }
                                                          else
                                                         {
-                                                             @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
-
+                                                            
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.Features</h3>
+                                                                        <h6>@item.Features</h6>
 
                                                                         <ul>
+                                                                             @foreach (RoomFeatureDetail featuredetail in item.RoomFeatureDetails)
+                                                            {
+
                                                                             <li> @if (featuredetail.RoomFeatureDetailTranslations!=null)
                                                                                  {
-                                                                                    <h5>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</h5> 
+                                                                                    <span>@featuredetail.RoomFeatureDetailTranslations.Detail_ru</span> 
                                                                                  } 
                                                                                  else 
                                                                                  {
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                  } 
 
                                                                                  
                                                                              </li>
+                                                                             }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
                                                         }
                                                     }
                                                     else
                                                     {
-                                                         @foreach (var featuredetail in item.RoomFeatureDetails)
-                                                            {
+                                                        
 
                                                                 <li>
                                                                     <div>
-                                                                        <h3>@item.Features</h3>
+                                                                        <h6>@item.Features</h6>
 
                                                                         <ul>
+                                                                             @foreach (RoomFeatureDetail featuredetail in item.RoomFeatureDetails)
+                                                            {
                                                                             <li> 
-                                                                                    <h5>@featuredetail.Detail</h5> 
+                                                                                    <span>@featuredetail.Detail</span> 
                                                                                 
                                                                              </li>
+                                                            }
                                                                         </ul>
 
                                                                     </div>
 
 
                                                                 </li>
-                                                            }
+                                                            
                                                     }
 
 

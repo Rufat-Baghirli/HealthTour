@@ -1,4 +1,4 @@
-﻿ @model Hotel_management.Models.Hotel
+﻿@model Hotel_management.Models.Hotel
 
 @{
     ViewData["Title"] = "Update";
@@ -12,92 +12,95 @@
 
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <h1 style="color:black" class="text-center"> Əsas şəkil</h1>
+            <h1 style="color:black" class="text-center"> Əsas şəkil</h1>
         </li>
         <li class="list-group-item">
-            <img class="img-fluid"style="width:100% !important;height:600px" src="~/images/Hotels/@Model.Mainimg">
+            <img class="img-fluid" style="width:100% !important;height:600px" src="~/images/Hotels/@Model.Mainimg">
         </li>
     </ul>
-   
-  
+
+
 
 </div>
 
- @if (Model.HotelImages != null)
-    {
-       
-<div class="card" style="width:100%">
-          <h1 style="color:black" class="text-center pt-3"> Otelin şəkilləri</h1>
-   
+@if (Model.HotelImages != null)
+{
 
-   <ul class="d-flex list-unstyled">
-          
-      
-          @foreach (HotelImages hotelImages in Model.HotelImages)
-        {
-        <li class="ps-2">
-            <img class="img-fluid" style="width:500px !important" src="~/images/Hotels/@hotelImages.Name">
-            <div class="pt-3 text-center">
-         <a class="btn btn-danger" asp-action="DeleteHotelImage" asp-route-Id="@hotelImages.Id">Şəkli sil</a>
+    <div class="card" style="width:100%">
+        <h1 style="color:black" class="text-center pt-3"> Otelin şəkilləri</h1>
 
-            </div>
 
-        </li>
-          
-           
-        
-        }
+        <ul class="d-flex list-unstyled">
 
-       
-    </ul>
-   
-   
 
-</div>
-    }
-   
-  
-    
+            @foreach (HotelImages hotelImages in Model.HotelImages)
+            {
+                <li class="ps-2">
+                    <img class="img-fluid" style="width:500px !important;height:500px" src="~/images/Hotels/@hotelImages.Name">
+                    <div class="pt-3 text-center">
+                        <a class="btn btn-danger" asp-action="DeleteHotelImage" asp-route-Id="@hotelImages.Id">Şəkli sil</a>
 
-                  
-            
-            
-        
+                    </div>
+
+                </li>
+
+
+
+            }
+
+
+        </ul>
+
+
+
+    </div>
+}
+
+
+
+
+
+
+
+
 
 <form method="post" enctype="multipart/form-data">
     <div asp-validation-summary="All" class="text-danger"></div>
-<input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Id" />
 
-                <div class="form-group">
-                <label asp-for="HotelImagesFile"></label>
+
+    <div class="form-group">
+        <label asp-for="HotelImagesFile"></label>
         <input class="form-control" accept="image/*" asp-for="HotelImagesFile">
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-        
-                <label asp-for="MainimgFile" accept="image/*"  class="control-label"></label>
-                <input asp-for="MainimgFile" class="form-control" />
-                <span asp-validation-for="MainimgFile" class="text-danger"></span>
+        <span class="alert-danger" asp-validation-for="HotelImagesFile"></span>
+    </div>
 
-            </div>
-           
-             <div class="form-group">
-                <label asp-for="MapLocation" class="control-label"></label>
-           <input asp-for="MapLocation" class="form-control" />
-                <span asp-validation-for="MapLocation" class="text-danger"></span>
-            </div>
-  
-            <div class="form-group">
-                
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label"></label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+
+        <label asp-for="MainimgFile" accept="image/*" class="control-label"></label>
+        <input asp-for="MainimgFile" class="form-control" />
+        <span asp-validation-for="MainimgFile" class="text-danger"></span>
+
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MapLocation" class="control-label"></label>
+        <input asp-for="MapLocation" class="form-control" />
+        <span asp-validation-for="MapLocation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+
         <label>Location</label>
         <select class="form-control" asp-for="LocationId">
             @foreach (var location in ViewBag.Locations)
@@ -108,29 +111,29 @@
         <span class="alert-danger" asp-validation-for="LocationId"></span>
     </div>
 
-                       
 
-                <div class="form-group">
-                    <label>Rating</label>
-                    <select class="form-control" asp-for="HotelStarId">
-                        @foreach (var stars in ViewBag.Ratings)
-                        {
 
-                            <option value="@stars.Id">@stars.Star</option>
-                        }
+    <div class="form-group">
+        <label>Rating</label>
+        <select class="form-control" asp-for="HotelStarId">
+            @foreach (var stars in ViewBag.Ratings)
+            {
+
+                <option value="@stars.Id">@stars.Star</option>
+            }
         </select>
         <span class="alert-danger" asp-validation-for="HotelStarId"></span>
     </div>
-    
-            <div class="form-group">
-                <input type="submit" value="Update" class="btn btn-primary" />
-            </div>
+
+    <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-primary" />
+    </div>
 </form>
 
 <div>
     <a asp-action="Index">Back to List</a>
-</div>         
-  
+</div>
+
 
 
 
@@ -140,5 +143,7 @@
 
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

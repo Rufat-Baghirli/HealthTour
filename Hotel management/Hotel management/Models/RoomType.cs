@@ -44,7 +44,7 @@ namespace Hotel_management.Models
         public float Roomarea { get; set; }
         [StringLength(255)]
         public string? Mainimg { get; set; }
-        public virtual IEnumerable<RoomImages>? RoomImages { get; set; }
+        public virtual ICollection<RoomImages>? RoomImages { get; set; }
 
         [NotMapped]
         public IFormFile[]? RoomImagesFile { get; set; }

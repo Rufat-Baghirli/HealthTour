@@ -261,7 +261,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                         return View(hotel);
                     }
 
-                    dbhotel.HotelImages.ToList().Add(new HotelImages
+                    dbhotel.HotelImages.Add(new HotelImages
                     {
                         Name = await file.SaveFileAsync(filePath)
                     });

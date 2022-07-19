@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Update";
     Layout = "~/Areas/Manage/Views/Shared/_Layout.cshtml";
-    
+
 }
 
 <h1>Update</h1>
@@ -15,49 +15,49 @@
 
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <h1 style="color:black" class="text-center"> Əsas şəkil</h1>
+            <h1 style="color:black" class="text-center"> Əsas şəkil</h1>
         </li>
         <li class="list-group-item">
-            <img class="img-fluid"style="width:100% !important;height:600px" src="~/images/Rooms/@Model.Mainimg">
+            <img class="img-fluid" style="width:100% !important;height:600px" src="~/images/Rooms/@Model.Mainimg">
         </li>
     </ul>
-   
-  
+
+
 
 </div>
- @if (Model.RoomImages != null)
-    {
-       
-<div class="card" style="width:100%">
-          <h1 style="color:black" class="text-center pt-3"> Otelin şəkilləri</h1>
-   
+@if (Model.RoomImages != null)
+{
 
-   <ul class="d-flex list-unstyled">
-          
-      
-          @foreach (RoomImages img in Model.RoomImages)
-        {
-        <li class="">
-            <img class="img-fluid" style="width:500px !important" src="~/images/Rooms/@img.Name">
-            <div class="pt-3 text-center">
-         <a class="btn btn-danger" asp-action="DeleteImage" asp-route-Id="@img.Id">Şəkli sil</a>
+    <div class="card" style="width:100%">
+        <h1 style="color:black" class="text-center pt-3"> Otaq şəkilləri</h1>
 
-            </div>
 
-        </li>
-          
-           
-        
-        }
+        <ul class="d-flex list-unstyled">
 
-       
-    </ul>
-   
-   
 
-</div>
-    }
-   
+            @foreach (RoomImages img in Model.RoomImages)
+            {
+                <li class="">
+                    <img class="img-fluid" style="width:500px !important" src="~/images/Rooms/@img.Name">
+                    <div class="pt-3 text-center">
+                        <a class="btn btn-danger" asp-action="DeleteImage" asp-route-Id="@img.Id">Şəkli sil</a>
+
+                    </div>
+
+                </li>
+
+
+
+            }
+
+
+        </ul>
+
+
+
+    </div>
+}
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Update" enctype="multipart/form-data">
@@ -66,7 +66,7 @@
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
-             
+
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -84,7 +84,7 @@
                 <input asp-for="ThreeweeksPrice" class="form-control" />
                 <span asp-validation-for="ThreeweeksPrice" class="text-danger"></span>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="OneweekPriceMid" class="control-label"></label>
                 <input asp-for="OneweekPriceMid" class="form-control" />
                 <span asp-validation-for="OneweekPriceMid" class="text-danger"></span>
@@ -99,7 +99,7 @@
                 <input asp-for="ThreeweeksPriceMid" class="form-control" />
                 <span asp-validation-for="ThreeweeksPriceMid" class="text-danger"></span>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="OneweekPriceHigh" class="control-label"></label>
                 <input asp-for="OneweekPriceHigh" class="form-control" />
                 <span asp-validation-for="OneweekPriceHigh" class="text-danger"></span>
@@ -116,30 +116,30 @@
             </div>
             <div class="form-group">
                 <label asp-for="HotelId" class="control-label">Hotel</label>
-               <select class="form-control" asp-for="HotelId">
-          
-                <option value="@Model.Hotel.Id">@Model.Hotel.Name</option>
-                
-            
-        </select>
+                <select class="form-control" asp-for="HotelId">
+
+                    <option value="@Model.Hotel.Id">@Model.Hotel.Name</option>
+
+
+                </select>
                 <span asp-validation-for="HotelId" class="text-danger"></span>
             </div>
-        
+
             <div class="form-group">
                 <label asp-for="Roomarea" class="control-label"></label>
                 <input asp-for="Roomarea" class="form-control" />
                 <span asp-validation-for="Roomarea" class="text-danger"></span>
             </div>
-           <div class="form-group">
-                <label asp-for="MainimgFile"   class="control-label"></label>
+            <div class="form-group">
+                <label asp-for="MainimgFile" class="control-label"></label>
                 <input asp-for="MainimgFile" accept="image/*" class="form-control" />
                 <span asp-validation-for="MainimgFile" class="text-danger"></span>
             </div>
 
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="RoomImagesFile"></label>
-        <input class="form-control" accept="image/*" asp-for="RoomImagesFile">
-        <span class="alert-danger" asp-validation-for="RoomImagesFile"></span>
+                <input class="form-control" accept="image/*" asp-for="RoomImagesFile">
+                <span class="alert-danger" asp-validation-for="RoomImagesFile"></span>
             </div>
             <div class="form-group">
                 <label asp-for="People" class="control-label"></label>
@@ -151,7 +151,7 @@
                 <input asp-for="Children" class="form-control" />
                 <span asp-validation-for="Children" class="text-danger"></span>
             </div>
-        
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -162,4 +162,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

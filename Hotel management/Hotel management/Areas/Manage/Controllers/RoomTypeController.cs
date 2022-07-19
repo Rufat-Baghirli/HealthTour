@@ -49,19 +49,6 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return View(room);
 
 
-            //var hotel = await _context.Hotels.Where(h=>h.isDeleted==false).Include(r=>r.Rooms.Where(r=>r.IsDeleted==false)).FirstOrDefaultAsync(r => r.Id == room.HotelId);
-
-            //if (hotel.Rooms != null)
-            //{
-            //    foreach (RoomType item in hotel.Rooms)
-            //    {
-            //        if(room.Name.ToLower() == item.Name.ToLower())
-            //        {
-            //            ModelState.AddModelError("Name", "Otelde bu adda Roomtype artiq movcuddur");
-            //            return View(room);
-            //        }
-            //    }
-            //};
 
 
 
@@ -163,7 +150,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                 return NotFound();
 
 
-            RoomType Roomtype = await _context.RoomTypes.Include(r => r.RoomFeatures).ThenInclude(r => r.RoomFeatureDetails).FirstOrDefaultAsync(r => r.Id == Id);
+            RoomType Roomtype = await _context.RoomTypes.Include(r => r.RoomImages).Include(r => r.RoomFeatures).ThenInclude(r => r.RoomFeatureDetails).FirstOrDefaultAsync(r => r.Id == Id);
             if (Roomtype == null)
                 return BadRequest();
             Roomtype.Hotel = _context.Hotels.FirstOrDefault(r => r.Id == Roomtype.HotelId);
@@ -179,7 +166,7 @@ namespace Hotel_management.Areas.Manage.Controllers
 
             if (Id is null or 0)
                 return NotFound();
-            RoomType roomtype = await _context.RoomTypes.Include(r => r.RoomFeatures).ThenInclude(r => r.RoomFeatureDetails).Include(r => r.RoomImages).Include(r=>r.Hotel).FirstOrDefaultAsync(r => r.Id == Id);
+            RoomType roomtype = await _context.RoomTypes.Include(r => r.RoomFeatures).ThenInclude(r => r.RoomFeatureDetails).Include(r => r.RoomImages).Include(r => r.Hotel).FirstOrDefaultAsync(r => r.Id == Id);
             if (roomtype == null)
                 return BadRequest();
             try
@@ -189,7 +176,7 @@ namespace Hotel_management.Areas.Manage.Controllers
 
 
 
-            
+
 
                 if (!ModelState.IsValid)
                 {
@@ -223,7 +210,7 @@ namespace Hotel_management.Areas.Manage.Controllers
                         return View(roomtype);
                     }
 
-                    if (type.MainimgFile.CheckLength(5000))
+                    if (type.MainimgFile.CheckLength(5120))
                     {
                         ModelState.AddModelError("MainimgFile", "Seklin Olcusu Maksimum 5 Mb Ola Biler");
                         return View(roomtype);
@@ -248,13 +235,13 @@ namespace Hotel_management.Areas.Manage.Controllers
                             return View(roomtype);
                         }
 
-                        if (file.CheckLength(5000))
+                        if (file.CheckLength(5120))
                         {
                             ModelState.AddModelError("RoomImagesFile", $"{file.FileName} Olcusu Maksimum 5Mb Ola Biler");
                             return View(roomtype);
                         }
 
-                        roomtype.RoomImages.ToList().Add(new RoomImages
+                        roomtype.RoomImages.Add(new RoomImages
                         {
                             Name = await file.SaveFileAsync(filePath)
                         });
@@ -349,4 +336,3 @@ namespace Hotel_management.Areas.Manage.Controllers
 
     }
 }
-
